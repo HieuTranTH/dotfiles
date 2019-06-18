@@ -18,9 +18,9 @@ defbce on
 
 # default windows
 screen -t Python  0 python
-screen -t Shell1  1 bash
-screen -t Shell2  2 bash
-screen -t Shell3  3 bash
+screen -t Bash1  1 bash
+screen -t Bash2  2 bash
+screen -t Bash3  3 bash
 
 select 0
 #bind c screen 1 # window numbering starts at 1 not 0
