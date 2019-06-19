@@ -121,24 +121,30 @@ fi
 ###############################################################################
 
 # Customization for GNU Screen to use dynamic title and different screenrc files
-. ~/bin/screen_bashrc.sh
-
-if [ "$dyna_title" = "Yes" ]; then
-    . ~/bin/screen_dynamic_title_bashrc.sh
+if [ -f ~/.bashrc_extra/bashrc_screen.sh ]; then
+    . ~/.bashrc_extra/bashrc_screen.sh
 fi
 
-# Add alias for terminal_start to make the calling gnome-terminal tab exit
-# after executing the command. Purpose is not receiving any logs from firefox
-#alias terminal_start='exec terminal_start'
+if [ "$dyna_title" = "Yes" -a -f ~/.bashrc_extra/bashrc_screen_dyna_title.sh ]; then
+    . ~/.bashrc_extra/bashrc_screen_dyna_title.sh
+fi
 
-# Todo.txt requirements
-# Make alias todo for todo.sh and source bash completion file todo_completion
-alias todo='~/bin/todo.txt_cli-2.11.0/todo.sh'
-. ~/bin/todo.txt_cli-2.11.0/todo_completion
+# Hostname hieu-ThinkPad-X250 specific ########################################
+if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
+    # Add alias for terminal_start to make the calling gnome-terminal tab exit
+    # after executing the command. Purpose is not receiving any logs from firefox
+    #alias terminal_start='exec terminal_start'
 
-# Aliases to cd to Documents and Tuxera directory
-alias cdd='cd ~/Documents'
-alias cdt='cd ~/Documents/Tuxera'
+    # Todo.txt requirements
+    # Make alias todo for todo.sh and source bash completion file todo_completion
+    alias todo='~/bin/todo.txt_cli-2.11.0/todo.sh'
+    . ~/bin/todo.txt_cli-2.11.0/todo_completion
+
+    # Aliases to cd to Documents and Tuxera directory
+    alias cdd='cd ~/Documents'
+    alias cdt='cd ~/Documents/Tuxera'
+fi
+# End of Hostname hieu-ThinkPad-X250 specific #################################
 
 # Alias for dotfiles version control
 function dotfiles {
