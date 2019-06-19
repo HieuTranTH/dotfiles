@@ -28,4 +28,5 @@ dotfiles config --local user.email="hieutran.th.358@gmail.com"
 dotfiles config --local credential.helper store
 dotfiles config --local --add remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 dotfiles fetch
+dotfiles branch -u origin/master
 ```
