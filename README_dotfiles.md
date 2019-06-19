@@ -23,5 +23,5 @@ After checking out successfully, open another terminal or source the new
 .bashrc and add remote tracking to the bare cloned repo.
 
 ```bash
-git remote add origin https://github.com/HieuTranTH/dotfiles.git
+dotfiles remote add origin https://github.com/HieuTranTH/dotfiles.git
 ```
