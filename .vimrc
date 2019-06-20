@@ -105,6 +105,10 @@ let g:solarized_termtrans=1
 " in ~/.vim/colors/ and uncomment:
 colorscheme solarized
 
+"##############################################################################
+" Start of Hieu's custome Configurations
+"##############################################################################
+
 " highlight current line
 set cursorline
 " highlight current column
@@ -173,3 +177,7 @@ highlight SpellBad cterm=reverse ctermbg=white ctermfg=red
 "   endif
 "   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 " endfunc
+
+"##############################################################################
+" End of Hieu's custome Configurations
+"##############################################################################
