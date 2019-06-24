@@ -25,7 +25,7 @@ After checking out successfully, open another terminal or source the new
 ```bash
 dotfiles config --local status.showUntrackedFiles no
 dotfiles config --local user.email="hieutran.th.358@gmail.com"
-dotfiles config --local remote.origin.url  "https://HieuTranTH@github.com/HieuTranTH/dotfiles.git"
+dotfiles config --local remote.origin.url "https://HieuTranTH@github.com/HieuTranTH/dotfiles.git"
 dotfiles config --local --add remote.origin.fetch "+refs/heads/*:refs/remotes/origin/*"
 dotfiles fetch
 dotfiles branch -u origin/master
