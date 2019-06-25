@@ -1,0 +1,47 @@
+{
+    "folders": [
+        "/home/hieu/Documents/Tuxera/INTEGRITY/INTEGRITY_autokey_macros"
+    ], 
+    "toggleServiceHotkey": {
+        "hotKey": "k", 
+        "modifiers": [
+            "<shift>", 
+            "<super>"
+        ], 
+        "enabled": true
+    }, 
+    "settings": {
+        "showTrayIcon": true, 
+        "sortByUsageCount": false, 
+        "scriptGlobals": {}, 
+        "undoUsingBackspace": true, 
+        "notificationIcon": "autokey-status-dark", 
+        "enableQT4Workaround": false, 
+        "promptToSave": false, 
+        "menuTakesFocus": false, 
+        "interfaceType": "XRecord", 
+        "windowDefaultSize": [
+            1607, 
+            606
+        ], 
+        "showToolbar": true, 
+        "serviceRunning": true, 
+        "columnWidths": [
+            150, 
+            50, 
+            100
+        ], 
+        "workAroundApps": ".*VirtualBox.*|krdc.Krdc", 
+        "hPanePosition": 405, 
+        "isFirstRun": true
+    }, 
+    "userCodeDir": null, 
+    "version": "0.90.4", 
+    "configHotkey": {
+        "hotKey": "k", 
+        "modifiers": [
+            "<super>"
+        ], 
+        "enabled": true
+    }
+}
