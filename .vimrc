@@ -185,6 +185,17 @@ highlight SpellBad cterm=reverse ctermbg=white ctermfg=red
 autocmd BufWinLeave *.* mkview
 autocmd BufWinEnter *.* silent loadview
 
+" Settings for netrw File Explorer (tree style listing, open files in a new tab, set width to 25% of the page)
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 3
+let g:netrw_winsize = 25
+" Auto have :Vexplorer with all Vim windows (should have a dedicated tab for
+" Explorer)
+" augroup ProjectDrawer
+"     autocmd!
+"     autocmd VimEnter * :Vexplore
+" augroup END
+
 "##############################################################################
 " End of Hieu's custome Configurations
 "##############################################################################
