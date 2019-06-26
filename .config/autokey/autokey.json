@@ -15,7 +15,7 @@
         "sortByUsageCount": false, 
         "scriptGlobals": {}, 
         "undoUsingBackspace": true, 
-        "notificationIcon": "autokey-status-dark", 
+        "notificationIcon": "autokey-status", 
         "enableQT4Workaround": false, 
         "promptToSave": false, 
         "menuTakesFocus": false, 
