@@ -5,6 +5,7 @@
 	editor = vi
 [alias]
 	flog = log --graph --full-history --all --decorate --oneline
+	cdate = log --date=short --pretty=format:\"%C(yellow)%h%Creset %C(blue)%cd%Creset %s\"
 
 # Added color
 # https://nathanhoad.net/how-to-colours-in-git/
