@@ -141,6 +141,7 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     . ~/bin/todo.txt_cli-2.11.0/todo_completion
 
     # Aliases to cd to Documents and Tuxera directory
+    alias cdb='cd ~/bin'
     alias cdd='cd ~/Documents'
     alias cdt='cd ~/Documents/Tuxera'
 fi
