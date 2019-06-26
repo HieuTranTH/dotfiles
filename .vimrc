@@ -131,16 +131,16 @@ function! StatuslineGit()
   return strlen(l:branchname) > 0?'  '.l:branchname.' ':' no-git-repo '
 endfunction
 
-" Obsolete function to show number of buffers, should use :tabe rather than :e
-" function! TotalBuffer()
-"   return len(getbufinfo({'buflisted':1}))
-" endfunction
+function! TotalBuffer()
+  return len(getbufinfo({'buflisted':1}))
+endfunction
 
 set statusline=
 " set statusline+=BUFFER:\ %n\ /\ 
-" Next 2 lines show current buffer number over all buffers count (obsolete)
+" Next line show current buffer number (obsolete)
 " set statusline+=%n\ /\ 
-" set statusline+=%{TotalBuffer()}
+set statusline+=%{TotalBuffer()}
+set statusline+=\ buf(s)\ \|
 set statusline+=%#PmenuSel#
 "set statusline+=%{StatuslineGit()}
 " set statusline+=%#LineNr#
@@ -180,6 +180,10 @@ highlight SpellBad cterm=reverse ctermbg=white ctermfg=red
 "   endif
 "   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 " endfunc
+
+" Save folds when exit and restore when open again
+autocmd BufWinLeave *.* mkview
+autocmd BufWinEnter *.* silent loadview
 
 "##############################################################################
 " End of Hieu's custome Configurations
