@@ -78,7 +78,8 @@ set smartcase
 set showmatch
 map <leader><space> :let @/=''<cr> " clear search
 
-" Remap help key.
+" Remap annoying F1 help key.
+" Put Vim in fullscreen (only work in Mac)
 inoremap <F1> <ESC>:set invfullscreen<CR>a
 nnoremap <F1> :set invfullscreen<CR>
 vnoremap <F1> :set invfullscreen<CR>
@@ -130,14 +131,16 @@ function! StatuslineGit()
   return strlen(l:branchname) > 0?'  '.l:branchname.' ':' no-git-repo '
 endfunction
 
-function! TotalBuffer()
-  return len(getbufinfo({'buflisted':1}))
-endfunction
+" Obsolete function to show number of buffers, should use :tabe rather than :e
+" function! TotalBuffer()
+"   return len(getbufinfo({'buflisted':1}))
+" endfunction
 
 set statusline=
 " set statusline+=BUFFER:\ %n\ /\ 
-set statusline+=%n\ /\ 
-set statusline+=%{TotalBuffer()}
+" Next 2 lines show current buffer number over all buffers count (obsolete)
+" set statusline+=%n\ /\ 
+" set statusline+=%{TotalBuffer()}
 set statusline+=%#PmenuSel#
 "set statusline+=%{StatuslineGit()}
 " set statusline+=%#LineNr#
