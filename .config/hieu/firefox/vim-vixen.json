@@ -9,7 +9,6 @@
     "w": { "type": "command.show.winopen", "alter": false },
     "W": { "type": "command.show.winopen", "alter": true },
     "b": { "type": "command.show.buffer" },
-    "a": { "type": "command.show.addbookmark", "alter": true },
     "k": { "type": "scroll.vertically", "count": -1 },
     "j": { "type": "scroll.vertically", "count": 1 },
     "h": { "type": "scroll.horizonally", "count": -1 },
@@ -21,10 +20,6 @@
     "gg": { "type": "scroll.top" },
     "G": { "type": "scroll.bottom" },
     "$": { "type": "scroll.end" },
-    "d": { "type": "tabs.close" },
-    "D": { "type": "tabs.close.right" },
-    "!d": { "type": "tabs.close.force" },
-    "u": { "type": "tabs.reopen" },
     "K": { "type": "tabs.prev" },
     "J": { "type": "tabs.next" },
     "gT": { "type": "tabs.prev" },
@@ -40,7 +35,7 @@
     "zo": { "type": "zoom.out" },
     "zz": { "type": "zoom.neutral" },
     "f": { "type": "follow.start", "newTab": false },
-    "F": { "type": "follow.start", "newTab": true, "background": false },
+    "F": { "type": "follow.start", "newTab": true, "background": true },
     "m": { "type": "mark.set.prefix" },
     "'": { "type": "mark.jump.prefix" },
     "H": { "type": "navigate.history.prev" },
@@ -79,5 +74,8 @@
     "complete": "sbh"
   },
   "blacklist": [
+    "www.youtube.com/watch*",
+    "*.facebook.com/messages/*",
+    "chat.tuxera.com"
   ]
 }
