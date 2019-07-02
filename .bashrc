@@ -117,7 +117,7 @@ if ! shopt -oq posix; then
 fi
 
 ###############################################################################
-# Start of Hieu's custome Configurations
+# Start of Hieu's custom Configurations
 ###############################################################################
 
 # Customization for GNU Screen to use dynamic title and different screenrc files
@@ -152,6 +152,16 @@ function dotfiles {
     /usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME $@
 }
 
+# Give colors for man pages
+# https://www.tecmint.com/view-colored-man-pages-in-linux/
+export LESS_TERMCAP_mb=$'\e[1;32m'
+export LESS_TERMCAP_md=$'\e[1;32m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;48;5;56m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;4;31m'
+
 ###############################################################################
-# End of Hieu's custome Configurations
+# End of Hieu's custom Configurations
 ###############################################################################
