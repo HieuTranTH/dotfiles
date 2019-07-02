@@ -181,9 +181,9 @@ highlight SpellBad cterm=reverse ctermbg=white ctermfg=red
 "   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 " endfunc
 
-" Save folds when exit and restore when open again
-autocmd BufWinLeave *.* mkview
-autocmd BufWinEnter *.* silent loadview
+" Save folds when exit and restore when open again (.c files only)
+autocmd BufWinLeave *.c mkview
+autocmd BufWinEnter *.c silent loadview
 
 " Settings for netrw File Explorer (tree style listing, open files in a new tab, set width to 25% of the page)
 let g:netrw_liststyle = 3
