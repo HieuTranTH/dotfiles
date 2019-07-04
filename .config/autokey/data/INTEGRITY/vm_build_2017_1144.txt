@@ -1,0 +1,1 @@
+export BUILD=/home/hieu/Documents/Tuxera/INTEGRITY/tuxera_integrity_testenv/build_pcx86_smp/; make && make vm && export BUILD_DIR=$BUILD; scripts/qemu-start.sh

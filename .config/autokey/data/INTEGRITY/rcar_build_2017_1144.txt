@@ -1,0 +1,1 @@
+export BUILD=/home/hieu/Documents/Tuxera/INTEGRITY/tuxera_integrity_testenv/build_arm_1144/; COMP=/usr/ghs/comp_201754/ OS=/usr/ghs/int1144-T19.0-r252117/ BSP=devtree-arm64 TUXERA_DEV_USER=renesas-r-carm3-6 make

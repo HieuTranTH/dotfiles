@@ -1,0 +1,1 @@
+make test SHELL=/bin/ash CONF=integrity-devtree-arm64-rcarm3.conf PARTITION_SIZE=7633920 TC2RUN=info --debug=v

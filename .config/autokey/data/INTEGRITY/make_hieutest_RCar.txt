@@ -1,0 +1,1 @@
+make hieu SHELL=/bin/ash CONF=integrity-devtree-arm64-rcarm3.conf

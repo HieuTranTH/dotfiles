@@ -1,7 +1,5 @@
 {
-    "folders": [
-        "/home/hieu/Documents/Tuxera/INTEGRITY/INTEGRITY_autokey_macros"
-    ], 
+    "folders": [], 
     "toggleServiceHotkey": {
         "hotKey": "k", 
         "modifiers": [
