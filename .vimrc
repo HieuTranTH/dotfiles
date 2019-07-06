@@ -107,7 +107,7 @@ let g:solarized_termtrans=1
 colorscheme solarized
 
 "##############################################################################
-" Start of Hieu's custome Configurations
+" Start of Hieu's custom Configurations
 "##############################################################################
 
 " highlight current line
@@ -197,5 +197,5 @@ let g:netrw_winsize = 25
 " augroup END
 
 "##############################################################################
-" End of Hieu's custome Configurations
+" End of Hieu's custom Configurations
 "##############################################################################
