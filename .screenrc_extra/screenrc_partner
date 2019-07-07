@@ -30,7 +30,7 @@ stuff "sudo -u $MYDEV -i^Mcd nfs_root/tuxera/hieu/tuxera-tests || cd nfs_root/tu
 screen -t Ticket_folder  5 bash
 stuff "cd /home/hieu/file_transfer^M"
 screen -t PDU_ETH   6 bash
-stuff "sudo -u $MYDEV -i^Mid^Mpdu_eth_host.sh $( id -u )^M"
+stuff "sudo -u $MYDEV -i^Mid^Mpdu_eth_host.sh $( id -u )"
 screen -t Terra_t_director  7 bash
 stuff "ssh -t terra \"cd /opt/tuxera/hieu/software/tuxera_test_director/ ; bash\"^M"
 screen -t Python  8 python
