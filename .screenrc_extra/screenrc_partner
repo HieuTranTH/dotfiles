@@ -17,8 +17,7 @@ defbce on
 #mousetrack on
 
 # default windows
-screen -t Partner_home  0 bash
-stuff "cd /home/hieu/^M"
+screen -t Python  0 python
 screen -t Term1(Minicom)  1 bash
 stuff "sudo -u $MYDEV -i^Mminicom -c on -t xterm-256color^M"
 screen -t Term2(SSH)  2 bash
@@ -33,7 +32,8 @@ screen -t PDU_ETH   6 bash
 stuff "sudo -u $MYDEV -i^Mid^Mpdu_eth_host.sh $( id -u )"
 screen -t Terra_t_director  7 bash
 stuff "ssh -t terra \"cd /opt/tuxera/hieu/software/tuxera_test_director/ ; bash\"^M"
-screen -t Python  8 python
+screen -t Partner_home  8 bash
+stuff "cd /home/hieu/^M"
 
 select 0
 #bind c screen 1 # window numbering starts at 1 not 0
