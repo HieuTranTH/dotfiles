@@ -5,7 +5,7 @@ screen() {
             echo "### Hieu Tran ###"
 
             # Check if SSH agent is running to make sure it will be forwarded inside screen session
-            ssh-add -l > /dev/null || { echo "Make sure SSH agent is running with an identity first" ; return 1; }
+            ssh-add -l | grep -q "$HOME/.ssh/id_rsa" || echo -e "\n###WARNING###\nMake sure SSH agent is running with an identity first"
 
             echo "Do you want to make new screen session with dynamic title?"
             select dyna_title in "Yes" "No"; do
