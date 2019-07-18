@@ -24,14 +24,14 @@ screen -t tuxera_commands  2 bash
 stuff "cd /home/hieu/Documents; vi -c 'set noexpandtab autoindent' tuxera_commands^M"
 screen -t git_commands  3 bash
 stuff "cd /home/hieu/Documents; vi -c 'set noexpandtab autoindent' git_commands^M"
-screen -t RedNotebook  4 bash
-stuff "cd /home/hieu/.rednotebook/data^M"
-screen -t Ticket_folder  5 bash
+screen -t Ticket_folder  4 bash
 stuff "cd /home/hieu/Documents/Tuxera/Jira-tickets^M"
-screen -t Gen_report  6 bash
+screen -t Gen_report  5 bash
 stuff "cd /home/hieu/Documents/Tuxera/software/tuxera_genreport^M"
-screen -t bin  7 bash
+screen -t bin  6 bash
 stuff "cd /home/hieu/bin^M"
+screen -t home  7 bash
+stuff "cd /home/hieu/^M"
 
 select 0
 #bind c screen 1 # window numbering starts at 1 not 0
