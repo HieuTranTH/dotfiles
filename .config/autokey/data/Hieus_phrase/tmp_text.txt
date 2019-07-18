@@ -1,0 +1,14 @@
+[ -e /env/config-expansions ] && /env/config-expansions
+
+path="/mnt/tftp"
+
+global.bootm.image="${path}/default-mtd-fixed-memtest/zImage-phyboard-mira-imx6-4.bin"
+
+oftree="${path}/default-mtd-fixed-memtest/zImage-imx6dl-phytec-mira-rdk-nand.dtb"
+if [ -f "${oftree}" ]; then
+global.bootm.oftree="$oftree"
+fi
+
+nfsroot="/home/customers/phyboard-solo-1/nfs_root"
+bootargs-ip
+global.linux.bootargs.dyn.root="root=/dev/nfs nfsroot=10.0.0.1:$nfsroot,nfsvers=3 ip=10.0.0.226:10.0.0.1:10.0.0.1:255.255.255.0"
