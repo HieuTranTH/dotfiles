@@ -144,11 +144,15 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     alias cdb='cd ~/bin'
     alias cdd='cd ~/Documents'
     alias cdt='cd ~/Documents/Tuxera'
+
+    if [ -f ~/.bashrc_extra/bashrc_rednotebook.sh ]; then
+        . ~/.bashrc_extra/bashrc_rednotebook.sh
+    fi
 fi
 # End of Hostname hieu-ThinkPad-X250 specific #################################
 
 # Alias for dotfiles version control
-function dotfiles {
+function dotfiles() {
     /usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME $@
 }
 
