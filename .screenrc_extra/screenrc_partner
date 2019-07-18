@@ -31,7 +31,7 @@ stuff "cd /home/hieu/file_transfer^M"
 screen -t PDU_ETH   6 bash
 stuff "sudo -u $MYDEV -i^Mid^Mpdu_eth_host.sh $( id -u )"
 screen -t Terra_t_director  7 bash
-stuff "ssh -t terra \"cd /opt/tuxera/hieu/software/tuxera_test_director/ ; bash\"^M"
+stuff "ssh terra^Mcd /opt/tuxera/hieu/software/tuxera_test_director/^M"
 screen -t Partner_home  8 bash
 stuff "cd /home/hieu/^M"
 
