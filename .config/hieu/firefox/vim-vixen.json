@@ -76,6 +76,7 @@
   "blacklist": [
     "www.youtube.com/watch*",
     "*.facebook.com/messages/*",
-    "chat.tuxera.com"
+    "chat.tuxera.com",
+    "www.typingstudy.com/*"
   ]
 }
