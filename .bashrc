@@ -129,6 +129,9 @@ if [ "$dyna_title" = "Yes" -a -f ~/.bashrc_extra/bashrc_screen_dyna_title.sh ]; 
     . ~/.bashrc_extra/bashrc_screen_dyna_title.sh
 fi
 
+# Alias for diff with color highlighting
+alias diff='diff --color=auto'
+
 # Hostname hieu-ThinkPad-X250 specific ########################################
 if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     # Add alias for terminal_start to make the calling gnome-terminal tab exit
