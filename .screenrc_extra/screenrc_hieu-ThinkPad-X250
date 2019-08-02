@@ -19,19 +19,19 @@ defbce on
 # default windows
 screen -t Python  0 python
 screen -t linux_commands  1 bash
-stuff "cd /home/hieu/Documents; vi -c 'set noexpandtab autoindent' linux_commands^M"
+stuff "cd /home/hieu/Documents; BASED=\$PWD; BASEF=/home/hieu/Documents/linux_commands; vi -c 'set noexpandtab autoindent' \$BASEF^M"
 screen -t tuxera_commands  2 bash
-stuff "cd /home/hieu/Documents; vi -c 'set noexpandtab autoindent' tuxera_commands^M"
+stuff "cd /home/hieu/Documents; BASED=\$PWD; BASEF=/home/hieu/Documents/tuxera_commands; vi -c 'set noexpandtab autoindent' \$BASEF^M"
 screen -t git_commands  3 bash
-stuff "cd /home/hieu/Documents; vi -c 'set noexpandtab autoindent' git_commands^M"
+stuff "cd /home/hieu/Documents; BASED=\$PWD; BASEF=/home/hieu/Documents/git_commands; vi -c 'set noexpandtab autoindent' \$BASEF^M"
 screen -t Ticket_folder  4 bash
-stuff "cd /home/hieu/Documents/Tuxera/Jira-tickets^M"
+stuff "cd /home/hieu/Documents/Tuxera/Jira-tickets; BASED=\$PWD^M"
 screen -t Gen_report  5 bash
-stuff "cd /home/hieu/Documents/Tuxera/software/tuxera_genreport^M"
+stuff "cd /home/hieu/Documents/Tuxera/software/tuxera_genreport; BASED=\$PWD^M"
 screen -t bin  6 bash
-stuff "cd /home/hieu/bin^M"
-screen -t home  7 bash
-stuff "cd /home/hieu/^M"
+stuff "cd /home/hieu/bin; BASED=\$PWD^M"
+screen -t Home  7 bash
+stuff "cd /home/hieu; BASED=\$PWD^M"
 
 select 0
 #bind c screen 1 # window numbering starts at 1 not 0

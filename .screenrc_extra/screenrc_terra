@@ -18,25 +18,25 @@ defbce on
 
 # default windows
 screen -t Terra_home  0 bash
-stuff "cd /home/hieu^M"
+stuff "cd /home/hieu; BASED=\$PWD^M"
 screen -t T_Delivery  1 bash
-stuff "cd /opt/tuxera/hieu/tuxera_delivery^M"
+stuff "cd /opt/tuxera/hieu/tuxera_delivery; BASED=\$PWD^M"
 screen -t Target1  2 bash
-stuff "cd /opt/tuxera/hieu/tuxera_delivery/target^M"
+stuff "cd /opt/tuxera/hieu/tuxera_delivery/target; BASED=\$PWD^M"
 screen -t Target2  3 bash
-stuff "cd /opt/tuxera/hieu/tuxera_delivery/target^M"
+stuff "cd /opt/tuxera/hieu/tuxera_delivery/target; BASED=\$PWD^M"
 screen -t Output1  4 bash
-stuff "cd /opt/tuxera/hieu/tuxera_delivery/output^M"
+stuff "cd /opt/tuxera/hieu/tuxera_delivery/output; BASED=\$PWD^M"
 screen -t Output2  5 bash
-stuff "cd /opt/tuxera/hieu/tuxera_delivery/output^M"
+stuff "cd /opt/tuxera/hieu/tuxera_delivery/output; BASED=\$PWD^M"
 screen -t Software1  6 bash
-stuff "cd /opt/tuxera/hieu/software^M"
+stuff "cd /opt/tuxera/hieu/software; BASED=\$PWD^M"
 screen -t Software2  7 bash
-stuff "cd /opt/tuxera/hieu/software^M"
+stuff "cd /opt/tuxera/hieu/software; BASED=\$PWD^M"
 screen -t Test_Director1  8 bash
-stuff "cd /opt/tuxera/hieu/software/tuxera_test_director^M"
+stuff "cd /opt/tuxera/hieu/software/tuxera_test_director; BASED=\$PWD^M"
 screen -t Test_Director2  9 bash
-stuff "cd /opt/tuxera/hieu/software/tuxera_test_director^M"
+stuff "cd /opt/tuxera/hieu/software/tuxera_test_director; BASED=\$PWD^M"
 
 select 0
 #bind c screen 1 # window numbering starts at 1 not 0

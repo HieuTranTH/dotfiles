@@ -19,19 +19,19 @@ defbce on
 # default windows
 screen -t Python  0 python
 screen -t Term1(Minicom)  1 bash
-stuff "sudo -u $MYDEV -i^Mminicom -c on -t xterm-256color^M"
+stuff "sudo -u $MYDEV -i^MBASED=\$PWD; minicom -c on -t xterm-256color^M"
 screen -t Term2(SSH)  2 bash
-stuff "sudo -u $MYDEV -i^Mssh root@$MYDEV || telnet $MYDEV^M"
+stuff "sudo -u $MYDEV -i^MBASED=\$PWD; ssh root@$MYDEV || telnet $MYDEV^M"
 screen -t NFS_root  3 bash
-stuff "sudo -u $MYDEV -i^Mcd nfs_root^M"
+stuff "sudo -u $MYDEV -i^Mcd nfs_root; BASED=\$PWD^M"
 screen -t Buildroot  4 bash
-stuff "sudo -u $MYDEV -i^Mcd nfs_root/tuxera/hieu/tuxera-tests || cd nfs_root/tuxera/tuxera-tests^M"
+stuff "sudo -u $MYDEV -i^Mcd nfs_root/tuxera/hieu/tuxera-tests || cd nfs_root/tuxera/tuxera-tests; BASED=\$PWD^M"
 screen -t Ticket_folder  5 bash
-stuff "cd /home/hieu/file_transfer^M"
+stuff "cd /home/hieu/file_transfer; BASED=\$PWD^M"
 screen -t Terra_t_director  6 bash
-stuff "ssh terra^Mcd /opt/tuxera/hieu/software/tuxera_test_director/^M"
+stuff "ssh terra^Mcd /opt/tuxera/hieu/software/tuxera_test_director/; BASED=\$PWD^M"
 screen -t Partner_home  7 bash
-stuff "cd /home/hieu/^M"
+stuff "cd /home/hieu/; BASED=\$PWD^M"
 
 select 0
 #bind c screen 1 # window numbering starts at 1 not 0
