@@ -49,22 +49,22 @@ select 0
 
 # layouts
 layout autosave on
-layout new one
+layout new prime
 select 1
-layout new two
+layout new hori_split
 select 1
 split
 #resize -v +8
 focus down
 select 2
 focus up
-layout new three
+layout new vert_split
 select 1
 split -v
 focus right
 select 2
 focus left
-layout new four
+layout new hori_split_main
 select 1
 split
 #resize -v +7
@@ -75,7 +75,7 @@ split -v
 focus right
 select 3
 focus up
-layout new five
+layout new vert_split_main
 select 1
 split -v
 focus right
@@ -85,8 +85,9 @@ focus down
 select 3
 focus left
 
-layout attach one
-layout select one
+# leave 'layout attach :last' as default
+# layout attach prime
+layout select prime
 
 # navigating regions with Ctrl-arrows
 bindkey "^[[1;5D" focus left
