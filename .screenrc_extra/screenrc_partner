@@ -1,6 +1,8 @@
 # the following two lines give a two-line status, with the current window highlighted
 hardstatus alwayslastline
 hardstatus string '%{= kG}[%{G}%H%? %1`%?%{g}][%{G}%S%? %1`%?%{g}][%= %{= kw}%-w%{+b yk} %n*%t%?(%u)%? %{-}%+w %=%{g}][%{B}%m/%d %{W}%C%A%{g}]'
+# highlight the caption line of the focused region
+caption splitonly "%?%F%{.y}%:%?%3 %t"
 
 # huge scrollback buffer
 defscrollback 5000
