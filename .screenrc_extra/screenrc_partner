@@ -113,3 +113,9 @@ bind -c rsz -k kl eval "focus left"  "command -c rsz" # Left
 bind -c rsz -k kr eval "focus right" "command -c rsz" # Right
 bind -c rsz -k ku eval "focus up"    "command -c rsz" # Up
 bind -c rsz -k kd eval "focus down" "command -c rsz" # Down
+
+# Create temporary layout for fullscreen with F1, remove with Ctrl+F1
+# TODO: select current focused window by default, and return to the last
+# layout when exit. Quite impossible with GNU screen.
+bindkey "^[OP" eval "layout new tmp_full" "caption always '%{wR}%=FULL_SCREEN%='"
+bindkey "^[[1;5P" eval "layout remove tmp_full" "caption splitonly '%?%F%{.y}%:%?%3 %t'"
