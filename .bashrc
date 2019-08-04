@@ -169,6 +169,9 @@ export LESS_TERMCAP_so=$'\e[01;48;5;56m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
+# Make Vi to be the default editor for C-xC-e and fc commands
+export EDITOR=vi
+
 ###############################################################################
 # End of Hieu's custom Configurations
 ###############################################################################
