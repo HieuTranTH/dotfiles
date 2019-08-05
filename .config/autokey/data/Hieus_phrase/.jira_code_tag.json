@@ -1,0 +1,31 @@
+{
+    "usageCount": 10, 
+    "omitTrigger": true, 
+    "prompt": false, 
+    "description": "jira_code_tag", 
+    "abbreviation": {
+        "wordChars": "[^ \\n]", 
+        "abbreviations": [
+            "{c"
+        ], 
+        "immediate": false, 
+        "ignoreCase": false, 
+        "backspace": true, 
+        "triggerInside": false
+    }, 
+    "hotkey": {
+        "hotKey": null, 
+        "modifiers": []
+    }, 
+    "modes": [
+        1
+    ], 
+    "showInTrayMenu": false, 
+    "matchCase": false, 
+    "filter": {
+        "regex": null, 
+        "isRecursive": false
+    }, 
+    "type": "phrase", 
+    "sendMode": "kb"
+}
