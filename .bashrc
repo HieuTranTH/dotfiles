@@ -148,6 +148,10 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     alias cdd='cd ~/Documents'
     alias cdt='cd ~/Documents/Tuxera'
 
+	# Aliases for pipe text to xlip clipboard and check xlip contents
+	alias c='xclip -selection clipboard'
+	alias v='xclip -o'
+
     if [ -f ~/.bashrc_extra/bashrc_rednotebook.sh ]; then
         . ~/.bashrc_extra/bashrc_rednotebook.sh
     fi
