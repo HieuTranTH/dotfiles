@@ -196,6 +196,9 @@ let g:netrw_winsize = 25
 "     autocmd VimEnter * :Vexplore
 " augroup END
 
+" Set tab widths of 8 spaces for C source codes
+autocmd Filetype c setlocal tabstop=8 shiftwidth=8 softtabstop=8 expandtab
+
 "##############################################################################
 " End of Hieu's custom Configurations
 "##############################################################################
