@@ -158,6 +158,8 @@ set statusline+=\
 " End of customized statusline
 
 " Highlight trailing whitespaces in red
+" There is a bug this highlight is not showing when opening a buffer from
+" netrw File Explorer
 highlight ExtraWhitespace ctermbg=red guibg=red
 match ExtraWhitespace /\s\+$/
 
