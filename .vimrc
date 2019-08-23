@@ -182,8 +182,9 @@ highlight SpellBad cterm=reverse ctermbg=white ctermfg=red
 " endfunc
 
 " Save folds when exit and restore when open again (.c files only)
-autocmd BufWinLeave *.c mkview
-autocmd BufWinEnter *.c silent loadview
+" Not using now, might enable later if needed
+" autocmd BufWinLeave *.c mkview
+" autocmd BufWinEnter *.c silent loadview
 
 " Settings for netrw File Explorer (tree style listing, open files in a new tab, set width to 25% of the page)
 let g:netrw_liststyle = 3
