@@ -158,10 +158,10 @@ set statusline+=\
 " End of customized statusline
 
 " Highlight trailing whitespaces in red
-" There is a bug this highlight is not showing when opening a buffer from
-" netrw File Explorer
 highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
+" :match command only applies to the current window. So any :split or :tabe
+" won't inherit the highlighting.
+autocmd VimEnter,WinEnter * match ExtraWhitespace /\s\+$/
 
 " Set spell check to F6
 map <F6> :setlocal spell! spelllang=en_us<CR>
