@@ -119,6 +119,8 @@ set colorcolumn=72,80
 
 " open completion menu on statusline
 set wildmenu
+" Bash-like completion
+set wildmenu wildmode=longest,list,full
 " set wildmenu wildmode=longest:full,full
 
 " Customized statusline
