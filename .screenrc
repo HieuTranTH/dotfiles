@@ -1,9 +1,9 @@
 # the following two lines give a two-line status, with the current window highlighted
 hardstatus alwayslastline
 hardstatus string '%{= kG}[%{G}%H%? %1`%?%{g}][%{G}%S%? %1`%?%{g}][%= %{= kw}%-w%{+b yk} %n*%t%?(%u)%? %{-}%+w %=%{g}][%{B}%m/%d %{W}%C%A%{g}]'
-# highlight the caption line of the focused region with green background
+# highlight the caption line of the focused region with green foreground
 caption splitonly "%?%F%{.g}%:%?%3 %t"
-# set color of borders and command-line (black foreground, blue background )
+# set color of borders and command-line (black background, blue foreground )
 rendition so .b
 
 # huge scrollback buffer
