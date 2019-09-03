@@ -1,5 +1,5 @@
 {
-    "usageCount": 10, 
+    "usageCount": 36, 
     "omitTrigger": true, 
     "prompt": false, 
     "description": "jira_code_tag", 
@@ -10,7 +10,7 @@
         ], 
         "immediate": false, 
         "ignoreCase": false, 
-        "backspace": true, 
+        "backspace": false, 
         "triggerInside": false
     }, 
     "hotkey": {
