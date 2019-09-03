@@ -20,6 +20,9 @@ defbce on
 # mouse tracking allows to switch region focus by clicking
 #mousetrack on
 
+# Fix text file stay visible in terminal after opened by text editor
+altscreen on
+
 # default windows
 screen -t Terra_home  0 bash
 stuff "cd /home/hieu; BASED=\$PWD^M"

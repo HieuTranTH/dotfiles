@@ -20,6 +20,9 @@ defbce on
 # mouse tracking allows to switch region focus by clicking
 #mousetrack on
 
+# Fix text file stay visible in terminal after opened by text editor
+altscreen on
+
 # default windows
 screen -t Python  0 python
 screen -t Term1(Minicom)  1 bash
