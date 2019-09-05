@@ -176,6 +176,9 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 # Make Vi to be the default editor for C-xC-e and fc commands
 export EDITOR=vi
 
+# Show job count in bash prompt
+PS1="[\j]$PS1"
+
 ###############################################################################
 # End of Hieu's custom Configurations
 ###############################################################################
