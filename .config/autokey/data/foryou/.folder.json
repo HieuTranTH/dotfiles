@@ -1,0 +1,28 @@
+{
+    "usageCount": 0, 
+    "abbreviation": {
+        "wordChars": "[\\w]", 
+        "abbreviations": [], 
+        "immediate": false, 
+        "ignoreCase": false, 
+        "backspace": true, 
+        "triggerInside": false
+    }, 
+    "modes": [
+        3
+    ], 
+    "title": "foryou", 
+    "hotkey": {
+        "hotKey": "s", 
+        "modifiers": [
+            "<ctrl>", 
+            "<shift>"
+        ]
+    }, 
+    "filter": {
+        "regex": null, 
+        "isRecursive": false
+    }, 
+    "type": "folder", 
+    "showInTrayMenu": false
+}

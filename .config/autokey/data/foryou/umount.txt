@@ -1,0 +1,1 @@
+;umount /mnt/sdcard/external_sd;umount /mnt/sdcard/.android_secure;umount /mnt/secure/asec;umount /mnt/sdcard;

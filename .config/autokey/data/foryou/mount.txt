@@ -1,0 +1,1 @@
+;mount -t tfat /dev/block/mmcblk1p1 /data/hieu/mnt;

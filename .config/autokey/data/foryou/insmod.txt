@@ -1,0 +1,1 @@
+;insmod /data/hieu/tuxera-file-systems-3019.8.21.3.14-atc-ac8317-evaluation/fat/kernel-module/tfat.ko;
