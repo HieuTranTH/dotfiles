@@ -47,7 +47,7 @@ select 0
 # get rid of silly xoff stuff
 # bind s split
 
-# layouts
+# Setting layouts size and position
 layout autosave on
 layout new prime
 select 1
@@ -62,7 +62,14 @@ layout new vert_split
 select 1
 split -v
 focus right
-select 2
+select 3
+split -v
+focus right
+select 6
+split
+focus down
+select 7
+focus left
 focus left
 layout new hori_split_main
 select 1
@@ -87,7 +94,7 @@ focus left
 
 # leave 'layout attach :last' as default
 # layout attach prime
-layout select prime
+layout select vert_split
 
 # navigating regions with Ctrl-arrows
 bindkey "^[[1;5D" focus left
