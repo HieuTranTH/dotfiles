@@ -155,7 +155,7 @@ set statusline+=\ %y
 set statusline+=\ %{&fileencoding?&fileencoding:&encoding}
 set statusline+=\[%{&fileformat}\]
 set statusline+=\ %p%%
-set statusline+=\ %l:%c
+set statusline+=\ %l/%L\ ln\ :%c
 set statusline+=\ 
 " End of customized statusline
 
