@@ -116,5 +116,5 @@ bind -c rsz -k kd eval "focus down" "command -c rsz" # Down
 # Create temporary layout for fullscreen with F1, remove with Ctrl+F1
 # TODO: select current focused window by default, and return to the last
 # layout when exit. Quite impossible with GNU screen.
-bindkey "^[OP" exec screen_open_fullscreen.sh
-bindkey "^[[1;5P" exec screen_close_fullscreen.sh
+#bindkey "^[OP" exec screen_open_fullscreen.sh
+#bindkey "^[[1;5P" exec screen_close_fullscreen.sh
