@@ -26,7 +26,7 @@ altscreen on
 # default windows
 screen -t Python  0 python
 screen -t Vim  1 bash
-stuff "cd /home/pi/hieu/spinfs/; BASED=\$PWD^Mvi .^M"
+stuff "cd /home/pi/hieu/spinfs/; BASED=\$PWD^Mvi -p . src/spi_flash.c include/spi_flash.h^M"
 screen -t Compile  2 bash
 stuff "cd /home/pi/hieu/spinfs/; BASED=\$PWD^M"
 screen -t Bash3  3 bash
@@ -81,7 +81,7 @@ focus left
 
 # leave 'layout attach :last' as default
 # layout attach prime
-layout select prime
+layout select vert_split_main
 
 # navigating regions with Ctrl-arrows
 bindkey "^[[1;5D" focus left
