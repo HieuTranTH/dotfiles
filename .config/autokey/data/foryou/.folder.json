@@ -8,9 +8,7 @@
         "backspace": true, 
         "triggerInside": false
     }, 
-    "modes": [
-        3
-    ], 
+    "modes": [], 
     "title": "foryou", 
     "hotkey": {
         "hotKey": "s", 

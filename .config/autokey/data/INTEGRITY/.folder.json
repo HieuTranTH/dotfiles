@@ -8,7 +8,9 @@
         "backspace": true, 
         "triggerInside": false
     }, 
-    "modes": [], 
+    "modes": [
+        3
+    ], 
     "title": "INTEGRITY", 
     "hotkey": {
         "hotKey": "s", 
