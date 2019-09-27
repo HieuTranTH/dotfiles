@@ -24,3 +24,5 @@
 #	added = yellow
 #	changed = green
 	untracked = cyan
+[log]
+	decorate = auto
