@@ -20,10 +20,10 @@
     "gg": { "type": "scroll.top" },
     "G": { "type": "scroll.bottom" },
     "$": { "type": "scroll.end" },
-    "J": { "type": "tabs.prev" },
-    "K": { "type": "tabs.next" },
-    "gT": { "type": "tabs.prev" },
-    "gt": { "type": "tabs.next" },
+    "J": { "type": "tabs.prev", "count": 1 },
+    "K": { "type": "tabs.next", "count": 1 },
+    "gT": { "type": "tabs.prev", "count": 1 },
+    "gt": { "type": "tabs.next", "count": 1 },
     "g0": { "type": "tabs.first" },
     "g$": { "type": "tabs.last" },
     "<C-6>": { "type": "tabs.prevsel" },
@@ -54,7 +54,6 @@
     "/": { "type": "find.start" },
     "n": { "type": "find.next" },
     "N": { "type": "find.prev" },
-    ".": { "type": "repeat.last" },
     "<S-Esc>": { "type": "addon.toggle.enabled" }
   },
   "search": {
@@ -74,9 +73,10 @@
     "complete": "sbh"
   },
   "blacklist": [
-    "www.youtube.com/watch*",
+    "www.youtube.com",
     "*.facebook.com/messages/*",
     "chat.tuxera.com",
-    "www.typingstudy.com/*"
+    "www.typingstudy.com",
+    "10fastfingers.com"
   ]
 }
