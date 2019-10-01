@@ -1,5 +1,5 @@
+set window-width 800
 set window-height 1200
-set window-width 1600
 set selection-clipboard clipboard
 set scroll-page-aware true
 set guioptions svh
