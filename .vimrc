@@ -86,8 +86,14 @@ vnoremap <F1> :set invfullscreen<CR>
 
 " Textmate holdouts
 
-" Formatting
+" Formatting in paragraph
 map <leader>q gqip
+
+" Toggle hybrid line number on/off
+map <leader>n :set number! relativenumber!<CR>
+
+" Toggling copy with mouse mode (toggle line number and listchar)
+map <leader>c :set number! relativenumber! list!<CR>
 
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
