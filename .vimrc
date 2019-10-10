@@ -168,7 +168,7 @@ set statusline+=\
 " Highlight trailing whitespaces in red
 highlight ExtraWhitespace ctermbg=red guibg=red
 " :match command only applies to the current window. So any :split or :tabe
-" won't inherit the highlighting.
+" won't inherit the highlighting. Next line fix it.
 autocmd VimEnter,WinEnter * match ExtraWhitespace /\s\+$/
 
 " Set spell check to F6
@@ -303,6 +303,10 @@ highlight! WinNumSel term=bold cterm=bold ctermfg=7 ctermbg=14 guifg=DarkBlue gu
 set tabline=%!MyTabLine()
 
 endif " exists("+showtabline")
+
+" Map tabnext and tabprev to CTRL_J, CTRL_K in Normal Mode
+:nnoremap <C-j> gT
+:nnoremap <C-k> gt
 
 "##############################################################################
 " End of Hieu's custom Configurations
