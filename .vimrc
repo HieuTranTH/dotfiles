@@ -52,8 +52,8 @@ set matchpairs+=<:> " use % to jump between pairs
 runtime! macros/matchit.vim
 
 " Move up/down editor lines
-nnoremap j gj
-nnoremap k gk
+noremap j gj
+noremap k gk
 
 " Allow hidden buffers
 set hidden
