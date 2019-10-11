@@ -45,7 +45,7 @@ screen() {
                         fi
                         # End of Hostname partner specific ####################
 
-                        command screen "$@" -c "~/.screenrc_extra/screenrc_$(hostname)" #use "command" here to prevent self-calling this function recursively
+                        command screen "$@" -c "~/.screenrc_extra/screenrc_$( hostname -s )" #use "command" here to prevent self-calling this function recursively
                         break
                         ;;
                     No)
