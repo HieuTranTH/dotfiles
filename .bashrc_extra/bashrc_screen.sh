@@ -25,7 +25,7 @@ screen() {
                 case $remote_scr in
                     Yes)
                         # Hostname partner specific ###########################
-                        if [ $( hostname ) = "partner" ]; then
+                        if [ $( hostname -s ) = "partner" ]; then
                             while true
                             do
                                 read -p "What is the customer's device user name? " MYDEV
