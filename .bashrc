@@ -165,6 +165,15 @@ fi
 function dotfiles() {
     /usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME $@
 }
+# Function to pull dotfiles, automatically stash save > pull > stash pop, which
+# will keep custom changes in some hosts
+function dotfilespull() {
+    cd ~
+    dotfiles stash save
+    dotfiles pull
+    dotfiles stash pop
+    cd -
+}
 
 # Give colors for man pages
 # https://www.tecmint.com/view-colored-man-pages-in-linux/
