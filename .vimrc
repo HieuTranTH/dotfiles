@@ -304,9 +304,9 @@ set tabline=%!MyTabLine()
 
 endif " exists("+showtabline")
 
-" Map tabnext and tabprev to CTRL_J, CTRL_K in Normal Mode
-:nnoremap <C-j> gT
-:nnoremap <C-k> gt
+" Map tabnext and tabprev to CTRL-J, CTRL-K in Normal Mode
+:nnoremap <C-J> gT
+:nnoremap <C-K> gt
 
 "##############################################################################
 " End of Hieu's custom Configurations

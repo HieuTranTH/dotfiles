@@ -1,0 +1,16 @@
+remove:
+a: add the current page to your bookmarks
+d: delete the current tab and select the tab to its right
+D: delete the current tab and select the tab to its left
+!d: delete a pinned tab
+u: reopen a close tab
+.: repeat last action
+
+Change:
+<C-J>: select the previous tab
+<C-K>: select the next tab
+F: follow links in the page in a new tab, background true
+  "blacklist": [
+    { "url": "www.youtube.com", "keys": ["m", "h", "j", "k", "l"] },
+    { "url": "www.youtube.com/watch*", "keys": ["m", "t", "f", "F", "h", "j", "k", "l", ":"] }
+  ]

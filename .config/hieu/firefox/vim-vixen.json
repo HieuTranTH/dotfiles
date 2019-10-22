@@ -20,10 +20,10 @@
     "gg": { "type": "scroll.top" },
     "G": { "type": "scroll.bottom" },
     "$": { "type": "scroll.end" },
-    "J": { "type": "tabs.prev", "count": 1 },
-    "K": { "type": "tabs.next", "count": 1 },
-    "gT": { "type": "tabs.prev", "count": 1 },
-    "gt": { "type": "tabs.next", "count": 1 },
+    "<C-J>": { "type": "tabs.prev" },
+    "<C-K>": { "type": "tabs.next" },
+    "gT": { "type": "tabs.prev" },
+    "gt": { "type": "tabs.next" },
     "g0": { "type": "tabs.first" },
     "g$": { "type": "tabs.last" },
     "<C-6>": { "type": "tabs.prevsel" },
@@ -35,7 +35,7 @@
     "zo": { "type": "zoom.out" },
     "zz": { "type": "zoom.neutral" },
     "f": { "type": "follow.start", "newTab": false },
-    "F": { "type": "follow.start", "newTab": true, "background": true },
+    "F": { "type": "follow.start", "newTab": true, "background": false },
     "m": { "type": "mark.set.prefix" },
     "'": { "type": "mark.jump.prefix" },
     "H": { "type": "navigate.history.prev" },
@@ -73,11 +73,7 @@
     "complete": "sbh"
   },
   "blacklist": [
-    "www.youtube.com",
-    "*.facebook.com/messages/*",
-    "chat.tuxera.com",
-    "www.typingstudy.com",
-    "10fastfingers.com",
-    "play.typeracer.com"
+    { "url": "www.youtube.com", "keys": ["m", "h", "j", "k", "l"] },
+    { "url": "www.youtube.com/watch*", "keys": ["m", "t", "f", "F", "h", "j", "k", "l", ":"] }
   ]
 }
