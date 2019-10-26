@@ -11,6 +11,8 @@
     "b": { "type": "command.show.buffer" },
     "k": { "type": "scroll.vertically", "count": -1 },
     "j": { "type": "scroll.vertically", "count": 1 },
+    "<C-Y>": { "type": "scroll.vertically", "count": -1 },
+    "<C-E>": { "type": "scroll.vertically", "count": 1 },
     "h": { "type": "scroll.horizonally", "count": -1 },
     "l": { "type": "scroll.horizonally", "count": 1 },
     "<C-U>": { "type": "scroll.pages", "count": -0.5 },

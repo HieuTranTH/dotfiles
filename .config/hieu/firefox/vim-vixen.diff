@@ -7,6 +7,8 @@ u: reopen a close tab
 .: repeat last action
 
 Change:
+<C-E>: Scroll up one line
+<C-Y>: Scroll down one line
 <C-J>: select the previous tab
 <C-K>: select the next tab
 F: follow links in the page in a new tab, background true
