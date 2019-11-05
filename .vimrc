@@ -89,6 +89,9 @@ vnoremap <F1> :set invfullscreen<CR>
 " Formatting in paragraph
 map <leader>q gqip
 
+" Toggle expandtab and autoindent (i.e. formatting will align with first line)
+map <leader>t :set expandtab! autoindent!<CR>
+
 " Toggle hybrid line number on/off
 map <leader>n :set number! relativenumber!<CR>
 
