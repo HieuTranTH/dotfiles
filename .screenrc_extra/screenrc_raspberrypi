@@ -30,8 +30,12 @@ stuff "cd /home/pi/hieu/spinfs/; BASED=\$PWD^Mvi -p . src/spi_flash.c include/sp
 screen -t Compile  2 bash
 stuff "cd /home/pi/hieu/spinfs/; BASED=\$PWD^M"
 screen -t Bash3  3 bash
-stuff "cd /home/pi/hieu/spinfs/; BASED=\$PWD^M"
-screen -t linux_commands  4 bash
+stuff "cd /home/pi/hieu/spinfs/output; BASED=\$PWD^M"
+screen -t Bash4  4 bash
+stuff "cd /home/pi/hieu/spinfs/scripts; BASED=\$PWD^M"
+screen -t Bash5  5 bash
+stuff "cd /home/pi/hieu/spinfs/src; BASED=\$PWD^M"
+screen -t linux_commands  9 bash
 stuff "cd /home/pi/hieu/; BASED=\$PWD; BASEF=/home/pi/hieu/linux_commands; view -p \$BASEF git_commands^M"
 
 select 0
@@ -72,11 +76,18 @@ focus up
 layout new vert_split_main
 select 1
 split -v
+split -v
 focus right
 select 2
 split
 focus down
 select 3
+focus right
+select 4
+split
+focus down
+select 5
+focus left
 focus left
 
 # leave 'layout attach :last' as default
