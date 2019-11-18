@@ -26,7 +26,7 @@ altscreen on
 # default windows
 screen -t Python  0 python
 screen -t Vim  1 bash
-stuff "cd /home/pi/hieu/spinfs/; BASED=\$PWD^Mvi -p . src/spi_flash.c include/spi_flash.h^M"
+stuff "cd /home/pi/hieu/spinfs/; BASED=\$PWD^Mvi -p . src/spinfs.c include/spinfs.h src/spi_flash.c include/spi_flash.h^M"
 screen -t Compile  2 bash
 stuff "cd /home/pi/hieu/spinfs/; BASED=\$PWD^M"
 screen -t Bash3  3 bash
