@@ -311,8 +311,11 @@ set tabline=%!MyTabLine()
 endif " exists("+showtabline")
 
 " Map tabnext and tabprev to CTRL-J, CTRL-K in Normal Mode
-:nnoremap <C-J> gT
-:nnoremap <C-K> gt
+nnoremap <C-J> gT
+nnoremap <C-K> gt
+
+" Map creating a new vertical window keybind
+map <C-W>N :vnew<CR>
 
 "##############################################################################
 " End of Hieu's custom Configurations
