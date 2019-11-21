@@ -35,6 +35,8 @@ screen -t Bash4  4 bash
 stuff "cd /home/pi/hieu/spinfs/scripts; BASED=\$PWD^M"
 screen -t Bash5  5 bash
 stuff "cd /home/pi/hieu/spinfs/src; BASED=\$PWD^M"
+screen -t Bash6  6 bash
+stuff "cd /home/pi/hieu/spinfs/src; BASED=\$PWD^M"
 screen -t linux_commands  9 bash
 stuff "cd /home/pi/hieu/; BASED=\$PWD; BASEF=/home/pi/hieu/linux_commands; view -p \$BASEF git_commands^M"
 
@@ -74,21 +76,19 @@ focus right
 select 3
 focus up
 layout new vert_split_main
-select 1
+select 5
 split -v
 split -v
+split
+focus down
+select 4
 focus right
 select 2
 split
 focus down
 select 3
 focus right
-select 4
-split
-focus down
-select 5
-focus left
-focus left
+select 6
 
 # leave 'layout attach :last' as default
 # layout attach prime
