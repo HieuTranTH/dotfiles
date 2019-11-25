@@ -98,6 +98,9 @@ map <leader>n :set number! relativenumber!<CR>
 " Toggling selecting with mouse mode (toggle line number and listchar)
 map <leader>s :set number! relativenumber! list!<CR>
 
+" Toggling cursorline and cursorcolumn
+map <leader>c :set cursorline! cursorcolumn!<CR>
+
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
 " Uncomment this to enable by default:
