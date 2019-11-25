@@ -95,8 +95,8 @@ map <leader>t :set expandtab! autoindent!<CR>
 " Toggle hybrid line number on/off
 map <leader>n :set number! relativenumber!<CR>
 
-" Toggling copy with mouse mode (toggle line number and listchar)
-map <leader>c :set number! relativenumber! list!<CR>
+" Toggling selecting with mouse mode (toggle line number and listchar)
+map <leader>s :set number! relativenumber! list!<CR>
 
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
