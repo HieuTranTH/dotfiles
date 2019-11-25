@@ -36,7 +36,7 @@ stuff "cd /home/pi/hieu/spinfs/scripts; BASED=\$PWD^M"
 screen -t Bash5  5 bash
 stuff "cd /home/pi/hieu/spinfs/src; BASED=\$PWD^M"
 screen -t Bash6  6 bash
-stuff "cd /home/pi/hieu/spinfs/src; BASED=\$PWD^M"
+stuff "cd /home/pi/hieu/spinfs/output; BASED=\$PWD^M"
 screen -t linux_commands  9 bash
 stuff "cd /home/pi/hieu/; BASED=\$PWD; BASEF=/home/pi/hieu/linux_commands; view -p \$BASEF git_commands^M"
 
