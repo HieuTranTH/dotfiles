@@ -143,9 +143,9 @@ colorscheme solarized
 "##############################################################################
 
 " highlight current line
-set cursorline
+"set cursorline
 " highlight current column
-set cursorcolumn
+"set cursorcolumn
 " display right margin (72 for git commit message, 80 for normal source code)
 set colorcolumn=72,80
 
