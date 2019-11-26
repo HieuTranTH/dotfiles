@@ -119,6 +119,15 @@ nnoremap <leader><Right> :tabm +1<CR>
 " Map creating a new vertical window keybind
 map <C-W>N :vnew<CR>
 
+" Bubling text, moving selected text up and down
+" http://vimcasts.org/episodes/bubbling-text/
+" Bubble single lines
+nmap <leader><Up> ddkP
+nmap <leader><Down> ddp
+" Bubble multiple lines
+vmap <leader><Up> xkP`[V`]
+vmap <leader><Down> xp`[V`]
+
 " Color scheme (terminal)
 set t_Co=256
 set background=dark
