@@ -108,6 +108,17 @@ set list " To enable by default
 " Or use your leader key + l to toggle on/off
 map <leader>l :set list!<CR> " Toggle tabs and EOL
 
+" Map tabnext and tabprev to CTRL-J, CTRL-K in Normal Mode
+nnoremap <C-J> gT
+nnoremap <C-K> gt
+
+" Map tabm -1 and tabm +1
+nnoremap <leader><Left> :tabm -1<CR>
+nnoremap <leader><Right> :tabm +1<CR>
+
+" Map creating a new vertical window keybind
+map <C-W>N :vnew<CR>
+
 " Color scheme (terminal)
 set t_Co=256
 set background=dark
@@ -312,13 +323,6 @@ highlight! WinNumSel term=bold cterm=bold ctermfg=7 ctermbg=14 guifg=DarkBlue gu
 set tabline=%!MyTabLine()
 
 endif " exists("+showtabline")
-
-" Map tabnext and tabprev to CTRL-J, CTRL-K in Normal Mode
-nnoremap <C-J> gT
-nnoremap <C-K> gt
-
-" Map creating a new vertical window keybind
-map <C-W>N :vnew<CR>
 
 "##############################################################################
 " End of Hieu's custom Configurations
