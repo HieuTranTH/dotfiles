@@ -23,6 +23,9 @@ defbce on
 # Fix text file stay visible in terminal after opened by text editor
 altscreen on
 
+# Case insensitive searching by default
+ignorecase on
+
 # default windows
 screen -t Python  0 python
 screen -t linux_commands  1 bash
