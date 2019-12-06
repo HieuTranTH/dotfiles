@@ -11,6 +11,8 @@ Change:
 <C-Y>: Scroll down one line
 <C-J>: select the previous tab
 <C-K>: select the next tab
+<C-O>: back
+<C-I>: forward
 F: follow links in the page in a new tab, background true
   "blacklist": [
     { "url": "www.youtube.com", "keys": ["m", "h", "j", "k", "l"] },
