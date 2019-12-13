@@ -6,7 +6,7 @@
             "<shift>", 
             "<super>"
         ], 
-        "enabled": true
+        "enabled": false
     }, 
     "settings": {
         "showTrayIcon": true, 
@@ -30,7 +30,7 @@
             100
         ], 
         "workAroundApps": ".*VirtualBox.*|krdc.Krdc", 
-        "hPanePosition": 405, 
+        "hPanePosition": 403, 
         "isFirstRun": true
     }, 
     "userCodeDir": null, 
@@ -40,6 +40,6 @@
         "modifiers": [
             "<super>"
         ], 
-        "enabled": true
+        "enabled": false
     }
 }
