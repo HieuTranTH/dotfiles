@@ -140,7 +140,6 @@ let g:solarized_termtrans=1
 " colorscheme solarized
 
 " Uncomment these to use molokai colorscheme
-"let g:molokai_original = 1
 colorscheme molokai
 
 "##############################################################################
