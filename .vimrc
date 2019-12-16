@@ -95,8 +95,9 @@ map <leader>t :set expandtab! autoindent!<CR>
 " Toggle hybrid line number on/off
 map <leader>n :set number! relativenumber!<CR>
 
-" Toggling selecting with mouse mode (toggle line number and listchar)
-map <leader>s :set number! relativenumber! list!<CR>
+" Toggling text selecting mode with mouse (toggle line number, listchar, and
+" colorcolumn)
+map <leader>s :set number! relativenumber! list!<CR>:let &cc = &cc == '' ? '72,80' : ''<CR>
 
 " Toggling cursorline and cursorcolumn
 map <leader>c :set cursorline! cursorcolumn!<CR>
