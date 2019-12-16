@@ -12,7 +12,7 @@ syntax on
 " For plugins to load correctly
 filetype plugin indent on
 
-" TODO: Pick a leader key
+" TODO: Pick a leader key, default is backslash '\' character
 " let mapleader = ","
 
 " Security
