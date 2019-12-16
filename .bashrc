@@ -148,9 +148,12 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     alias cdd='cd ~/Documents'
     alias cdt='cd ~/Documents/Tuxera'
 
-	# Aliases for pipe text to xlip clipboard and check xlip contents
-	alias c='xclip -selection clipboard'
-	alias v='xclip -o'
+    # Aliases for pipe text to xlip clipboard and check xlip contents
+    alias c='xclip -selection clipboard'
+    alias v='xclip -o'
+
+    # Edit *_commands files with vim
+    alias vic='vi -c "set noexpandtab autoindent" -p /home/hieu/Documents/*_commands'
 
     if [ -f ~/.bashrc_extra/bashrc_rednotebook.sh ]; then
         . ~/.bashrc_extra/bashrc_rednotebook.sh
