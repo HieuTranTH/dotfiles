@@ -133,10 +133,15 @@ set t_Co=256
 set background=dark
 " set background=light
 let g:solarized_termcolors=256
+" set transparency to true -> disable background color
 let g:solarized_termtrans=1
 " put https://raw.github.com/altercation/vim-colors-solarized/master/colors/solarized.vim
 " in ~/.vim/colors/ and uncomment:
-colorscheme solarized
+" colorscheme solarized
+
+" Uncomment these to use molokai colorscheme
+"let g:molokai_original = 1
+colorscheme molokai
 
 "##############################################################################
 " Start of Hieu's custom Configurations
