@@ -152,9 +152,6 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
 	alias c='xclip -selection clipboard'
 	alias v='xclip -o'
 
-    # Alias for ranger to disable mouse input
-    alias ranger='ranger --cmd="set mouse_enabled false"'
-
     if [ -f ~/.bashrc_extra/bashrc_rednotebook.sh ]; then
         . ~/.bashrc_extra/bashrc_rednotebook.sh
     fi
