@@ -4,3 +4,6 @@ set selection-clipboard clipboard
 set scroll-page-aware true
 set guioptions svh
 set inputbar-fg "#0D00BC"
+map <C-+> zoom in
+map <C--> zoom out
+map <C-0> zoom default
