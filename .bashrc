@@ -153,7 +153,9 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     alias v='xclip -o'
 
     # Edit *_commands files with vim
-    alias vic='vi -c "set noexpandtab autoindent" -p /home/hieu/Documents/*_commands'
+    alias vic='vim -p /home/hieu/Documents/*_commands -c "tabdo set noexpandtab autoindent"'
+
+    alias vii3='vim -p /home/hieu/.config/regolith/i3/{config,todo,i3_old.config}'
 
     if [ -f ~/.bashrc_extra/bashrc_rednotebook.sh ]; then
         . ~/.bashrc_extra/bashrc_rednotebook.sh
@@ -185,11 +187,15 @@ export LESS_TERMCAP_so=$'\e[01;48;5;56m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-# Make Vi to be the default editor for C-xC-e and fc commands
-export EDITOR=vi
+# Make Vim to be the default editor for C-xC-e and fc commands
+export EDITOR=vim
 
 # Show job count in bash prompt
 PS1="[\j]$PS1"
+# Indicate that we are in a shell open from ranger "S" command
+if echo "$(ps -p $(ps -o ppid= -p $$))" | grep -q "ranger"; then
+    PS1="RANGER:$PS1"
+fi
 
 ###############################################################################
 # End of Hieu's custom Configurations
