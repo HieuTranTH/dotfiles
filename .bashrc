@@ -192,11 +192,6 @@ export EDITOR=vim
 
 # Show job count in bash prompt
 PS1="[\j]$PS1"
-# Indicate that we are in a shell open from ranger "S" command
-# Make RANGER text in front of the prompt to be red and blinking
-if echo "$(ps -p $(ps -o ppid= -p $$))" | grep -q "ranger"; then
-    PS1="\033[5;91mRANGER:\033[0m$PS1"
-fi
 
 ###############################################################################
 # End of Hieu's custom Configurations
