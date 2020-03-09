@@ -102,6 +102,9 @@ map <leader>s :set number! relativenumber! list!<CR>:let &cc = &cc == '' ? '72,8
 " Toggling cursorline and cursorcolumn
 map <leader>c :set cursorline! cursorcolumn!<CR>
 
+" Bind scrolling and cursor in all windows
+map <leader>b :windo set cursorline! cursorcolumn! scb! crb!<CR>
+
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
 " Uncomment this to enable by default:
