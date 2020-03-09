@@ -105,6 +105,9 @@ map <leader>c :set cursorline! cursorcolumn!<CR>
 " Bind scrolling and cursor in all windows
 map <leader>b :windo set cursorline! cursorcolumn! scb! crb!<CR>
 
+" Reload all buffers
+map <leader>r :bufdo e<CR>
+
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
 " Uncomment this to enable by default:
