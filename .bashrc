@@ -155,15 +155,17 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     # Edit *_commands files with vim
     alias vic='vim -p /home/hieu/Documents/*_commands -c "tabdo set noexpandtab autoindent"'
 
-    alias vii3='vim -p /home/hieu/.config/regolith/i3/{config,todo,i3_old.config}'
+    # Edit i3 config, open other referenced configuration files
+    alias vii3='vim -p /home/hieu/.config/regolith/i3/{config,todo,i3_old.config} /home/hieu/voidrice/.config/i3/config -c "tabdo setfiletype i3"'
 
+    # Check for running instance of rednotebook when open it via SSH ForwardX11
     if [ -f ~/.bashrc_extra/bashrc_rednotebook.sh ]; then
         . ~/.bashrc_extra/bashrc_rednotebook.sh
     fi
 fi
 # End of Hostname hieu-ThinkPad-X250 specific #################################
 
-# Alias for dotfiles version control
+# Function wrapper for dotfiles git version control
 function dotfiles() {
     /usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME $@
 }
