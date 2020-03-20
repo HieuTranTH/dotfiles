@@ -135,6 +135,10 @@ nmap <leader><Down> ddp
 vmap <leader><Up> xkP`[V`]
 vmap <leader><Down> xp`[V`]
 
+" Map // to search for visually selected text
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
+
 " Color scheme (terminal)
 set t_Co=256
 set background=dark
