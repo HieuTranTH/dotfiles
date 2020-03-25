@@ -153,7 +153,7 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     alias v='xclip -o'
 
     # Edit *_commands files with vim
-    alias vic='vim -p /home/hieu/Documents/*_commands -c "tabdo set noexpandtab autoindent"'
+    alias vic='vim -p /home/hieu/Documents/*_commands -c "tabdo set noexpandtab autoindent formatoptions-=q"'
 
     # Edit i3 config, open other referenced configuration files
     alias vii3='vim -p /home/hieu/.config/regolith/i3/{config,todo,i3_old.config} /home/hieu/voidrice/.config/i3/config -c "tabdo setfiletype i3"'
