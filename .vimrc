@@ -36,9 +36,9 @@ set wrap
 " Disable to bypass autoformatting when textwidth is reached
 " set textwidth=79
 set textwidth=0
-" This below line is not good, because it will be overrided anyway when vim
-" load filetype setting
-set formatoptions=tcqrn1
+" This below line for setting formatoptions is not good, because it will be
+" overrided anyway when vim load filetype setting
+set formatoptions=tcrqn1
 set tabstop=4
 set shiftwidth=4
 set softtabstop=4
