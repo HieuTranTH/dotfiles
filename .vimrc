@@ -84,7 +84,9 @@ inoremap <F1> <ESC>:set invfullscreen<CR>a
 nnoremap <F1> :set invfullscreen<CR>
 vnoremap <F1> :set invfullscreen<CR>
 
-" Textmate holdouts
+" Unmap annoying q: key
+" Cannot unmap default Vim key so map it to Noop
+map q: <Nop>
 
 " Formatting in paragraph
 map <leader>q gqip
