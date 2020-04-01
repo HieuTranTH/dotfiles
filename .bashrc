@@ -162,6 +162,9 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     if [ -f ~/.bashrc_extra/bashrc_rednotebook.sh ]; then
         . ~/.bashrc_extra/bashrc_rednotebook.sh
     fi
+
+    # Let shell change directory when ranger exits
+    alias r='source ranger'
 fi
 # End of Hostname hieu-ThinkPad-X250 specific #################################
 
