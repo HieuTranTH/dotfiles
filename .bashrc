@@ -147,6 +147,11 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     alias cdb='cd ~/bin'
     alias cdd='cd ~/Documents'
     alias cdt='cd ~/Documents/Tuxera'
+    alias cdtb='cd ~/Documents/Tuxera/builroot_package_x86-64'
+    alias cdtj='cd ~/Documents/Tuxera/Jira-tickets'
+    alias cdti='cd ~/Documents/Tuxera/INTEGRITY'
+    alias cdtq='cd ~/Documents/Tuxera/QNX'
+    alias cdts='cd ~/Documents/Tuxera/software'
 
     # Aliases for pipe text to xlip clipboard and check xlip contents
     alias c='xclip -selection clipboard'
