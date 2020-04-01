@@ -68,6 +68,9 @@ set laststatus=2
 set showmode
 set showcmd
 
+" Allow :find to search down into sub-directories, simple fuzzy-finder
+set path+=**
+
 " Searching
 nnoremap / /\v
 vnoremap / /\v
