@@ -169,7 +169,13 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     fi
 
     # Let shell change directory when ranger exits
-    alias r='source ranger'
+    # see /usr/bin/ranger
+    function r() {
+        [ $# -eq 1 ] && cd $1
+        # shift positional parameter because 'ranger' script will check $1
+        shift
+        source ranger
+    }
 fi
 # End of Hostname hieu-ThinkPad-X250 specific #################################
 
