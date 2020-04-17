@@ -193,6 +193,15 @@ function dotfilespull() {
     cd -
 }
 
+# Go to the top directory of a git repo, work with repo that have submodules
+function cdg() {
+    TEMP_PWD=$PWD
+    while [ ! -d .git ]; do
+        cd ..
+    done
+    OLDPWD=$TEMP_PWD
+}
+
 # Give colors for man pages
 # https://www.tecmint.com/view-colored-man-pages-in-linux/
 export LESS_TERMCAP_mb=$'\e[1;32m'
