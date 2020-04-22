@@ -13,7 +13,7 @@ syntax on
 filetype plugin indent on
 
 " TODO: Pick a leader key, default is backslash '\' character
-" let mapleader = ","
+let mapleader = " "
 
 " Security
 set modelines=0
