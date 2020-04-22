@@ -143,6 +143,10 @@ vmap <leader><Down> xp`[V`]
 " Map // to search for visually selected text
 vnoremap * y/\V<C-R>=escape(@",'/\')<CR><CR>
 
+" New splits spawn below and right
+set splitbelow splitright
+" Remove pipe characters that act as seperators on vertical splits
+set fillchars+=vert:\ 
 
 " Color scheme (terminal)
 set t_Co=256
