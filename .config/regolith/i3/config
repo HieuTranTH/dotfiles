@@ -8,13 +8,15 @@ set $mod Mod4
 set $alt Mod1
 
 # i3xrocks config file
-set $i3xrocks_config /etc/regolith/i3xrocks/config
+#set $i3xrocks_config /etc/regolith/i3xrocks/config
+set $i3xrocks_config /home/hieu/.config/regolith/i3xrocks/config
 
 # compton config file
 set $compton_config /etc/regolith/compton/config
 
 # path to terminal. Override this to specify a custom terminal.
-set $terminal_path /usr/bin/st
+#set $terminal_path /usr/bin/st
+set $terminal_path /usr/bin/gnome-terminal
 
 # Color values are defined in ~/.Xresources-regolith
 # These are the labels which define each i3 workspace.
@@ -41,7 +43,7 @@ set_from_resource $ws19 i3-wm.workspace.19.name "19"
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-hide_edge_borders smart
+#hide_edge_borders smart
 
 # start a terminal
 bindsym $mod+Return exec $terminal_path
@@ -70,16 +72,22 @@ bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
 
-# move windows in workspaces
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $alt+Shift+Tab focus left
+bindsym $alt+Tab focus right
 
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+# move windows in workspaces
+bindsym $mod+Shift+Left move left 20 px
+bindsym $mod+Shift+Down move down 20 px
+bindsym $mod+Shift+Up move up 20 px
+bindsym $mod+Shift+Right move right 20 px
+
+bindsym $mod+Shift+h move left 20 px
+bindsym $mod+Shift+j move down 20 px
+bindsym $mod+Shift+k move up 20 px
+bindsym $mod+Shift+l move right 20 px
+
+#bindsym $mod+Shift+o move workspace to output left
+#bindsym $mod+Shift+i exec --no-startup-id /home/hieu/.screenlayout/internal_only.sh
 
 # toggle split orientation
 bindsym $mod+BackSpace split toggle
@@ -87,18 +95,42 @@ bindsym $mod+BackSpace split toggle
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
 
-# change gaps interactively
-bindsym $mod+minus gaps inner current minus 6
-bindsym $mod+plus gaps inner current plus 6
+# change gaps interactively (resize windows)
+bindsym $mod+minus gaps inner current plus 6
+bindsym $mod+plus gaps inner current minus 6
+bindsym $mod+Shift+minus gaps outer current plus 6
+bindsym $mod+Shift+plus gaps outer current minus 6
 
 # show/hide keybindings
-bindsym $mod+Shift+question exec --no-startup-id /usr/bin/conky-toggle
+# this keybind is conflicted with $mod+Shift+plus
+#bindsym $mod+Shift+question exec --no-startup-id /usr/bin/conky-toggle
 
 # toggle tiling / floating
 bindsym $mod+Shift+f floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+Shift+t focus mode_toggle
+
+# send a window to scatchpad
+# toggling tiling / floating to remove it from scratchpad
+bindsym $mod+Shift+s move scratchpad
+
+# show/hide scratchpad all scratchpad windows (except Rednotebook) at once
+bindsym $mod+s [class="^((?!Rednotebook).)*$"] scratchpad show
+# show/hide Rednotebook in scratchpad and make it sticky
+bindsym $mod+r [class="Rednotebook"] scratchpad show, sticky toggle
+
+# set a floating window to be sticky
+bindsym $mod+y sticky toggle
+
+# python math scratchpad
+# currently broken #FIXME
+#for_window [class="math"] floating enable
+#for_window [class="math"] resize set 800 300
+#for_window [class="math"] move scratchpad
+#for_window [class="math"] border pixel 5
+#exec --no-startup-id $terminal_path --class=math -- python
+#bindsym $mod+p			[class="math"] scratchpad show; [class="math"] move position center
 
 # toggle tabbed mode
 bindsym $mod+t layout toggle tabbed splith splitv
@@ -125,8 +157,13 @@ bindsym $mod+Ctrl+8 workspace $ws18
 bindsym $mod+Ctrl+9 workspace $ws19
 
 # cycle across workspaces
-bindsym $mod+Tab workspace next
-bindsym $mod+Shift+Tab workspace prev
+bindsym $mod+Tab workspace next_on_output
+bindsym $mod+Next workspace next_on_output
+bindsym $mod+Shift+Tab workspace prev_on_output
+bindsym $mod+Prior workspace prev_on_output
+
+# go back and forth workspace
+bindsym $mod+section workspace back_and_forth
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace $ws1
@@ -150,7 +187,7 @@ bindsym $mod+Shift+Ctrl+8 move container to workspace $ws18
 bindsym $mod+Shift+Ctrl+9 move container to workspace $ws19
 
 # move focused container to workspace, move to workspace
-bindsym $mod+$alt+1 move container to workspace $ws1; workspace $ws1  
+bindsym $mod+$alt+1 move container to workspace $ws1; workspace $ws1
 bindsym $mod+$alt+2 move container to workspace $ws2; workspace $ws2
 bindsym $mod+$alt+3 move container to workspace $ws3; workspace $ws3
 bindsym $mod+$alt+4 move container to workspace $ws4; workspace $ws4
@@ -177,81 +214,101 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Logout of session
-bindsym $mod+Shift+e exec /usr/bin/gnome-session-quit --logout
+#bindsym $mod+Shift+e exec /usr/bin/gnome-session-quit --logout
 
 # Reboot computer
-bindsym $mod+Shift+b exec /usr/bin/gnome-session-quit --reboot
+#bindsym $mod+Shift+b exec /usr/bin/gnome-session-quit --reboot
 
 # Power off computer
-bindsym $mod+Shift+p exec /usr/bin/gnome-session-quit --power-off
+#bindsym $mod+Shift+p exec /usr/bin/gnome-session-quit --power-off
 
 # lock the screen
 bindsym $mod+Escape exec gnome-screensaver-command --lock
 
 # put the system to sleep
-bindsym $mod+Shift+s exec systemctl suspend
+#bindsym $mod+Shift+s exec systemctl suspend
 
 # shortcuts for common system configuration tasks
+for_window [class="^Gnome-control-center"] floating enable
 bindsym $mod+c exec gnome-control-center
-bindsym $mod+w exec gnome-control-center wifi
-bindsym $mod+b exec gnome-control-center bluetooth
-bindsym $mod+d exec gnome-control-center display
-bindsym $mod+n exec gnome-control-center network
-bindsym $mod+p exec gnome-control-center power
-bindsym $mod+s exec gnome-control-center sound
+#bindsym $mod+w exec gnome-control-center wifi
+#bindsym $mod+b exec gnome-control-center bluetooth
+#bindsym $mod+d exec gnome-control-center display
+#bindsym $mod+n exec gnome-control-center network
+#bindsym $mod+p exec gnome-control-center power
+#bindsym $mod+s exec gnome-control-center sound
+
+## Custom/testing binds
+#bindsym $mod+d exec dmenu_run
+# flashing focused window border
+bindsym $mod+w border pixel +8
+bindsym --release $mod+w border pixel -8
+
+# focus the parent container
+bindsym $mod+a focus parent
+
+# focus the child container
+bindsym $mod+Shift+a focus child
 
 # resize window (you can also use the mouse for that)
-mode "Resize Mode" {
-        # These bindings trigger as soon as you enter the resize mode
-        bindsym Left resize shrink width 6 px or 6 ppt
-        bindsym Down resize grow height 6 px or 6 ppt
-        bindsym Up resize shrink height 6 px or 6 ppt
-        bindsym Right resize grow width 6 px or 6 ppt
+#mode "Resize Mode" {
+#        # These bindings trigger as soon as you enter the resize mode
+#        bindsym Left resize shrink width 6 px or 6 ppt
+#        bindsym Down resize grow height 6 px or 6 ppt
+#        bindsym Up resize shrink height 6 px or 6 ppt
+#        bindsym Right resize grow width 6 px or 6 ppt
+#
+#        bindsym Shift+Left resize shrink width 12 px or 12 ppt
+#        bindsym Shift+Down resize grow height 12 px or 12 ppt
+#        bindsym Shift+Up resize shrink height 12 px or 12 ppt
+#        bindsym Shift+Right resize grow width 12 px or 12 ppt
+#
+#        bindsym h resize shrink width 6 px or 6 ppt
+#        bindsym k resize grow height 6 px or 6 ppt
+#        bindsym j resize shrink height 6 px or 6 ppt
+#        bindsym l resize grow width 6 px or 6 ppt
+#
+#        bindsym Shift+h resize shrink width 12 px or 12 ppt
+#        bindsym Shift+k resize grow height 12 px or 12 ppt
+#        bindsym Shift+j resize shrink height 12 px or 12 ppt
+#        bindsym Shift+l resize grow width 12 px or 12 ppt
+#
+#        # back to normal: Enter or Escape
+#        bindsym Return mode "default"
+#        bindsym Escape mode "default"
+#        bindsym $mod+r mode "default"
+#}
+#bindsym $mod+r mode "Resize Mode"
 
-        bindsym Shift+Left resize shrink width 12 px or 12 ppt
-        bindsym Shift+Down resize grow height 12 px or 12 ppt
-        bindsym Shift+Up resize shrink height 12 px or 12 ppt
-        bindsym Shift+Right resize grow width 12 px or 12 ppt
-
-        bindsym h resize shrink width 6 px or 6 ppt
-        bindsym k resize grow height 6 px or 6 ppt
-        bindsym j resize shrink height 6 px or 6 ppt
-        bindsym l resize grow width 6 px or 6 ppt
-
-        bindsym Shift+h resize shrink width 12 px or 12 ppt
-        bindsym Shift+k resize grow height 12 px or 12 ppt
-        bindsym Shift+j resize shrink height 12 px or 12 ppt
-        bindsym Shift+l resize grow width 12 px or 12 ppt
-
-        # back to normal: Enter or Escape
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
-}
-bindsym $mod+r mode "Resize Mode"
+bindsym $mod+Shift+y resize shrink width 6 px or 6ppt
+bindsym $mod+Shift+u resize shrink height 6 px or 6ppt
+bindsym $mod+Shift+i resize grow height 6 px or 6ppt
+bindsym $mod+Shift+o resize grow width 6 px or 6ppt
 
 # Disable titlebar
-new_window pixel 1
-new_float pixel 1
+default_border pixel 2
+# applies only to windows which are starting out as floating windows, e.g.,
+# dialog windows, but not windows that are floated later on
+default_floating_border pixel 2
 
 # Gaps (i3-gaps)
-gaps inner 5
-gaps outer 0
+gaps inner 10
+gaps outer 5
 
 # Only enable gaps on a workspace when there is at least one container
-smart_gaps on
+#smart_gaps on
 
 set_from_resource $focused.color.border i3-wm.client.focused.color.border "#002b36"
 set_from_resource $focused.color.background i3-wm.client.focused.color.background "#586e75"
 set_from_resource $focused.color.text i3-wm.client.focused.color.text "#fdf6e3"
 set_from_resource $focused.color.indicator i3-wm.client.focused.color.indicator "#268bd2"
-set_from_resource $focused.color.child_border i3-wm.client.focused.color.child_border
+set_from_resource $focused.color.child_border i3-wm.client.focused.color.child_border "#af005f"
 
 set_from_resource $focused_inactive.color.border i3-wm.client.focused_inactive.color.border "#002b36"
 set_from_resource $focused_inactive.color.background i3-wm.client.focused_inactive.color.background "#073642"
 set_from_resource $focused_inactive.color.text i3-wm.client.focused_inactive.color.text "#839496"
 set_from_resource $focused_inactive.color.indicator i3-wm.client.focused_inactive.color.indicator "#073642"
-set_from_resource $focused_inactive.color.child_border i3-wm.client.focused_inactive.color.child_border 
+set_from_resource $focused_inactive.color.child_border i3-wm.client.focused_inactive.color.child_border "#0000ff"
 
 set_from_resource $unfocused.color.border i3-wm.client.unfocused.color.border "#002b36"
 set_from_resource $unfocused.color.background i3-wm.client.unfocused.color.background "#073642"
@@ -303,10 +360,11 @@ set_from_resource $i3-wm.bar.font i3-wm.bar.font "pango:Source Code Pro Medium 1
 
 # Configure the bar
 bar {
+  position top
   font $i3-wm.bar.font
   separator_symbol " "
-  status_command i3xrocks -c $i3xrocks_config
-  tray_output none
+  status_command SCRIPT_DIR=~/.config/regolith/i3xrocks/blocklets i3xrocks -c $i3xrocks_config
+  tray_output primary
   strip_workspace_numbers yes
 
   colors {
@@ -315,8 +373,8 @@ bar {
       separator  $i3-wm.bar.separator.color
 
 #                        BORDER  BACKGROUND TEXT
-      focused_workspace  $i3-wm.bar.workspace.focused.border.color      $i3-wm.bar.workspace.focused.background.color   $i3-wm.bar.workspace.focused.text.color
-      active_workspace   $i3-wm.bar.workspace.active.border.color       $i3-wm.bar.workspace.active.background.color    $i3-wm.bar.workspace.active.text.color
+      focused_workspace  "#ff0000"      $i3-wm.bar.workspace.focused.background.color   $i3-wm.bar.workspace.focused.text.color
+      active_workspace   "#0000ff"       $i3-wm.bar.workspace.active.background.color    $i3-wm.bar.workspace.active.text.color
       inactive_workspace $i3-wm.bar.workspace.inactive.border.color     $i3-wm.bar.workspace.inactive.background.color  $i3-wm.bar.workspace.inactive.text.color
       urgent_workspace   $i3-wm.bar.workspace.urgent.border.color       $i3-wm.bar.workspace.urgent.background.color    $i3-wm.bar.workspace.urgent.text.color
   }
