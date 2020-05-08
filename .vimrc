@@ -111,7 +111,7 @@ map <leader>c :set cursorline! cursorcolumn!<CR>
 map <leader>b :windo set cursorline! cursorcolumn! scb! crb!<CR>
 
 " Reload all buffers
-map <leader>r :bufdo e<CR>
+map <leader>r :checktime<CR>
 
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
