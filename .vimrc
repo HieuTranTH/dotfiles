@@ -113,6 +113,9 @@ map <leader>b :windo set cursorline! cursorcolumn! scb! crb!<CR>
 " Reload all buffers
 map <leader>r :checktime<CR>
 
+" Check for missing included files
+map <leader>p :checkpath<CR>
+
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
 " Uncomment this to enable by default:
