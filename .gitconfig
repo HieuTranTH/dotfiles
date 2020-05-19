@@ -3,6 +3,7 @@
 	email = hieu@tuxera.com
 [core]
 	editor = vi
+	pager = less -+F
 [alias]
 	flog = log --graph --full-history --all --decorate --oneline
 	cdate = log --date=short --pretty=format:\"%C(yellow)%h%Creset %C(blue)%cd%Creset %C(red)%d%Creset %s\"
