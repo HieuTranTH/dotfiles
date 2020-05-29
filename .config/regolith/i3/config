@@ -101,7 +101,7 @@ bindsym $mod+plus gaps inner current minus 6
 bindsym $mod+Shift+minus gaps outer current plus 6
 bindsym $mod+Shift+plus gaps outer current minus 6
 
-# show/hide keybindings
+# show/hide keybindings cheatsheet
 # this keybind is conflicted with $mod+Shift+plus
 #bindsym $mod+Shift+question exec --no-startup-id /usr/bin/conky-toggle
 
@@ -238,6 +238,9 @@ bindsym $mod+c exec gnome-control-center
 #bindsym $mod+p exec gnome-control-center power
 #bindsym $mod+s exec gnome-control-center sound
 
+# prompt to change title name
+bindsym $mod+n exec i3-input -F 'title_format %s | %title' -P 'New title name: '
+
 ## Custom/testing binds
 #bindsym $mod+d exec dmenu_run
 # flashing focused window border
@@ -308,7 +311,7 @@ set_from_resource $focused_inactive.color.border i3-wm.client.focused_inactive.c
 set_from_resource $focused_inactive.color.background i3-wm.client.focused_inactive.color.background "#073642"
 set_from_resource $focused_inactive.color.text i3-wm.client.focused_inactive.color.text "#839496"
 set_from_resource $focused_inactive.color.indicator i3-wm.client.focused_inactive.color.indicator "#073642"
-set_from_resource $focused_inactive.color.child_border i3-wm.client.focused_inactive.color.child_border "#0000ff"
+set_from_resource $focused_inactive.color.child_border i3-wm.client.focused_inactive.color.child_border
 
 set_from_resource $unfocused.color.border i3-wm.client.unfocused.color.border "#002b36"
 set_from_resource $unfocused.color.background i3-wm.client.unfocused.color.background "#073642"
@@ -326,7 +329,7 @@ set_from_resource $urgent.color.child_border i3-wm.client.urgent.color.child_bor
 # Window Border color
 # class                 border                             background                         text                               indicator                          child_border
 client.focused          $focused.color.border              $focused.color.background          $focused.color.text                $focused.color.indicator           $focused.color.child_border
-client.focused_inactive $focused_inactive.color.border     $focused_inactive.color.background $focused_inactive.color.text       $focused_inactive.color.indicator  $focused_inactive.color.child_border
+client.focused_inactive $focused_inactive.color.border     #586e75                            $focused_inactive.color.text       $focused_inactive.color.indicator  $focused_inactive.color.child_border
 client.unfocused        $unfocused.color.border            $unfocused.color.background        $unfocused.color.text              $unfocused.color.indicator         $unfocused.color.child_border
 client.urgent           $urgent.color.border               $urgent.color.background           $urgent.color.text                 $urgent.color.indicator            $urgent.color.child_border
 
