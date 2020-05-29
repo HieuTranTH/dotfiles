@@ -143,7 +143,17 @@ nmap <leader><Down> ddp
 vmap <leader><Up> xkP`[V`]
 vmap <leader><Down> xp`[V`]
 
-" Map // to search for visually selected text
+" Mappings for GNU like (bash, emacs,...) readline navigations in command mode
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-p> <Up>
+cnoremap <C-n> <Down>
+cnoremap <C-b> <Left>
+cnoremap <C-f> <Right>
+cnoremap <M-b> <S-Left>
+cnoremap <M-f> <S-Right>
+
+" Map * to search for visually selected text
 vnoremap * y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 " New splits spawn below and right
@@ -255,8 +265,8 @@ highlight SpellBad cterm=reverse ctermbg=white ctermfg=red
 " Settings for netrw File Explorer (tree style listing, open files in a new
 " tab, set width to 25% of the page, open split to the right)
 let g:netrw_liststyle = 3
-let g:netrw_browse_split = 3
-"let g:netrw_winsize = 25
+"let g:netrw_browse_split = 3
+let g:netrw_winsize = 75
 let g:netrw_altv = 1
 " Auto have :Vexplorer with all Vim windows (should have a dedicated tab for
 " Explorer)
