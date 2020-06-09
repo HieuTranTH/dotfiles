@@ -202,6 +202,21 @@ function r() {
     source ranger
 }
 
+# Parse argument of file:line format to vim
+# Only work with as first parameter
+function vim() {
+    local first="$1"
+    case $first in
+        *:*)
+            shift
+            command vim ${first%%:*} +0${first##*:} $@
+            ;;
+        *)
+            command vim $@
+            ;;
+    esac
+}
+
 # Give colors for man pages
 # https://www.tecmint.com/view-colored-man-pages-in-linux/
 export LESS_TERMCAP_mb=$'\e[1;32m'
