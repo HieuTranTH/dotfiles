@@ -167,15 +167,6 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     if [ -f ~/.bashrc_extra/bashrc_rednotebook.sh ]; then
         . ~/.bashrc_extra/bashrc_rednotebook.sh
     fi
-
-    # Let shell change directory when ranger exits
-    # see /usr/bin/ranger
-    function r() {
-        [ $# -eq 1 ] && cd $1
-        # shift positional parameter because 'ranger' script will check $1
-        shift
-        source ranger
-    }
 fi
 # End of Hostname hieu-ThinkPad-X250 specific #################################
 
@@ -200,6 +191,15 @@ function cdg() {
         cd ..
     done
     OLDPWD=$TEMP_PWD
+}
+
+# Let shell change directory when ranger exits
+# see /usr/bin/ranger
+function r() {
+    [ $# -eq 1 ] && cd $1
+    # shift positional parameter because 'ranger' script will check $1
+    shift
+    source ranger
 }
 
 # Give colors for man pages
