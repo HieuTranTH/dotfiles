@@ -262,9 +262,9 @@ highlight SpellBad cterm=reverse ctermbg=white ctermfg=red
 " autocmd BufWinLeave *.c mkview
 " autocmd BufWinEnter *.c silent loadview
 
-" Settings for netrw File Explorer (tree style listing, open files in a new
+" Settings for netrw File Explorer (long listing, open files in a new
 " tab, set width to 25% of the page, open split to the right)
-let g:netrw_liststyle = 3
+let g:netrw_liststyle = 1
 "let g:netrw_browse_split = 3
 let g:netrw_winsize = 75
 let g:netrw_altv = 1
