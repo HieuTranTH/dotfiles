@@ -163,6 +163,9 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     # Edit i3 config, open other referenced configuration files
     alias vii3='command vim -p /home/hieu/.config/regolith/i3/{config,todo,i3_old.config} /home/hieu/voidrice/.config/i3/config -c "tabdo setfiletype i3"'
 
+    # Start minicom with logging and color
+    alias minicomlc='minicom -C minicom_$(date +%Y-%m-%d_%H.%M).txt -w -c on -t xterm-256color'
+
     # Check for running instance of rednotebook when open it via SSH ForwardX11
     if [ -f ~/.bashrc_extra/bashrc_rednotebook.sh ]; then
         . ~/.bashrc_extra/bashrc_rednotebook.sh
