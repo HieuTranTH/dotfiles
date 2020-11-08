@@ -133,8 +133,9 @@ nnoremap <leader><Right> :tabm +1<CR>
 
 " Map creating a new vertical window keybind
 map <C-W>N :vnew<CR>
-" Zoom in the current window
-map <leader>o _<Bar>
+" Zoom in the current window by creating a new tab and open that window's
+" buffer
+map <leader>o :let current_buffer = bufnr("%")<CR>:let current_line = line('.')<CR>:tabe<CR>:execute "buffer " current_buffer<CR>:execute current_line<CR>
 
 " Bubling text, moving selected text up and down
 " http://vimcasts.org/episodes/bubbling-text/
