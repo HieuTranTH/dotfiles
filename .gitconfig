@@ -29,3 +29,7 @@
 	decorate = auto
 [diff]
 	wsErrorHighlight = all
+[merge]
+	conflictstyle = diff3
+[mergetool]
+	keepBackup = false
