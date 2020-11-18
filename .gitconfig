@@ -31,5 +31,6 @@
 	wsErrorHighlight = all
 [merge]
 	conflictstyle = diff3
+	tool = vimdiff3
 [mergetool]
 	keepBackup = false
