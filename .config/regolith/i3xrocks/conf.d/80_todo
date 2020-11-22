@@ -1,0 +1,6 @@
+# todo
+#
+# Displays number of tasks in the todo list
+[todo]
+command=~/.config/regolith/i3xrocks/blocklets/$BLOCK_NAME
+interval=100

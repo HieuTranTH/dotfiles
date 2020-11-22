@@ -1,0 +1,6 @@
+# Displays network load
+[net-traffic]
+# Uncomment the next line to display in bits
+# command=/usr/share/i3xrocks/net-traffic-new -b
+command=/home/hieu/.config/regolith/i3xrocks/blocklets/$BLOCK_NAME
+interval=10
