@@ -1,0 +1,7 @@
+#" means done
+
+bind mark
+automatically open workspace 11-19 to extra monitor, laptop workspace on laptop screen
+bind resize key to default size
+make rofi listing windows longer
+bind key for last focused window back and forth with $alt
