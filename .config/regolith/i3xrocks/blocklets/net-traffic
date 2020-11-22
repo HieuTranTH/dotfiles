@@ -49,7 +49,7 @@ case "$IF" in
 esac
 
 # Handle button event
-if [ "x${BUTTON}" == "x1" ] ; then
+if [ "x${BUTTON}" == "x3" ] ; then
   if [ "$INT_TYPE" == "W" ]; then
     ACTION=$(xrescat i3xrocks.action.net-traffic.left "/usr/bin/gnome-control-center --class=floating_window wifi")
     /usr/bin/i3-msg -q exec "$ACTION"
