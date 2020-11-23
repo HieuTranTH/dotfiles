@@ -2,4 +2,5 @@
 #
 # Displays temp data
 [temp]
+command=~/.config/regolith/i3xrocks/blocklets/$BLOCK_NAME
 interval=30
