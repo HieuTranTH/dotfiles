@@ -260,10 +260,31 @@ highlight SpellBad cterm=reverse ctermbg=white ctermfg=red
 "   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 " endfunc
 
-" Save folds when exit and restore when open again (.c files only)
-" Not using now, might enable later if needed
-" autocmd BufWinLeave *.c mkview
-" autocmd BufWinEnter *.c silent loadview
+" Function to check if there is a view file of the current file
+" Deriving from https://stackoverflow.com/a/28460676
+function! MyViewCheck()
+    let path = fnamemodify(bufname('%'),':p')
+    " vim's odd =~ escaping for /
+    let path = substitute(path, '=', '==', 'g')
+    if empty($HOME)
+    else
+        let path = substitute(path, '^'.$HOME, '\~', '')
+    endif
+    let path = substitute(path, '/', '=+', 'g') . '='
+    " view directory
+    let path = &viewdir.'/'.path
+    if !empty(glob(path))
+        return 1
+    endif
+    return 0
+endfunction
+" # Command Viewcheck (and it's abbreviation 'viewcheck')
+"command Viewcheck call MyViewCheck()
+" Lower-case user commands: http://vim.wikia.com/wiki/Replace_a_builtin_command_using_cabbrev
+"cabbrev viewcheck <c-r>=(getcmdtype()==':' && getcmdpos()==1 ? 'Viewcheck' : 'viewcheck')<CR>
+" Automatically load/save view file if it currently exists
+autocmd BufWinLeave * if MyViewCheck() | mkview | endif
+autocmd BufWinEnter * if MyViewCheck() | silent loadview | endif
 
 " Settings for netrw File Explorer (long listing, open files in a new
 " tab, set width to 25% of the page, open split to the right)
