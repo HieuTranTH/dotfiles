@@ -161,7 +161,7 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     alias vic='command vim -p /home/hieu/Documents/*_commands -c "tabdo set noexpandtab autoindent formatoptions-=q"'
 
     # Edit i3 config, open other referenced configuration files
-    alias vii3='command vim -p /home/hieu/.config/regolith/i3/{config,todo,i3_old.config} /home/hieu/voidrice/.config/i3/config -c "tabdo setfiletype i3"'
+    alias vii3='command vim -p /home/hieu/.config/regolith/i3/{config,todo} /home/hieu/.config/regolith/Xresources //home/hieu/voidrice/.config/i3/config -c "tabdo setfiletype i3"'
 
     # Start minicom with logging and color
     alias minicomlc='minicom -C minicom_$(date +%Y-%m-%d_%H.%M).txt -w -c on -t xterm-256color'
