@@ -5,6 +5,9 @@ i3-wm.floatingwindow.border.size: 2
 i3-wm.binding.next_free: apostrophe
 i3-wm.binding.take_next_free: Shift+apostrophe
 i3-wm.bar.separator: "|"
+! -- i3xrocks status bar blocks
+! Bypass location by VPN setting
+i3xrocks.weather.location: Helsinki,Uusimaa
 
 ! -- Gnome terminal
 !gnome.terminal.font: JetBrains Mono 9
