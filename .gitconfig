@@ -7,6 +7,8 @@
 [alias]
 	flog = log --graph --full-history --all --decorate --oneline
 	cdate = log --date=short --pretty=format:\"%C(yellow)%h%Creset %C(blue)%cd%Creset %C(red)%d%Creset %s\"
+    changelog = log --pretty=format:\"%h%x09%an%x09%ad%x09%s\"
+    cchangelog = log --pretty=format:\"%C(yellow)%h%C(blue)%x09%an%C(red)%x09%ad%Creset%x09%s\"
 
 # Added color
 # https://nathanhoad.net/how-to-colours-in-git/
