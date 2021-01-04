@@ -205,14 +205,24 @@ function r() {
     source ranger
 }
 
-# Parse argument of file:line format to vim
+# Parse argument of file:line:column or file:line format to vim
 # Only work with as first parameter
 function vim() {
     local first="$1"
     case $first in
+        *:*:*)
+            shift
+            file=${first%%:*}
+            column=${first##*:}
+            line=${first#$file:}
+            line=${line%:$column}
+            command vim ${file} +0${line} -c "normal ${column}|" $@
+            ;;
         *:*)
             shift
-            command vim ${first%%:*} +0${first##*:} $@
+            file=${first%%:*}
+            line=${first##*:}
+            command vim ${file} +0${line} $@
             ;;
         *)
             command vim $@
