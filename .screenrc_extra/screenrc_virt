@@ -1,3 +1,5 @@
+# Open up the screen's layout to work with nixtest test-profiles on virt server
+
 # the following two lines give a two-line status, with the current window highlighted
 hardstatus alwayslastline
 hardstatus string '%{= kG}[%{G}%H%? %1`%?%{g}][%{G}%S%? %1`%?%{g}][%= %{= kw}%-w%{+b yk} %n*%t%?(%u)%? %{-}%+w %=%{g}][%{B}%m/%d %{W}%C%A%{g}]'
@@ -27,10 +29,14 @@ altscreen on
 ignorecase on
 
 # default windows
-screen -t Python  0 python
-screen -t Bash1  1 bash
-screen -t Bash2  2 bash
-screen -t Bash3  3 bash
+screen -t Test_profile  0 bash
+stuff "cd /home/hieu/nixtest/scripts/test-profiles/hieu-profiles^M"
+screen -t Nixtest1  1 bash
+stuff "cd /home/hieu/nixtest; BASED=\$PWD^Mecho Specify the test profile file and its label at the end of the next command^MNIXTEST_PROFILE_REPEATS=10 ./scripts/run-test-profile.sh scripts/test-profiles/hieu-profiles/"
+screen -t Nixtest2  2 bash
+stuff "cd /home/hieu/nixtest; BASED=\$PWD^Mecho Specify the test profile file and its label at the end of the next command^MNIXTEST_PROFILE_REPEATS=10 ./scripts/run-test-profile.sh scripts/test-profiles/hieu-profiles/"
+screen -t Nixtest3  3 bash
+stuff "cd /home/hieu/nixtest; BASED=\$PWD^Mecho Specify the test profile file and its label at the end of the next command^MNIXTEST_PROFILE_REPEATS=10 ./scripts/run-test-profile.sh scripts/test-profiles/hieu-profiles/"
 
 select 0
 #bind c screen 1 # window numbering starts at 1 not 0
@@ -44,12 +50,17 @@ layout autosave on
 layout new prime
 select 1
 layout new hori_split
-select 1
+select 0
 split
 #resize -v +8
 focus down
+select 1
+split
+focus down
 select 2
-focus up
+split
+focus down
+select 3
 layout new vert_split
 select 1
 split -v
@@ -79,7 +90,7 @@ focus left
 
 # leave 'layout attach :last' as default
 # layout attach prime
-layout select prime
+layout select hori_split
 
 # navigating regions with Ctrl-arrows
 bindkey "^[[1;5D" focus left
@@ -114,5 +125,5 @@ bind -c rsz -k kd eval "focus down" "command -c rsz" # Down
 # Create temporary layout for fullscreen with F1, remove with Ctrl+F1
 # TODO: select current focused window by default, and return to the last
 # layout when exit. Quite impossible with GNU screen.
-bindkey "^[OP" exec screen_open_fullscreen.sh
-bindkey "^[[1;5P" exec screen_close_fullscreen.sh
+#bindkey "^[OP" exec screen_open_fullscreen.sh
+#bindkey "^[[1;5P" exec screen_close_fullscreen.sh
