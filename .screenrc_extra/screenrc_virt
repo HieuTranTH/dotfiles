@@ -61,6 +61,9 @@ select 2
 split
 focus down
 select 3
+focus up
+focus up
+focus up
 layout new vert_split
 select 1
 split -v
