@@ -299,8 +299,11 @@ let g:netrw_altv = 1
 "     autocmd VimEnter * :Vexplore
 " augroup END
 
-" Set tab widths of 8 spaces for C source codes
-autocmd Filetype c setlocal tabstop=8 shiftwidth=8 softtabstop=8 expandtab
+" Use Ch syntax for *.h files
+let ch_syntax_for_h = 1
+" Set tab widths of 8 spaces for C source codes, use tab character for
+" indentation. This is following Linux Kernel coding style guidelines.
+autocmd Filetype c,ch setlocal tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab
 
 " Customize tabline to show tab numbers and better highlighting
 " https://www.reddit.com/r/vim/comments/22ala7/vim_custom_tabline/
