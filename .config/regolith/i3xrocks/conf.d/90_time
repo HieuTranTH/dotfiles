@@ -1,4 +1,4 @@
 # Date Time
 [time]
 command=~/.config/regolith/i3xrocks/blocklets/$BLOCK_NAME
-interval=10
+interval=xresource:i3xrocks.time.interval 10
