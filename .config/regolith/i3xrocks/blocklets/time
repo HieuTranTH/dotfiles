@@ -40,16 +40,7 @@ VALUE_COLOR=${color:-$(xrescat i3xrocks.value.color "#D8DEE9")}
 VALUE_FONT=${font:-$(xrescat i3xrocks.value.font "Source Code Pro Medium 13")}
 echo "<span color=\"${LABEL_COLOR}\">$LABEL_ICON</span><span font_desc=\"${VALUE_FONT}\" color=\"${VALUE_COLOR}\">$DATE_VALUE </span>"
 
-case "x${BUTTON}" in
-    x1 )
-        SHELL_ACTION="cal -3"
-        ACTION="/usr/bin/gnome-terminal --class=floating_window -- bash -c 'echo $SHELL_ACTION && $SHELL_ACTION && exec bash'"
-        /usr/bin/i3-msg -q exec "$ACTION"
-        ;;
-    x3 )
-        ACTION=$(xrescat i3xrocks.action.time "/usr/bin/gnome-control-center --class=floating_window datetime")
-        /usr/bin/i3-msg -q exec "$ACTION"
-        ;;
-    * )
-        ;;
-esac
+if [ "x${BUTTON}" == "x1" ]; then
+    ACTION=$(xrescat i3xrocks.action.time "/usr/bin/gnome-control-center --class=floating_window datetime")
+    /usr/bin/i3-msg -q exec "$ACTION"
+fi
