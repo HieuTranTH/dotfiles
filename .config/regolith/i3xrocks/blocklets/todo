@@ -6,8 +6,8 @@ VALUE_COLOR=${color:-$(xrescat i3xrocks.value.color "#D8DEE9")}
 LABEL_COLOR=${label_color:-$(xrescat i3xrocks.label.color "#7B8394")}
 LABEL_ICON=${label_icon:-$(xrescat i3xrocks.label.todo " ")}
 
-# format net usage output with fixed width
-COUNT="$(printf "%2d" "$(td count)")"
+# find the count number of todo priority A items
+COUNT="$(/home/hieu/bin/todo.txt_cli-2.11.0/todo.sh lsp A | tail -1 | cut -d' ' -f2)"
 
 # output net usage using pango markup
 ICON_SPAN="<span color=\"${LABEL_COLOR}\">$LABEL_ICON</span>"
@@ -15,6 +15,23 @@ VALUE_SPAN="<span font_desc=\"${VALUE_FONT}\" color=\"${VALUE_COLOR}\"> $COUNT</
 
 echo "${ICON_SPAN}${VALUE_SPAN}"
 
-if [ -n "$button" ]; then
-    /usr/bin/i3-msg -q exec "/usr/bin/gnome-terminal --class=floating_window -e 'td --interactive'"
-fi
+# left click: open priority A todo list in terminal
+# middle click:
+# right click: open all todo list in terminal
+# scroll up:
+# scroll down:
+BUTTON=${button:-}
+case "x${BUTTON}" in
+    x1 )
+        SHELL_ACTION="/home/hieu/bin/todo.txt_cli-2.11.0/todo.sh lsp A"
+        ACTION="/usr/bin/gnome-terminal --class=floating_window -- bash -c 'echo $SHELL_ACTION && $SHELL_ACTION && exec bash'"
+        /usr/bin/i3-msg -q exec "$ACTION"
+        ;;
+    x3 )
+        SHELL_ACTION="/home/hieu/bin/todo.txt_cli-2.11.0/todo.sh l"
+        ACTION="/usr/bin/gnome-terminal --class=floating_window -- bash -c 'echo $SHELL_ACTION && $SHELL_ACTION && exec bash'"
+        /usr/bin/i3-msg -q exec "$ACTION"
+        ;;
+    * )
+        ;;
+esac

@@ -28,7 +28,12 @@ fi
 
 echo "<span font_desc=\"${VALUE_FONT}\" color=\"${VALUE_COLOR}\">${WEATHER}</span>"
 
-if [ ! "x${BUTTON}" == "x" ]; then
+# left click:
+# middle click:
+# right click: open the weather website in browser
+# scroll up:
+# scroll down:
+if [ "x${BUTTON}" == "x3" ]; then
     ACTION=$(xrescat i3xrocks.action.weather "xdg-open https://wttr.in/${VALUE_WEATHER_LOCATION}")
     /usr/bin/i3-msg -q exec "$ACTION"
 fi

@@ -72,6 +72,11 @@ mixer_value() {
     fi
 }
 
+# left click:
+# middle click:
+# right click: mute toggle
+# scroll up: volume up
+# scroll down: volume down
 ACTION_1=$(xrescat i3xrocks.action.volume.left "true")
 ACTION_2=$(xrescat i3xrocks.action.volume.middle "true")
 ACTION_3=$(xrescat i3xrocks.action.volume.right "amixer -q -D $MIXER sset $SCONTROL $(mixer_capability) toggle")
