@@ -1,9 +1,11 @@
-! -- i3-wm with Finnish keyboard
-i3-wm.bar.position: top
+! -- i3-wm appearence
 i3-wm.window.border.size: 2
 i3-wm.floatingwindow.border.size: 2
+! -- i3-wm bindings with Finnish keyboard
 i3-wm.binding.next_free: apostrophe
 i3-wm.binding.take_next_free: Shift+apostrophe
+! -- i3bar
+i3-wm.bar.position: top
 i3-wm.bar.separator: "|"
 ! -- i3xrocks status bar blocks
 ! Bypass location by VPN setting
@@ -12,6 +14,5 @@ i3xrocks.weather.location: Helsinki,Uusimaa
 ! -- Gnome terminal
 !gnome.terminal.font: JetBrains Mono 9
 gnome.terminal.scrollbar: always
-! -- The below currently not available in the regolith-desktop-mobile/focal,now 2.90-1focal version
 gnome.terminal.use-transparent-background: true
-gnome.terminal.background-transparency-percent: 50
+gnome.terminal.background-transparency-percent: 10
