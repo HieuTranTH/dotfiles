@@ -227,7 +227,7 @@ bindsym $mod+section workspace back_and_forth
 
 ## Navigate // Next Free Workspace // <> ` ##
 set_from_resource $i3-wm.binding.next_free i3-wm.binding.next_free grave
-bindsym $mod+$i3-wm.binding.next_free exec --no-startup-id /usr/share/i3xrocks/next-workspace --startnum 1
+bindsym $mod+$i3-wm.binding.next_free exec --no-startup-id /usr/bin/i3-next-workspace
 
 ## Navigate // Scratchpad // <> s ##
 set_from_resource $i3-wm.binding.scratchpad i3-wm.binding.scratchpad s
@@ -354,7 +354,7 @@ bindsym $mod+$alt+Ctrl+$ws9_key move container to workspace number $ws19; worksp
 
 ## Modify // Carry Window to Next Free Workspace // <><Shift> ` ##
 set_from_resource $i3-wm.binding.take_next_free i3-wm.binding.take_next_free Shift+grave
-bindsym $mod+$i3-wm.binding.take_next_free exec --no-startup-id /usr/share/i3xrocks/next-workspace --startnum 1 --move-window-and-follow
+bindsym $mod+$i3-wm.binding.take_next_free exec --no-startup-id /usr/bin/i3-next-workspace --move-window-and-follow
 
 ## Modify // Flashing border of the focused window // <> w ##
 bindsym $mod+w border pixel +8
@@ -680,7 +680,7 @@ exec_always --no-startup-id $i3-wm.program.compositor
 
 # Start Rofication for notifications
 set_from_resource $i3-wm.program.notifications i3-wm.program.notifications /usr/bin/rofication-daemon
-exec --no-startup-id $i3-wm.program.notifications
+#exec --no-startup-id $i3-wm.program.notifications
 
 # Launch first time user experience script
 set_from_resource $i3-wm.program.ftui i3-wm.program.ftui /usr/bin/regolith-ftue
