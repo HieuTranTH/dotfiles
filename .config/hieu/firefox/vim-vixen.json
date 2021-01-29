@@ -40,8 +40,8 @@
     "F": { "type": "follow.start", "newTab": true, "background": false },
     "m": { "type": "mark.set.prefix" },
     "'": { "type": "mark.jump.prefix" },
-    "<C-O>": { "type": "navigate.history.prev" },
-    "<C-I>": { "type": "navigate.history.next" },
+    "H": { "type": "navigate.history.prev" },
+    "L": { "type": "navigate.history.next" },
     "[[": { "type": "navigate.link.prev" },
     "]]": { "type": "navigate.link.next" },
     "gu": { "type": "navigate.parent" },
@@ -76,6 +76,8 @@
   },
   "blacklist": [
     { "url": "www.youtube.com", "keys": ["m", "h", "j", "k", "l"] },
-    { "url": "www.youtube.com/watch*", "keys": ["m", "t", "f", "F", "h", "j", "k", "l", ":"] }
+    { "url": "www.youtube.com/watch*", "keys": ["m", "t", "f", "F", "h", "j", "k", "l", ":"] },
+    "vulcan.tuxera.com",
+    "gerrit.srv.tuxera.com"  
   ]
 }

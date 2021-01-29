@@ -13,8 +13,12 @@ Change:
 <C-K>: select the next tab
 <C-O>: back
 <C-I>: forward
-F: follow links in the page in a new tab, background true
+H: go back one page
+L: go forward one page
+F: follow links in the page in a new tab, background false
   "blacklist": [
     { "url": "www.youtube.com", "keys": ["m", "h", "j", "k", "l"] },
-    { "url": "www.youtube.com/watch*", "keys": ["m", "t", "f", "F", "h", "j", "k", "l", ":"] }
+    { "url": "www.youtube.com/watch*", "keys": ["m", "t", "f", "F", "h", "j", "k", "l", ":"] },
+    "vulcan.tuxera.com",
+    "gerrit.srv.tuxera.com"
   ]
