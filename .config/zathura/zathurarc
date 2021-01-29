@@ -1,9 +1,7 @@
-set window-width 800
-set window-height 1200
 set selection-clipboard clipboard
 set scroll-page-aware true
 set guioptions svh
-set inputbar-fg "#0D00BC"
+set inputbar-fg "#FFFFFF"
 map <C-+> zoom in
 map <C--> zoom out
 map <C-0> zoom default
