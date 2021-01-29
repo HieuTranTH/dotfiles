@@ -1,5 +1,5 @@
 {
-    "usageCount": 9, 
+    "usageCount": 10, 
     "omitTrigger": false, 
     "prompt": false, 
     "description": "vi_hieurc", 
@@ -20,7 +20,7 @@
     "modes": [
         1
     ], 
-    "showInTrayMenu": true, 
+    "showInTrayMenu": false, 
     "matchCase": false, 
     "filter": {
         "regex": null, 
