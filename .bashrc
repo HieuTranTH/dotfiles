@@ -192,6 +192,7 @@ function cdg() {
     TEMP_PWD=$PWD
     while [ ! -d .git ]; do
         cd ..
+        [ $PWD = "/" ] && break
     done
     OLDPWD=$TEMP_PWD
 }
