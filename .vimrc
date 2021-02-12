@@ -12,6 +12,9 @@ syntax on
 " For plugins to load correctly
 filetype plugin indent on
 
+" Reset cursor shape that has been set from .inputrc
+let &t_ti .= "\<esc>[2 q"
+
 " TODO: Pick a leader key, default is backslash '\' character
 let mapleader = " "
 
