@@ -1,0 +1,51 @@
+# C-x C-r : reread this Readline Init file
+
+# To avoid strange things
+$include /etc/inputrc
+
+# https://www.topbug.net/blog/2017/07/31/inputrc-for-humans/
+# https://wiki.archlinux.org/index.php/readline
+# Tab-completion
+set colored-stats On
+set colored-completion-prefix On
+set menu-complete-display-prefix On
+set completion-ignore-case On
+# The next line disable colored-completion-prefix
+#set completion-prefix-display-length 3
+set mark-symlinked-directories On
+#set show-all-if-ambiguous On
+set show-all-if-unmodified on
+
+# Misc
+set echo-control-characters off
+
+# Set vi mode here instead of "set -o vi" will also work on other shells (e.g.
+# Python shell)
+set editing-mode vi
+$if mode=vi
+set show-mode-in-prompt on
+# Block shaped cursor when in command mode and a pipe cursor when in insert mode
+# Next 2 configs need show-mode-in-prompt enabled
+set vi-ins-mode-string \1\e[6 q\2
+set vi-cmd-mode-string \1\e[2 q\2
+
+# Customized key binds for vi-insert mode
+set keymap vi-insert
+#"\C-p": previous-history
+#"\C-n": next-history
+"\C-p": history-search-backward
+"\C-n": history-search-forward
+"\C-a": beginning-of-line
+"\C-e": end-of-line
+"\C-l": clear-screen
+"\C-x\C-e": edit-and-execute-command
+
+# Customized key binds for vi-command mode
+set keymap vi-command
+"\C-p": history-search-backward
+"\C-n": history-search-forward
+"\C-x\C-e": edit-and-execute-command
+# re-read-init-file does not work well when modifying editing mode
+"\C-x\C-r": re-read-init-file
+"_": vi-first-print
+$endif
