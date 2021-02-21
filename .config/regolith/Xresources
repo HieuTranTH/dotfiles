@@ -5,6 +5,8 @@ i3-wm.floatingwindow.border.size: 2
 i3-wm.binding.next_free: apostrophe
 i3-wm.binding.move_next_free: Shift+apostrophe
 i3-wm.binding.take_next_free: Mod1+apostrophe
+! -- i3-wm session manager
+i3-wm.program.refresh_ui: ~/bin/regolith-look
 
 ! -- i3bar
 i3-wm.bar.position: top

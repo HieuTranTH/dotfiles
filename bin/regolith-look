@@ -1,0 +1,21 @@
+#!/bin/bash
+
+echo "=========================================="
+echo "Wrapper for /usr/bin/regolith-look"
+echo "to make sure that it does not reset wallpaper"
+echo "=========================================="
+echo
+#@ usage: regolith-look
+
+DEFAULT_BIN=/usr/bin/regolith-look
+if ! grep -q \
+    "#.*gsettings set org.gnome.desktop.background picture-uri" \
+        $DEFAULT_BIN
+then
+    echo "WARNING: default $DEFAULT_BIN will reset wallpaper"
+    echo "Please comment out the line"
+    echo "Exiting..."
+    exit 1
+else
+    $DEFAULT_BIN $@
+fi
