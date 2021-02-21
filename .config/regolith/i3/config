@@ -535,7 +535,7 @@ set_from_resource $i3-wm.binding.dec_gaps_big i3-wm.binding.dec_gaps_big Shift+m
 #}
 #bindsym $mod+r mode "Resize Mode"
 
-## Resize // Resize Window // k j h l ##
+## Resize // Resize Window // <> k j h l ##
 bindsym $mod+Shift+y resize shrink width 6 px or 6 ppt
 bindsym $mod+Shift+u resize shrink height 6 px or 6 ppt
 bindsym $mod+Shift+i resize grow height 6 px or 6 ppt
