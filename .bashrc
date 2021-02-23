@@ -153,11 +153,17 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     alias cdtq='cd ~/Documents/Tuxera/QNX'
     alias cdts='cd ~/Documents/Tuxera/software'
 
+    # Edit .bashrc
+    alias vib='command vim ~/.bashrc'
+
     # Edit *_commands files with vim
-    alias vic='command vim -p /home/hieu/Documents/*_commands -c "tabdo set noexpandtab autoindent formatoptions-=q" -c "2tabnext"'
+    alias vic='command vim -p ~/Documents/*_commands -c "tabdo set noexpandtab autoindent formatoptions-=q" -c "2tabnext"'
 
     # Edit i3 config, open other referenced configuration files
-    alias vii3='command vim -p /home/hieu/.config/regolith/i3/{config,todo} /home/hieu/.config/regolith/Xresources /home/hieu/voidrice/.config/i3/config -c "tabdo setfiletype i3" -c "1tabn"'
+    alias vii3='command vim -p ~/.config/regolith/i3/{config,todo} ~/.config/regolith/Xresources ~/voidrice/.config/i3/config -c "tabdo setfiletype i3" -c "1tabn"'
+
+    # Edit .vimrc
+    alias viv='command vim ~/.vimrc'
 
     # Start minicom with logging and color
     alias minicomlc='minicom -C minicom_$(date +%Y-%m-%d_%H.%M).txt -w -c on -t xterm-256color'
