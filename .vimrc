@@ -4,7 +4,15 @@ set nocompatible
 " Helps force plugins to load correctly when it is turned back on below
 filetype off
 
-" TODO: Load plugins here (pathogen or vundle)
+" Load plugins here (Plug)
+" https://github.com/junegunn/vim-plug
+" Specify a directory for plugins
+" - For Neovim: stdpath('data') . '/plugged'
+" - Avoid using standard Vim directory names like 'plugin'
+call plug#begin('~/.vim/plugged')
+
+" Initialize plugin system
+call plug#end()
 
 " Turn on syntax highlighting
 syntax on
@@ -15,7 +23,7 @@ filetype plugin indent on
 " Reset cursor shape that has been set from .inputrc
 let &t_ti .= "\<esc>[2 q"
 
-" TODO: Pick a leader key, default is backslash '\' character
+" Pick space as leader key, default is backslash '\' character
 let mapleader = " "
 
 " Security
