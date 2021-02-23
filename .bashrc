@@ -153,10 +153,6 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     alias cdtq='cd ~/Documents/Tuxera/QNX'
     alias cdts='cd ~/Documents/Tuxera/software'
 
-    # Aliases for pipe text to xlip clipboard and check xlip contents
-    alias c='xclip -selection clipboard'
-    alias v='xclip -o'
-
     # Edit *_commands files with vim
     alias vic='command vim -p /home/hieu/Documents/*_commands -c "tabdo set noexpandtab autoindent formatoptions-=q" -c "2tabnext"'
 
