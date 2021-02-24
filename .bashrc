@@ -172,6 +172,35 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     if [ -f ~/.bashrc_extra/bashrc_rednotebook.sh ]; then
         . ~/.bashrc_extra/bashrc_rednotebook.sh
     fi
+
+    # fzf
+    # Edit any text executable files
+    function fzfbin() {
+        find $( echo $PATH | sed 's/:/ /g' ) /usr/share \
+            -executable -type f -exec grep -Iq . {} \; -print | \
+            fzf -m --preview="head -20 {}" --height 40% | xargs -ro -d "\n" vim
+    }
+    # Edit any user configuration files
+    function fzfconf() {
+        cd ~; find .bash* .config .gitconfig .*rc* .profile .screen* .ssh .vim* .Xresources* | \
+            fzf -m --preview="head -20 {}" --height 40% | xargs -ro -d "\n" vim
+    }
+    # Open any file in current directory with xdg-open
+    function fzfopen() {
+        find \( -type f -o -type l \) | \
+            fzf +m --preview="xdg-mime query filetype {}" --height 40% | \
+            xargs -ro -d "\n" xdg-open 2>&-
+    }
+
+    # Tab completion for fzf command arguments
+    # fzf will be triggered with '**' then Tab
+    . ~/.vim/plugged/fzf/shell/completion.bash
+
+    # CTRL-T - Paste the selected file path into the command line
+    # CTRL-R - Paste the selected command from history into the command line
+    # ALT-C - cd into the selected directory
+    export FZF_ALT_C_OPTS='--preview="tree -L 1 {}"'
+    . ~/.vim/plugged/fzf/shell/key-bindings.bash
 fi
 # End of Hostname hieu-ThinkPad-X250 specific #################################
 
