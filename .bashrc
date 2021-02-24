@@ -174,8 +174,6 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     fi
 
     # fzf
-    # Make Background (current line) brighter
-    export FZF_DEFAULT_OPTS="--color='bg+:240'"
     # Edit any text executable files
     function fzfbin() {
         find $( echo $PATH | sed 's/:/ /g' ) /usr/share \
@@ -285,6 +283,9 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 # Make Vim to be the default editor for C-xC-e and fc commands
 export EDITOR=vim
+
+# Make FZF background (current line) brighter
+export FZF_DEFAULT_OPTS="--color='bg+:240'"
 
 # Show job count in bash prompt
 PS1="[\j]$PS1"
