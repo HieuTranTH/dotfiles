@@ -40,6 +40,7 @@ set keymap vi-insert
 "\C-a": beginning-of-line
 "\C-e": end-of-line
 "\C-l": clear-screen
+"\C-k": kill-line
 "\C-x\C-e": edit-and-execute-command
 TAB: menu-complete
 # Shift+Tab is \e[Z
