@@ -199,6 +199,8 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     # CTRL-T - Paste the selected file path into the command line
     # CTRL-R - Paste the selected command from history into the command line
     # ALT-C - cd into the selected directory
+    export FZF_ALT_C_COMMAND="command find -L . -mindepth 1 \\( -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+    -o -type d -print 2> /dev/null | cut -b3-"
     export FZF_ALT_C_OPTS='--preview="tree -L 1 {}"'
     . ~/.vim/plugged/fzf/shell/key-bindings.bash
 fi
