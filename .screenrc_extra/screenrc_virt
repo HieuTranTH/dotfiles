@@ -30,7 +30,7 @@ ignorecase on
 
 # default windows
 screen -t Test_profile  0 bash
-stuff "cd /home/hieu/nixtest/scripts/test-profiles/hieu-profiles^M"
+stuff "cd /home/hieu/nixtest/scripts/test-profiles/hieu-profiles^Mcp template FIL-"
 screen -t Nixtest1  1 bash
 stuff "cd /home/hieu/nixtest; BASED=\$PWD^Mecho Specify the test profile file and its label at the end of the next command^MNIXTEST_PROFILE_REPEATS=10 ./scripts/run-test-profile.sh scripts/test-profiles/hieu-profiles/"
 screen -t Nixtest2  2 bash
