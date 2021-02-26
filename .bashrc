@@ -185,6 +185,15 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
         cd ~; find .bash* .config .gitconfig .*rc* .profile .screen* .ssh .vim* .Xresources* | \
             fzf -m --preview="head -20 {}" --height 40% | xargs -ro -d "\n" vim
     }
+    # Kill processes
+    function fzfkill() {
+        PROCESS_IDs=$( ps aux | fzf -m --height 40% --no-mouse | awk '{print $2}' )
+        if [ -n "$PROCESS_IDs" ]; then
+            echo kill $1 $PROCESS_IDs
+            kill $1 $PROCESS_IDs
+            ps -u -p $PROCESS_IDs
+        fi
+    }
     # Open any file in current directory with xdg-open
     function fzfopen() {
         find \( -type f -o -type l \) | \
