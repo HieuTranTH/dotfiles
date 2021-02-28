@@ -190,6 +190,8 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
         PROCESS_IDs=$( ps aux | fzf -m --height 40% --no-mouse | awk '{print $2}' )
         if [ -n "$PROCESS_IDs" ]; then
             echo kill $1 $PROCESS_IDs
+            read -p "Proceed? (Y/n)" CONT
+            [ ${CONT:-Y} != 'Y' ] && exit 1
             kill $1 $PROCESS_IDs
             ps -u -p $PROCESS_IDs
         fi
