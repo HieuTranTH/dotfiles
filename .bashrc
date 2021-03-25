@@ -147,11 +147,11 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     alias cdb='cd ~/bin'
     alias cdd='cd ~/Documents'
     alias cdt='cd ~/Documents/Tuxera'
-    alias cdtb='cd ~/Documents/Tuxera/builroot_package_x86-64'
-    alias cdtj='cd ~/Documents/Tuxera/Jira-tickets'
-    alias cdti='cd ~/Documents/Tuxera/INTEGRITY'
-    alias cdtq='cd ~/Documents/Tuxera/QNX'
-    alias cdts='cd ~/Documents/Tuxera/software'
+    alias cdtb='cd ~/Documents/Tuxera/builroot_package_x86-64; cd1'
+    alias cdtj='cd ~/Documents/Tuxera/Jira-tickets; cd1'
+    alias cdti='cd ~/Documents/Tuxera/INTEGRITY; cd1'
+    alias cdtq='cd ~/Documents/Tuxera/QNX; cd1'
+    alias cdts='cd ~/Documents/Tuxera/software; cd1'
 
     # Edit .bashrc
     alias vib='command vim ~/.bashrc'
@@ -174,6 +174,15 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     fi
 
     # fzf
+    # cd to a sub-directory right under CWD
+    function cd1() {
+        DEST=$( ls -lA | grep "^d" | fzf |  awk '{ print $9 }' )
+        [ -n "$DEST" ] && cd $DEST
+    }
+    # Bind Alt-1 to execute cd1()
+    bind -m emacs-standard '"\e1": "cd1\n"'
+    bind -m vi-command '"\e1": "cd1\n"'
+    bind -m vi-insert '"\e1": "cd1\n"'
     # Edit any text executable files
     function fzfbin() {
         find $( echo $PATH | sed 's/:/ /g' ) /usr/share \
