@@ -57,7 +57,7 @@ printf "<span font_desc='%s' color='%s'> %02d%%</span>\n", $value_font, $value_c
 # right click: open gnome-system-monitor (similar to top)
 # scroll up:
 # scroll down:
-if ($ENV{'button'} == 3) {
+if (defined $ENV{'button'} && $ENV{'button'} == 3) {
     my $action = `xrescat i3xrocks.action.cpu-usage "/usr/bin/gnome-system-monitor --class=floating_window"`;
     system("/usr/bin/i3-msg -q exec '$action'");
 }
