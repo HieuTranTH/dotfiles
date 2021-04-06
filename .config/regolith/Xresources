@@ -2,6 +2,7 @@
 i3-wm.window.border.size: 2
 i3-wm.floatingwindow.border.size: 2
 ! -- i3-wm bindings with Finnish keyboard
+! apostrophe is ' key
 i3-wm.binding.next_free: apostrophe
 i3-wm.binding.move_next_free: Shift+apostrophe
 i3-wm.binding.take_next_free: Mod1+apostrophe
@@ -21,6 +22,7 @@ i3xrocks.weather.location: Helsinki,Uusimaa
 
 ! -- Gnome terminal
 !gnome.terminal.font: JetBrains Mono 9
+!gnome.terminal.update: false
 gnome.terminal.scrollbar: always
 gnome.terminal.use-transparent-background: true
 gnome.terminal.background-transparency-percent: 10
