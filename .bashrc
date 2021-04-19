@@ -187,12 +187,14 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     function fzfbin() {
         find $( echo $PATH | sed 's/:/ /g' ) /usr/share \
             -executable -type f -exec grep -Iq . {} \; -print | \
-            fzf -m --preview="head -20 {}" --height 40% | xargs -ro -d "\n" vim
+            fzf -m --preview="head -20 {}" --height 40% \
+                --bind "ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c 'vim {}' &)" | xargs -ro -d "\n" vim
     }
     # Edit any user configuration files
     function fzfconf() {
         cd ~; find .bash* .config .gitconfig .*rc* .profile .screen* .ssh .vim* .Xresources* | \
-            fzf -m --preview="head -20 {}" --height 40% | xargs -ro -d "\n" vim
+            fzf -m --preview="head -20 {}" --height 40% \
+                --bind "ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c 'vim {}' &)" | xargs -ro -d "\n" vim
     }
     # Kill processes
     function fzfkill() {
@@ -209,7 +211,7 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     function fzfopen() {
         find \( -type f -o -type l \) | \
             fzf +m --preview="xdg-mime query filetype {}" --height 40% | \
-            xargs -ro -d "\n" xdg-open 2>&-
+            xargs -ro -d "\n" devour xdg-open 2>&-
     }
 
     # Tab completion for fzf command arguments
