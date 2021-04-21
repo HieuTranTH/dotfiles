@@ -120,7 +120,7 @@ map <leader>s :set number! relativenumber! list!<CR>:let &cc = &cc == '' ? '72,8
 map <leader>c :set cursorline! cursorcolumn!<CR>
 
 " Bind scrolling and cursor in all windows
-map <leader>b :windo set cursorline! cursorcolumn! scb! crb!<CR>
+map <leader>m :windo set cursorline! cursorcolumn! scb! crb!<CR>
 
 " Reload all buffers
 map <leader>r :checktime<CR>
