@@ -133,6 +133,18 @@ map <leader>r :checktime<CR>
 " Check for missing included files
 map <leader>p :checkpath<CR>
 
+" FuzzyFinder binds
+" https://github.com/junegunn/fzf.vim#commands
+nmap <leader>fo :Files<CR>
+nmap <leader>fb :Buffers<CR>
+nmap <leader>fs :GFiles?<CR>
+nmap <leader>fg :Rg<CR>
+nmap <leader>ff :Lines<CR>
+nmap <leader>f/ :BLines<CR>
+nmap <leader>ft :Tags<CR>
+nmap <leader>fc :Commands<CR>
+nmap <leader>fm :Marks<CR>
+
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
 " Uncomment this to enable by default:
@@ -148,8 +160,9 @@ nnoremap <C-K> gt
 nnoremap <leader><Left> :tabm -1<CR>
 nnoremap <leader><Right> :tabm +1<CR>
 
-" Map creating a new vertical window keybind
-map <C-W>N :vnew<CR>
+" Map creating a new vertical/horizontal window keybind
+map <C-W>N :vnew<CR>:Buffers<CR>
+map <C-W>n :new<CR>:Buffers<CR>
 " Zoom in the current window by creating a new tab and open that window's
 " buffer
 map <leader>o :let current_buffer = bufnr("%")<CR>:let current_line = line('.')<CR>:tabe<CR>:execute "buffer " current_buffer<CR>:execute current_line<CR>
