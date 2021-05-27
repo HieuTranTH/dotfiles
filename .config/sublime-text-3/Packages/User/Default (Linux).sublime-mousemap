@@ -1,0 +1,17 @@
+[
+    {
+        "button": "button1",
+        "count": 1,
+        "modifiers": ["ctrl"],
+        "press_command": "drag_select",
+        "command": "goto_definition"
+    },
+    {
+        "button": "button8",
+        "command": "jump_back"
+    },
+	{
+        "button": "button9",
+        "command": "jump_forward"
+    }
+]
