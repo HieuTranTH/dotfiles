@@ -135,6 +135,11 @@ map <leader>p :checkpath<CR>
 
 " FuzzyFinder binds
 " https://github.com/junegunn/fzf.vim#commands
+" most stuff are defined in ~/.vim/plugged/fzf.vim/autoload/fzf/vim.vim
+" let s:default_action = {
+"  \ 'ctrl-t': 'tab split',
+"  \ 'ctrl-x': 'split',
+"  \ 'ctrl-v': 'vsplit' }
 nmap <leader>fo :Files<CR>
 nmap <leader>fb :Buffers<CR>
 nmap <leader>fs :GFiles?<CR>
