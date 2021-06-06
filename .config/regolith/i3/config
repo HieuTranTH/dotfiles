@@ -24,7 +24,7 @@
 # i3-wm.bar.position: top
 #
 # Reload i3 after making Xresource changes.  Learn more at
-# https://regolith-linux.org/docs/howto/override-xres/
+# https://regolith-linux.org/docs/howtos/override-xres/
 #
 ###############################################################################
 #
@@ -372,6 +372,11 @@ floating_modifier $mod
 set_from_resource $i3-wm.hide.edge.borders i3-wm.hide.edge.borders smart
 hide_edge_borders $i3-wm.hide.edge.borders
 
+# Set the default layout mode
+set_from_resource $i3-wm.workspace.layout i3-wm.workspace.layout default
+workspace_layout $i3-wm.workspace.layout
+
+
 ###############################################################################
 # Session Management
 ###############################################################################
@@ -445,6 +450,11 @@ set_from_resource $i3-wm.program.wifi i3-wm.program.wifi gnome-control-center --
 set_from_resource $i3-wm.binding.bluetooth i3-wm.binding.bluetooth b
 set_from_resource $i3-wm.program.bluetooth i3-wm.program.bluetooth gnome-control-center --class=floating_window bluetooth
 #bindsym $mod+$i3-wm.binding.bluetooth exec $i3-wm.program.bluetooth
+
+## Modify // Sound Settings // <> s ##
+set_from_resource $i3-wm.binding.sound i3-wm.binding.sound s
+set_from_resource $i3-wm.program.sound i3-wm.program.sound gnome-control-center --class=floating_window sound
+#bindsym $mod+$i3-wm.binding.sound exec $i3-wm.program.sound
 
 ## Launch // File Browser // <><Shift> n ##
 set_from_resource $i3-wm.binding.files i3-wm.binding.files Shift+n

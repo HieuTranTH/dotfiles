@@ -13,7 +13,7 @@ if ! grep -q \
         $DEFAULT_BIN
 then
     echo "WARNING: default $DEFAULT_BIN will reset wallpaper"
-    echo "Please comment out the line"
+    echo "Please comment out the lines around setting wallpaper code"
     echo "Exiting..."
     exit 1
 else
