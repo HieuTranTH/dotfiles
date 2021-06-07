@@ -12,6 +12,7 @@ filetype off
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-fugitive'
 " Initialize plugin system
 call plug#end()
 
