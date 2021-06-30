@@ -21,6 +21,7 @@
 [color "diff"]
 	meta = magenta bold
 	frag = yellow bold
+	context = 243
 	old = red bold
 	new = green bold
 [color "status"]
