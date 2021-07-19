@@ -147,6 +147,7 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     alias cdb='cd ~/bin'
     alias cdd='cd ~/Documents'
     alias cdt='cd ~/Documents/Tuxera'
+    alias cdta='cd ~/Documents/Tuxera/AmbaFS; cd1'
     alias cdtb='cd ~/Documents/Tuxera/builroot_package_x86-64; cd1'
     alias cdtj='cd ~/Documents/Tuxera/Jira-tickets; cd1'
     alias cdti='cd ~/Documents/Tuxera/INTEGRITY; cd1'
