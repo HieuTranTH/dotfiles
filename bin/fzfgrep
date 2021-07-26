@@ -1,0 +1,52 @@
+#!/bin/bash
+
+##
+# Interactive search.
+# Usage: `fzfgrep` or `fzfgrep <folder>`.
+#
+[[ -n $1 ]] && cd $1 # go to provided folder or noop
+
+if which rg; then
+    RG_DEFAULT_COMMAND="rg -i -l --hidden --no-ignore-vcs"
+    selected=$(
+    FZF_DEFAULT_COMMAND="rg --files" fzf \
+        -m \
+        -e \
+        --ansi \
+        --disabled \
+        --prompt="RG > " \
+        --reverse \
+        --print-query \
+        --no-mouse \
+        --bind "ctrl-a:select-all" \
+        --bind "ctrl-alt-a:deselect-all" \
+        --bind "ctrl-d:preview-half-page-down" \
+        --bind "ctrl-u:preview-half-page-up" \
+        --bind 'ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c "vim +/{q} {}" &)' \
+        --bind "change:reload:$RG_DEFAULT_COMMAND {q} || true" \
+        --preview "rg -i --pretty --context 4 {q} {}"
+    )
+elif which grep; then
+    GREP_DEFAULT_COMMAND="grep -i -l -I -R"
+    selected=$(
+    FZF_DEFAULT_COMMAND="find" fzf \
+        -m \
+        -e \
+        --ansi \
+        --disabled \
+        --prompt="GREP > " \
+        --reverse \
+        --print-query \
+        --no-mouse \
+        --bind "ctrl-a:select-all" \
+        --bind "ctrl-alt-a:deselect-all" \
+        --bind "ctrl-d:preview-half-page-down" \
+        --bind "ctrl-u:preview-half-page-up" \
+        --bind "change:reload:$GREP_DEFAULT_COMMAND {q} || true" \
+        --preview "grep -n -i --color=always --context 4 {q} {}"
+    )
+fi
+
+QUERY_STRING=$( sed "1 q" <<<"$selected" )
+selected=$( sed "1 d" <<<"$selected" )
+[[ -n $selected ]] && vim +/"$QUERY_STRING" -p $selected # open multiple files in editor
