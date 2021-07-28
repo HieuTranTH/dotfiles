@@ -144,7 +144,7 @@ map <leader>p :checkpath<CR>
 nmap <leader>fo :Files<CR>
 nmap <leader>fb :Buffers<CR>
 nmap <leader>fs :GFiles?<CR>
-nmap <leader>fg :Rg<CR>
+nmap <leader>fg :if executable('rg') \| execute "Rg" \| else \| execute "RGgrep" \| endif<CR>
 nmap <leader>ff :Lines<CR>
 nmap <leader>f/ :BLines<CR>
 nmap <leader>ft :Tags<CR>
