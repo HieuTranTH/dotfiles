@@ -38,6 +38,8 @@ select 0
 
 # get rid of silly xoff stuff
 # bind s split
+# get rid of locking which easily mistyped when using minicom
+bind x version
 
 # layouts
 layout autosave on
