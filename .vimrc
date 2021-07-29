@@ -422,7 +422,6 @@ function! MyTabLine()
     let s .= '%T%#TabLineFill#%='
     let s .= (tabpagenr('$') > 1 ? '%999XX' : 'X')
     return s
-
 endfunction
 
 " set showtabline=1
@@ -450,6 +449,15 @@ function! DeleteEmptyBuffers()
 endfunction
 map <leader>e :call DeleteEmptyBuffers()<CR>
 
+" Create fold around parenthesis, brackets; or toggle fold at cursor
+function! FoldCreateToggle()
+    if foldlevel(line(".")) > 0
+        exe 'normal za'
+    else
+        exe 'normal zf%'
+    endif
+endfunction
+map <leader>z :call FoldCreateToggle()<CR>
 "##############################################################################
 " End of Hieu's custom Configurations
 "##############################################################################
