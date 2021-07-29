@@ -454,6 +454,9 @@ function! FoldCreateToggle()
     if foldlevel(line(".")) > 0
         exe 'normal za'
     else
+        if !MyViewCheck()
+            exe 'mkview'
+        endif
         exe 'normal zf%'
     endif
 endfunction
