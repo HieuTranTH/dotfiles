@@ -204,7 +204,7 @@ function fzfkill() {
     if [ -n "$PROCESS_IDs" ]; then
         echo kill $1 $PROCESS_IDs
         read -p "Proceed? (Y/n)" CONT
-        [ ${CONT:-Y} != 'Y' ] && exit 1
+        [ ${CONT:-Y} != 'Y' ] && return 1
         kill $1 $PROCESS_IDs
         ps -u -p $PROCESS_IDs
     fi
