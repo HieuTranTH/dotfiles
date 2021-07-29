@@ -134,10 +134,6 @@ alias diff='diff --color=auto'
 
 # Hostname hieu-ThinkPad-X250 specific ########################################
 if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
-    # Add alias for terminal_start to make the calling gnome-terminal tab exit
-    # after executing the command. Purpose is not receiving any logs from firefox
-    #alias terminal_start='exec terminal_start'
-
     # Todo.txt requirements
     # Make alias todo for todo.sh and source bash completion file todo_completion
     alias todo='~/bin/todo.txt_cli-2.11.0/todo.sh'
@@ -154,17 +150,11 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     alias cdtq='cd ~/Documents/Tuxera/QNX; cd1'
     alias cdts='cd ~/Documents/Tuxera/software; cd1'
 
-    # Edit .bashrc
-    alias vib='command vim ~/.bashrc'
-
     # Edit *_commands files with vim
     alias vic='command vim -p ~/Documents/*_commands -c "tabdo set noexpandtab autoindent formatoptions-=q" -c "2tabnext"'
 
     # Edit i3 config, open other referenced configuration files
     alias vii3='command vim -p ~/.config/regolith/i3/{config,todo} ~/.config/regolith/Xresources ~/voidrice/.config/i3/config -c "tabdo setfiletype i3" -c "1tabn"'
-
-    # Edit .vimrc
-    alias viv='command vim ~/.vimrc'
 
     # Start minicom with logging and color
     alias minicomlc='minicom -C minicom_$(date +%Y-%m-%d_%H.%M).txt -w -c on -t xterm-256color'
@@ -174,60 +164,72 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
         . ~/.bashrc_extra/bashrc_rednotebook.sh
     fi
 
-    # fzf
-    # cd to a sub-directory right under CWD
-    function cd1() {
-        DEST=$( ls -lA | grep "^d" | fzf |  awk '{ print $9 }' )
-        [ -n "$DEST" ] && cd $DEST
-    }
-    # Bind Alt-1 to execute cd1()
-    bind -m emacs-standard '"\e1": "cd1\n"'
-    bind -m vi-command '"\e1": "cd1\n"'
-    bind -m vi-insert '"\e1": "cd1\n"'
-    # Edit any text executable files
-    function fzfbin() {
-        find $( echo $PATH | sed 's/:/ /g' ) /usr/share \
-            -executable -type f -exec grep -Iq . {} \; -print | \
-            fzf -m --preview="head -20 {}" --height 40% \
-                --bind "ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c 'vim {}' &)" | xargs -ro -d "\n" vim
-    }
-    # Edit any user configuration files
-    function fzfconf() {
-        cd ~; find .bash* .config .gitconfig .*rc* .profile .screen* .ssh .vim* .Xresources* | \
-            fzf -m --preview="head -20 {}" --height 40% \
-                --bind "ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c 'vim {}' &)" | xargs -ro -d "\n" vim
-    }
-    # Kill processes
-    function fzfkill() {
-        PROCESS_IDs=$( ps aux | fzf -m --height 40% --no-mouse | awk '{print $2}' )
-        if [ -n "$PROCESS_IDs" ]; then
-            echo kill $1 $PROCESS_IDs
-            read -p "Proceed? (Y/n)" CONT
-            [ ${CONT:-Y} != 'Y' ] && exit 1
-            kill $1 $PROCESS_IDs
-            ps -u -p $PROCESS_IDs
-        fi
-    }
-    # Open any file in current directory with xdg-open
-    function fzfopen() {
-        find \( -type f -o -type l \) | \
-            fzf +m --preview="xdg-mime query filetype {}" --height 40% | \
-            xargs -ro -d "\n" devour xdg-open 2>&-
-    }
-
-    # Tab completion for fzf command arguments
-    # fzf will be triggered with '**' then Tab
-    . ~/.vim/plugged/fzf/shell/completion.bash
-
-    # CTRL-T - Paste the selected file path into the command line
-    # CTRL-R - Paste the selected command from history into the command line
-    # ALT-C - cd into the selected directory
-    export FZF_ALT_C_COMMAND="command find -L . -mindepth 1 \\( -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
-    -o -type d -print 2> /dev/null | cut -b3-"
-    export FZF_ALT_C_OPTS='--preview="tree -L 1 {}"'
-    . ~/.vim/plugged/fzf/shell/key-bindings.bash
 fi
 # End of Hostname hieu-ThinkPad-X250 specific #################################
+
+# Edit .bashrc
+alias vib='command vim ~/.bashrc'
+
+# Edit .vimrc
+alias viv='command vim ~/.vimrc'
+
+################################################################################
+# fzf                                                                          #
+################################################################################
+# cd to a sub-directory right under CWD
+function cd1() {
+    DEST=$( ls -lA | grep "^d" | fzf |  awk '{ print $9 }' )
+    [ -n "$DEST" ] && cd $DEST
+}
+# Bind Alt-1 to execute cd1()
+bind -m emacs-standard '"\e1": "cd1\n"'
+bind -m vi-command '"\e1": "cd1\n"'
+bind -m vi-insert '"\e1": "cd1\n"'
+# Edit any text executable files
+function fzfbin() {
+    find $( echo $PATH | sed 's/:/ /g' ) /usr/share \
+        -executable -type f -exec grep -Iq . {} \; -print | \
+        fzf -m --preview="head -20 {}" --height 40% \
+            --bind "ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c 'vim {}' &)" | xargs -ro -d "\n" vim
+}
+# Edit any user configuration files
+function fzfconf() {
+    cd ~; find .bash* .config .gitconfig .*rc* .profile .screen* .ssh .vim* .Xresources* | \
+        fzf -m --preview="head -20 {}" --height 40% \
+            --bind "ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c 'vim {}' &)" | xargs -ro -d "\n" vim
+}
+# Kill processes
+function fzfkill() {
+    PROCESS_IDs=$( ps aux | fzf -m --height 40% --no-mouse | awk '{print $2}' )
+    if [ -n "$PROCESS_IDs" ]; then
+        echo kill $1 $PROCESS_IDs
+        read -p "Proceed? (Y/n)" CONT
+        [ ${CONT:-Y} != 'Y' ] && exit 1
+        kill $1 $PROCESS_IDs
+        ps -u -p $PROCESS_IDs
+    fi
+}
+# Open any file in current directory with xdg-open
+function fzfopen() {
+    find \( -type f -o -type l \) | \
+        fzf +m --preview="xdg-mime query filetype {}" --height 40% | \
+        xargs -ro -d "\n" devour xdg-open 2>&-
+}
+
+# Tab completion for fzf command arguments
+# fzf will be triggered with '**' then Tab
+. ~/.vim/plugged/fzf/shell/completion.bash
+
+# CTRL-T - Paste the selected file path into the command line
+# CTRL-R - Paste the selected command from history into the command line
+# ALT-C - cd into the selected directory
+export FZF_ALT_C_COMMAND="command find -L . -mindepth 1 \\( -fstype 'sysfs' -o -fstype 'devfs' -o -fstype 'devtmpfs' -o -fstype 'proc' \\) -prune \
+-o -type d -print 2> /dev/null | cut -b3-"
+export FZF_ALT_C_OPTS='--preview="tree -L 1 {}"'
+. ~/.vim/plugged/fzf/shell/key-bindings.bash
+################################################################################
+# End of fzf                                                                   #
+################################################################################
 
 # Function wrapper for dotfiles git version control
 function dotfiles() {
