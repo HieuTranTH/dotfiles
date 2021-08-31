@@ -150,6 +150,10 @@ nmap <leader>f/ :BLines<CR>
 nmap <leader>ft :Tags<CR>
 nmap <leader>fc :Commands<CR>
 nmap <leader>fm :Marks<CR>
+nmap <leader>fw :Windows<CR>
+nmap <leader>fl :Locate 
+nmap <leader>fh :History<CR>
+let g:fzf_buffers_jump = 1
 
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
