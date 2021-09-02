@@ -203,7 +203,10 @@ function fzfconf() {
 }
 # Kill processes
 function fzfkill() {
-    PROCESS_IDs=$( ps aux | fzf -m --height 40% --no-mouse | awk '{print $2}' )
+    PROCESS_IDs=$( ps aux | fzf -m --height 40% --no-mouse \
+        --bind 'ctrl-r:reload(ps aux)' \
+        --header 'Press CTRL-R to reload' --header-lines=1 \
+            | awk '{print $2}' )
     if [ -n "$PROCESS_IDs" ]; then
         echo kill $1 $PROCESS_IDs
         read -p "Proceed? (Y/n)" CONT
