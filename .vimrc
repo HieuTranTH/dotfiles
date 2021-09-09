@@ -288,7 +288,8 @@ map <F6> :setlocal spell! spelllang=en_us<CR>
 " https://github.com/altercation/vim-colors-solarized/issues/195
 " cterm=reverse makes SpellBad higher priority than CursorLine so it is more
 " visible when mouse is over the line
-highlight SpellBad cterm=reverse ctermbg=white ctermfg=red
+" enable if using colorscheme solarized
+" highlight SpellBad cterm=reverse ctermbg=white ctermfg=red
 
 " Show syntax highlighting groups for word under cursor (Ctrl-Shift-p)-Not use
 " http://vimcasts.org/episodes/creating-colorschemes-for-vim/
