@@ -132,12 +132,12 @@ fi
 # Alias for diff with color highlighting
 alias diff='diff --color=auto'
 
-# Hostname hieu-ThinkPad-X250 specific ########################################
-if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
+# Hostname hieu-thinkpad-p14s-gen-2 specific ###################################
+if [ $( hostname ) = "hieu-thinkpad-p14s-gen-2" ]; then
     # Todo.txt requirements
     # Make alias todo for todo.sh and source bash completion file todo_completion
-    alias todo='~/bin/todo.txt_cli-2.11.0/todo.sh'
-    . ~/bin/todo.txt_cli-2.11.0/todo_completion
+    alias todo='~/bin/todo.txt_cli-2.12.0/todo.sh'
+    . ~/bin/todo.txt_cli-2.12.0/todo_completion
 
     # Aliases to cd to Documents and Tuxera directory
     alias cdb='cd ~/bin'
@@ -154,7 +154,7 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     alias vic='command vim -p ~/Documents/*_commands -c "tabdo set noexpandtab autoindent formatoptions-=q" -c "2tabnext"'
 
     # Edit i3 config, open other referenced configuration files
-    alias vii3='command vim -p ~/.config/regolith/i3/{config,todo} ~/.config/regolith/Xresources ~/voidrice/.config/i3/config -c "tabdo setfiletype i3" -c "1tabn"'
+    alias vii3='command vim -p ~/.config/regolith/i3/{config,todo} ~/.config/regolith/Xresources ~/Documents/hieu_gits/voidrice/.config/i3/config -c "tabdo setfiletype i3" -c "1tabn"'
 
     # Start minicom with logging and color
     alias minicomlc='minicom -C minicom_$(date +%Y-%m-%d_%H.%M).txt -w -c on -t xterm-256color'
@@ -165,7 +165,7 @@ if [ $( hostname ) = "hieu-ThinkPad-X250" ]; then
     fi
 
 fi
-# End of Hostname hieu-ThinkPad-X250 specific #################################
+# End of Hostname hieu-thinkpad-p14s-gen-2 specific ############################
 
 # Edit .bashrc
 alias vib='command vim ~/.bashrc'
@@ -181,8 +181,8 @@ export FZF_DEFAULT_OPTS="--color='bg+:240'"
 
 # cd to a sub-directory right under CWD
 function cd1() {
-    DEST=$( ls -lA | grep "^d" | fzf |  awk '{ print $9 }' )
-    [ -n "$DEST" ] && cd $DEST
+    DEST=$( ls -lA | grep "^d" | fzf --height 20% |  awk '{ print $9 }' )
+    [ -n "$DEST" ] && cd $DEST && echo "$PWD:" && ls -a
 }
 # Bind Alt-1 to execute cd1()
 bind -m emacs-standard '"\e1": "cd1\n"'
