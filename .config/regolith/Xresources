@@ -11,6 +11,8 @@ i3-wm.program.refresh_ui: ~/bin/regolith-look
 
 ! -- i3bar
 i3-wm.bar.position: top
+! * The separator is broken on 4K monitor with 200% scale and only showing a dot
+! * (not trying to fix)
 i3-wm.bar.separator: "|"
 
 ! -- i3xrocks status bar blocks
