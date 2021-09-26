@@ -2,7 +2,7 @@
     "version": "0.95.10",
     "userCodeDir": null,
     "settings": {
-        "isFirstRun": true,
+        "isFirstRun": false,
         "serviceRunning": true,
         "menuTakesFocus": false,
         "showTrayIcon": true,
