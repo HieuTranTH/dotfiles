@@ -1,4 +1,5 @@
 #!/bin/sh
+TODO_CMD="/home/hieu/bin/todo.txt_cli-2.12.0/todo.sh"
 
 # get font and icon specifics from xresource file
 VALUE_FONT=${font:-$(xrescat i3xrocks.value.font "JetBrains Mono Medium 13")}
@@ -7,7 +8,7 @@ LABEL_COLOR=${label_color:-$(xrescat i3xrocks.label.color "#7B8394")}
 LABEL_ICON=${label_icon:-$(xrescat i3xrocks.label.todo " ")}
 
 # find the count number of todo priority A items
-COUNT="$(/home/hieu/bin/todo.txt_cli-2.11.0/todo.sh lsp A | tail -1 | cut -d' ' -f2)"
+COUNT="$($TODO_CMD lsp A | tail -1 | cut -d' ' -f2)"
 
 # output net usage using pango markup
 ICON_SPAN="<span color=\"${LABEL_COLOR}\">$LABEL_ICON</span>"
@@ -23,12 +24,12 @@ echo "${ICON_SPAN}${VALUE_SPAN}"
 BUTTON=${button:-}
 case "x${BUTTON}" in
     x1 )
-        SHELL_ACTION="/home/hieu/bin/todo.txt_cli-2.11.0/todo.sh lsp A"
+        SHELL_ACTION="$TODO_CMD lsp A"
         ACTION="/usr/bin/gnome-terminal --class=floating_window -- bash -c 'echo $SHELL_ACTION && $SHELL_ACTION && exec bash'"
         /usr/bin/i3-msg -q exec "$ACTION"
         ;;
     x3 )
-        SHELL_ACTION="/home/hieu/bin/todo.txt_cli-2.11.0/todo.sh l"
+        SHELL_ACTION="$TODO_CMD l"
         ACTION="/usr/bin/gnome-terminal --class=floating_window -- bash -c 'echo $SHELL_ACTION && $SHELL_ACTION && exec bash'"
         /usr/bin/i3-msg -q exec "$ACTION"
         ;;
