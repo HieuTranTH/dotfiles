@@ -49,4 +49,4 @@ fi
 
 QUERY_STRING=$( sed "1 q" <<<"$selected" )
 selected=$( sed "1 d" <<<"$selected" )
-[[ -n $selected ]] && vim +/"$QUERY_STRING" -p $selected # open multiple files in editor
+[[ -n $selected ]] && vim +/"\v$QUERY_STRING" -p $selected # open multiple files in editor
