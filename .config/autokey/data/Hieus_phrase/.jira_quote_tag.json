@@ -1,0 +1,31 @@
+{
+    "type": "phrase",
+    "description": "jira_quote_tag",
+    "modes": [
+        1
+    ],
+    "usageCount": 0,
+    "prompt": false,
+    "omitTrigger": true,
+    "matchCase": false,
+    "showInTrayMenu": false,
+    "abbreviation": {
+        "abbreviations": [
+            "{q"
+        ],
+        "backspace": false,
+        "ignoreCase": false,
+        "immediate": false,
+        "triggerInside": false,
+        "wordChars": "[^ \\n]"
+    },
+    "hotkey": {
+        "modifiers": [],
+        "hotKey": null
+    },
+    "filter": {
+        "regex": null,
+        "isRecursive": false
+    },
+    "sendMode": "kb"
+}
