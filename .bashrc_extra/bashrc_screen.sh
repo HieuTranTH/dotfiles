@@ -1,6 +1,12 @@
 screen() {
     case "$*" in
         -S*)
+            # Check for argument to -S option
+            if [ $# -lt 2 ]; then
+                echo "Missing session name"
+                return 1
+            fi
+
             echo "### This is a wrapper for GNU screen which has been source in .bashrc ###"
             echo "### Hieu Tran ###"
 
