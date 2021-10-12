@@ -42,6 +42,7 @@ elif which grep; then
         --bind "ctrl-alt-a:deselect-all" \
         --bind "ctrl-d:preview-half-page-down" \
         --bind "ctrl-u:preview-half-page-up" \
+        --bind 'ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c "vim +/{q} {}" &)' \
         --bind "change:reload:$GREP_DEFAULT_COMMAND {q} || true" \
         --preview "grep -n -i --color=always --context 4 {q} {}"
     )
