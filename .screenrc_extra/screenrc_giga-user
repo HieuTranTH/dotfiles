@@ -32,11 +32,11 @@ ignorecase on
 screen -t Test_profile  0 bash
 stuff "cd /home/hieu/nixtest/scripts/test-profiles/hieu-profiles^Mcp template FIL-;vim \$_^[OD^[OD^[OD^[OD^[OD^[OD^[OD"
 screen -t Nixtest1  1 bash
-stuff "cd /home/hieu/nixtest; BASED=\$PWD^Mecho Specify the test profile file and its label at the end of the next command^MNIXTEST_PROFILE_REPEATS=10 ./scripts/run-test-profile.sh scripts/test-profiles/hieu-profiles/"
+stuff "cd /home/hieu/nixtest; BASED=\$PWD^Mecho Specify the test profile file and its label at the end of the next command^MNIXTEST_PROFILE_REPEATS=1 ./scripts/run-test-profile.sh scripts/test-profiles/hieu-profiles/"
 screen -t Nixtest2  2 bash
 stuff "cd /home/hieu/nixtest; BASED=\$PWD^Mecho Specify the test profile file and its label at the end of the next command^MNIXTEST_PROFILE_REPEATS=10 ./scripts/run-test-profile.sh scripts/test-profiles/hieu-profiles/"
 screen -t Nixtest3  3 bash
-stuff "cd /home/hieu/nixtest; BASED=\$PWD^Mecho Specify the test profile file and its label at the end of the next command^MNIXTEST_PROFILE_REPEATS=10 ./scripts/run-test-profile.sh scripts/test-profiles/hieu-profiles/"
+stuff "cd /home/hieu/nixtest; BASED=\$PWD^Mecho Specify the test profile file and its label at the end of the next command^MNIXTEST_PROFILE_REPEATS=100 ./scripts/run-test-profile.sh scripts/test-profiles/hieu-profiles/"
 
 select 0
 #bind c screen 1 # window numbering starts at 1 not 0
