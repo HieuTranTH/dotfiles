@@ -199,6 +199,12 @@ cnoremap f <S-Right>
 " Map * to search for visually selected text
 vnoremap * y/\V<C-R>=escape(@",'/\')<CR><CR>
 
+" Binds for modifying a list of Jira tickets
+" join lines
+vnoremap <leader>jj <ESC>:'<,'>sort!<CR>:'<,'>s/\n/, /g<CR>:let @/=''<CR>$xx
+" split line
+vnoremap <leader>js <ESC>:'<,'>s/, /\r/g<CR>
+
 " New splits spawn below and right
 set splitbelow splitright
 " Remove pipe characters that act as seperators on vertical splits
