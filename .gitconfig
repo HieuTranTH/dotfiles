@@ -37,3 +37,5 @@
 	tool = vimdiff3
 [mergetool]
 	keepBackup = false
+[rebase]
+    autoStash = true
