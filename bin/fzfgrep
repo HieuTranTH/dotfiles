@@ -2,39 +2,42 @@
 
 ##
 # Interactive search.
-# Usage: `fzfgrep` or `fzfgrep <folder>`.
+# Usage: `fzfgrep` or `fzfgrep <folder>`. `-g` option to use `git grep`
 #
+if [ $1 = -g ]; then
+    GITGREP=true
+    shift
+fi
+
 [[ -n $1 ]] && cd $1 # go to provided folder or noop
 
-if which rg; then
-    RG_DEFAULT_COMMAND="rg -i -l --hidden --no-ignore-vcs"
-    selected=$(
-    FZF_DEFAULT_COMMAND="rg --files" fzf \
-        -m \
-        -e \
-        --ansi \
-        --disabled \
-        --prompt="RG > " \
-        --reverse \
-        --print-query \
-        --no-mouse \
-        --bind "ctrl-a:select-all" \
-        --bind "ctrl-alt-a:deselect-all" \
-        --bind "ctrl-d:preview-half-page-down" \
-        --bind "ctrl-u:preview-half-page-up" \
-        --bind 'ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c "vim +/{q} {}" &)' \
-        --bind "change:reload:$RG_DEFAULT_COMMAND {q} || true" \
-        --preview "rg -i --pretty --context 4 {q} {}"
-    )
+if [ -n "$GITGREP" ]; then
+    GREP_DEFAULT_COMMAND="git grep -i -l -I"
+    FZF_DEFAULT_COMMAND="git ls-files"
+    PROMPT="GITGREP > "
+    PREVIEW="git grep -n -i -h --color=always --context 4 {q} {}"
+elif which rg; then
+    GREP_DEFAULT_COMMAND="rg -i -l --hidden --no-ignore-vcs"
+    FZF_DEFAULT_COMMAND="rg --files"
+    PROMPT="RG > "
+    PREVIEW="rg -i --pretty --context 4 {q} {}"
 elif which grep; then
     GREP_DEFAULT_COMMAND="grep -i -l -I -R"
-    selected=$(
-    FZF_DEFAULT_COMMAND="find" fzf \
+    FZF_DEFAULT_COMMAND="find"
+    PROMPT="GREP > "
+    PREVIEW="grep -n -i --color=always --context 4 {q} {}"
+else
+    echo "No grep found"
+    exit 1
+fi
+
+selected=$(
+    FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND" fzf \
         -m \
         -e \
         --ansi \
         --disabled \
-        --prompt="GREP > " \
+        --prompt="$PROMPT" \
         --reverse \
         --print-query \
         --no-mouse \
@@ -44,9 +47,8 @@ elif which grep; then
         --bind "ctrl-u:preview-half-page-up" \
         --bind 'ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c "vim +/{q} {}" &)' \
         --bind "change:reload:$GREP_DEFAULT_COMMAND {q} || true" \
-        --preview "grep -n -i --color=always --context 4 {q} {}"
-    )
-fi
+        --preview "$PREVIEW"
+)
 
 QUERY_STRING=$( sed "1 q" <<<"$selected" )
 selected=$( sed "1 d" <<<"$selected" )
