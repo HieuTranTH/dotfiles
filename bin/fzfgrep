@@ -1,17 +1,58 @@
 #!/bin/bash
 
-##
-# Interactive search.
-# Usage: `fzfgrep` or `fzfgrep <folder>`. `-g` option to use `git grep`
-#
-if [ $1 = -g ]; then
-    GITGREP=true
-    shift
-fi
+#echo "=========================================="
+#echo "Interactive search"
+#echo "=========================================="
+#echo
+#@ usage: `fzfgrep` or `fzfgrep <folder>`. `-g` option to use `git grep`
+#@ author: Hieu Tran
+#@ email : hieu@tuxera.com
+
+PROGNAME=${0##*/}
+
+## Default values
+EXIT_FAILURE=1
+GITGREP=0
+
+function usage() {
+    echo -e "$PROGNAME - Interactive search with ripgrep, grep, or git grep\n"
+    echo -e "usage: $PROGNAME [-g] [-h] [-?] [PATH]\n"
+    echo -e "   -g: Use git grep."
+    echo -e "   -h: Print this help message."
+    echo -e "   -?: Print this help message."
+}
+
+function die() {
+    echo "ERROR: $*" >&2
+    exit $EXIT_FAILURE
+}
+
+## List of options the program will accept;
+## those options that take arguments are followed by a colon
+OPTSTRING='gh?'
+
+## The loop calls getopts until there are no more options on the command line
+## Each option is stored in $OPT, any option arguments are stored in OPTARG
+while getopts "$OPTSTRING" OPT
+do
+    case $OPT in
+        g)
+            GITGREP=$(( GITGREP + 1 ))
+            ;;
+        *)
+            usage >&2
+            exit $EXIT_FAILURE
+            ;;
+    esac
+done
+
+## Remove options from the command line
+## $OPTIND points to the next, unparsed argument
+shift "$(( OPTIND - 1 ))"
 
 [[ -n $1 ]] && cd $1 # go to provided folder or noop
 
-if [ -n "$GITGREP" ]; then
+if [ "$GITGREP" -gt 0 ]; then
     GREP_DEFAULT_COMMAND="git grep -i -l -I"
     FZF_DEFAULT_COMMAND="git ls-files"
     PROMPT="GITGREP > "
