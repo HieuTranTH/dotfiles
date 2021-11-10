@@ -118,9 +118,9 @@ map <leader>n :set number! relativenumber!<CR>
 map <leader>s :set number! relativenumber! list!<CR>:let &cc = &cc == '' ? '72,80' : ''<CR>
 
 " Git blame current line
-nmap <leader>b :exe '!git -C' expand('%:p:h') 'blame -L' . line(".") . ',+1' '' expand('%:t')<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+nmap <leader>b :exe '!gitblame.sh -C' expand('%:p:h') 'blame -L' . line(".") . ',+1' '' expand('%:t')<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 " Git blame visual selection
-vmap <leader>b <ESC>:let RANGE = line("'>") - line("'<") + 1<CR>:exe '!git -C' expand('%:p:h') 'blame -L' . line("'<") . ',+' . RANGE '' expand('%:t')<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+vmap <leader>b <ESC>:let RANGE = line("'>") - line("'<") + 1<CR>:exe '!gitblame.sh -C' expand('%:p:h') 'blame -L' . line("'<") . ',+' . RANGE '' expand('%:t')<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
 
 " Toggling cursorline and cursorcolumn
 map <leader>c :set cursorline! cursorcolumn!<CR>
