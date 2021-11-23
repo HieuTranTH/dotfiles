@@ -50,7 +50,7 @@ done
 ## $OPTIND points to the next, unparsed argument
 shift "$(( OPTIND - 1 ))"
 
-[[ -n $1 ]] && cd $1 # go to provided folder or noop
+[ -n "$1" ] && [ -d "$1" ] && cd "$1" # go to provided folder or noop
 
 if [ "$GITGREP" -gt 0 ]; then
     GREP_DEFAULT_COMMAND="git grep -i -l -I"
