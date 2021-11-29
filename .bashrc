@@ -197,7 +197,7 @@ function fzfbin() {
 }
 # Edit any user configuration files
 function fzfconf() {
-    cd ~; find .bash* .config .gitconfig .*rc* .profile .screen* .ssh .vim* .Xresources* | \
+    cd ~; find .bash* .config .gdbinit .gitconfig .*rc* .profile .screen* .ssh .vim* .Xresources* | \
         fzf -m --preview="head -20 {}" --height 40% \
             --bind "ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c 'vim {}' &)" | xargs -ro -d "\n" vim
 }
