@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+#echo "=========================================="
+#echo "Interactive git status"
+#echo "=========================================="
+#echo
+
+#@ usage: 
+#@ author: Hieu Tran
+#@ email : hieu@tuxera.com
+
+PROGNAME=${0##*/}
+
+## Default values
+EXIT_FAILURE=1
+
+function usage() {
+    echo -e "$PROGNAME - Interactive git status\n"
+    echo -e "usage: $PROGNAME [-h] [-?] [args] ...\n"
+    echo -e "   -h: Print this help message."
+    echo -e "   -?: Print this help message."
+    echo -e "   args: Arguments to git."
+}
+
+function die() {
+    echo "ERROR: $*" >&2
+    exit $EXIT_FAILURE
+}
+
+
+## List of options the program will accept;
+## those options that take arguments are followed by a colon
+OPTSTRING='ph?'
+
+## The loop calls getopts until there are no more options on the command line
+## Each option is stored in $OPT, any option arguments are stored in OPTARG
+while getopts "$OPTSTRING" OPT
+do
+    case $OPT in
+        *)
+            usage >&2
+            exit $EXIT_FAILURE
+            ;;
+    esac
+done
+
+## Remove options from the command line
+## $OPTIND points to the next, unparsed argument
+shift "$(( OPTIND - 1 ))"
+GIT_ARGS="$@"
+
+FZF_DEFAULT_COMMAND="git status -s"
+selected=$(
+    FZF_DEFAULT_COMMAND="$FZF_DEFAULT_COMMAND" fzf \
+        -m \
+        --ansi \
+        --no-mouse \
+        --bind "ctrl-a:select-all" \
+        --bind "ctrl-alt-a:deselect-all" \
+        --bind "ctrl-d:preview-half-page-down" \
+        --bind "ctrl-u:preview-half-page-up" \
+        --height 20%
+)
+
+selected=$( awk '{ print $2 }' <<<"$selected" )
+
+if [ -z $GIT_ARGS ]; then
+    read -p "Arguments to git: " GIT_ARGS
+fi
+[[ -n $selected ]] && git $GIT_ARGS $selected
