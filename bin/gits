@@ -67,4 +67,4 @@ selected=$( awk '{ print $2 }' <<<"$selected" )
 if [ -z $GIT_ARGS ]; then
     read -p "Arguments to git: " GIT_ARGS
 fi
-[[ -n $selected ]] && git $GIT_ARGS $selected
+[[ -n $selected ]] && echo git $GIT_ARGS $selected && git $GIT_ARGS $selected
