@@ -11,7 +11,7 @@ filetype off
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim', { 'commmit': 'bd703a7' }
 Plug 'tpope/vim-fugitive'
 " Initialize plugin system
 call plug#end()
