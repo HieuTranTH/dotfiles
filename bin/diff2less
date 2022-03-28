@@ -1,0 +1,19 @@
+#!/bin/bash
+#set -x
+
+echo "======================================================"
+echo "Pass diff output to less for easy reading through pipe"
+echo "======================================================"
+echo
+#@ usage: diff2less <file1> <file2> [args...]
+
+if [ $# -ge 2  ]
+then
+    FILE1=$1
+    FILE2=$2
+    shift 2
+    diff -u --color=always $@ $FILE1 $FILE2 | less -r
+else
+    echo "Missing arguments"
+    exit 1
+fi
