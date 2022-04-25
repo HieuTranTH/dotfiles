@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 #echo "=========================================="
 #echo "Git show after blaming and choosing the commit"
