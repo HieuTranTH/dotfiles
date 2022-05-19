@@ -92,5 +92,7 @@ selected=$(
 )
 
 QUERY_STRING=$( sed "1 q" <<<"$selected" )
+# Escaped forward slash
+QUERY_STRING=$( echo "$QUERY_STRING" | sed "s/\([/]\)/\\\\\1/g" )
 selected=$( sed "1 d" <<<"$selected" )
 [[ -n $selected ]] && vim +/"\v$QUERY_STRING" -p $selected # open multiple files in editor
