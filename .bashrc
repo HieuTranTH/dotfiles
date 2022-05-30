@@ -159,11 +159,6 @@ if [ $( hostname ) = "hieu-thinkpad-p14s-gen-2" ]; then
     # Start minicom with logging and color
     alias minicomlc='minicom -C minicom_$(date +%Y-%m-%d_%H.%M).txt -w -c on -t xterm-256color'
 
-    # Check for running instance of rednotebook when open it via SSH ForwardX11
-    if [ -f ~/.bashrc_extra/bashrc_rednotebook.sh ]; then
-        . ~/.bashrc_extra/bashrc_rednotebook.sh
-    fi
-
 fi
 # End of Hostname hieu-thinkpad-p14s-gen-2 specific ############################
 
