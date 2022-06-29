@@ -176,7 +176,7 @@ export FZF_DEFAULT_OPTS="--color='bg+:240'"
 
 # cd to a sub-directory right under CWD
 function cd1() {
-    DEST=$( ls -la | grep "^d" | fzf --height 20% |  awk '{ print $9 }' )
+    DEST=$( ls -laL | grep "^d" | fzf --height 20% |  awk '{ print $9 }' )
     [ -n "$DEST" ] && cd $DEST && echo "$PWD:" && ls -A
 }
 # Bind Alt-1 to execute cd1()
