@@ -13,11 +13,13 @@ PROGNAME=${0##*/}
 ## Default values
 EXIT_FAILURE=1
 GITGREP=0
+CASE_INSENSITIVE=1
 
 function usage() {
     echo -e "$PROGNAME - Interactive search with ripgrep, grep, or git grep\n"
-    echo -e "usage: $PROGNAME [-g] [-h] [-?] [PATH]\n"
+    echo -e "usage: $PROGNAME [-g] [-I] [-h] [-?] [PATH]\n"
     echo -e "   -g: Use git grep."
+    echo -e "   -I: Case sensitive search."
     echo -e "   -h: Print this help message."
     echo -e "   -?: Print this help message."
 }
@@ -29,7 +31,7 @@ function die() {
 
 ## List of options the program will accept;
 ## those options that take arguments are followed by a colon
-OPTSTRING='gh?'
+OPTSTRING='gIh?'
 
 ## The loop calls getopts until there are no more options on the command line
 ## Each option is stored in $OPT, any option arguments are stored in OPTARG
@@ -38,6 +40,9 @@ do
     case $OPT in
         g)
             GITGREP=$(( GITGREP + 1 ))
+            ;;
+        I)
+            unset CASE_INSENSITIVE
             ;;
         *)
             usage >&2
@@ -53,20 +58,20 @@ shift "$(( OPTIND - 1 ))"
 [ -n "$1" ] && [ -d "$1" ] && cd "$1" # go to provided folder or noop
 
 if [ "$GITGREP" -gt 0 ]; then
-    GREP_DEFAULT_COMMAND="git grep -i -l -I"
+    GREP_DEFAULT_COMMAND="git grep ${CASE_INSENSITIVE:+-i} -l -I"
     FZF_DEFAULT_COMMAND="git ls-files"
     PROMPT="GITGREP > "
-    PREVIEW="git grep -n -i -h --color=always --context 4 {q} {}"
+    PREVIEW="git grep -n ${CASE_INSENSITIVE:+-i} -h --color=always --context 4 {q} {}"
 elif which rg &> /dev/null; then
-    GREP_DEFAULT_COMMAND="rg -i -l --hidden --no-ignore-vcs"
+    GREP_DEFAULT_COMMAND="rg ${CASE_INSENSITIVE:+-i} -l --hidden --no-ignore-vcs"
     FZF_DEFAULT_COMMAND="rg --files"
     PROMPT="RG > "
-    PREVIEW="rg -i --pretty --context 4 {q} {}"
+    PREVIEW="rg ${CASE_INSENSITIVE:+-i} --pretty --context 4 {q} {}"
 elif which grep &> /dev/null; then
-    GREP_DEFAULT_COMMAND="grep -i -l -I -R"
+    GREP_DEFAULT_COMMAND="grep ${CASE_INSENSITIVE:+-i} -l -I -R"
     FZF_DEFAULT_COMMAND="find"
     PROMPT="GREP > "
-    PREVIEW="grep -n -i --color=always --context 4 {q} {}"
+    PREVIEW="grep -n ${CASE_INSENSITIVE:+-i} --color=always --context 4 {q} {}"
 else
     echo "No grep found"
     exit 1
@@ -95,4 +100,4 @@ QUERY_STRING=$( sed "1 q" <<<"$selected" )
 # Escaped forward slash
 QUERY_STRING=$( echo "$QUERY_STRING" | sed "s/\([/]\)/\\\\\1/g" )
 selected=$( sed "1 d" <<<"$selected" )
-[[ -n $selected ]] && vim +/"\v\c$QUERY_STRING" -p $selected # open multiple files in editor
+[[ -n $selected ]] && vim +/"\v${CASE_INSENSITIVE:+\c}${QUERY_STRING}" -p $selected # open multiple files in editor
