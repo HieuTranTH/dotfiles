@@ -53,13 +53,13 @@ screen() {
 
                         # Hostname raspberrypi specific ###########################
                         if [ $( hostname -s ) = "raspberrypi" ]; then
-                            cd ~/hieu/spinfs
+                            cd $HOME/hieu/spinfs
                         fi
                         # End of Hostname raspberrypi specific ####################
 
-                        if [ -f "~/.screenrc_extra/screenrc_$( hostname -s )" ]; then
+                        if [ -f "$HOME/.screenrc_extra/screenrc_$( hostname -s )" ]; then
                             #use "command" here to prevent self-calling this function recursively
-                            command screen "$@" -c "~/.screenrc_extra/screenrc_$( hostname -s )"
+                            command screen "$@" -c $HOME/.screenrc_extra/screenrc_$( hostname -s )"
                         else
                             command screen "$@"
                         fi
