@@ -59,7 +59,7 @@ screen() {
 
                         if [ -f "$HOME/.screenrc_extra/screenrc_$( hostname -s )" ]; then
                             #use "command" here to prevent self-calling this function recursively
-                            command screen "$@" -c $HOME/.screenrc_extra/screenrc_$( hostname -s )"
+                            command screen "$@" -c "$HOME/.screenrc_extra/screenrc_$( hostname -s )"
                         else
                             command screen "$@"
                         fi
