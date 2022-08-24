@@ -246,7 +246,7 @@ fi
 # Function to push dotfiles, then update the repo on other hosts
 function dotfilespush() {
     dotfiles push
-    dotfiles_sync.sh
+    #dotfiles_sync.sh   # Don't sync to Tuxera hosts anymore
 }
 # Function to pull dotfiles, automatically stash save > pull > stash pop, which
 # will keep custom changes in some hosts
