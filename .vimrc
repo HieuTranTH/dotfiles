@@ -13,6 +13,7 @@ call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim', { 'commit': 'bd703a7' }
 Plug 'tpope/vim-fugitive'
+Plug 'hashivim/vim-terraform'
 " Initialize plugin system
 call plug#end()
 
