@@ -352,6 +352,8 @@ let ch_syntax_for_h = 1
 " Set tab widths of 8 spaces for C source codes, use tab character for
 " indentation. This is following Linux Kernel coding style guidelines.
 autocmd Filetype c,ch setlocal tabstop=8 shiftwidth=8 softtabstop=8 noexpandtab
+" Set tab widths of 2 spaces for yaml files
+autocmd Filetype yaml setlocal tabstop=2 shiftwidth=2 softtabstop=2
 
 " Customize tabline to show tab numbers and better highlighting
 " https://www.reddit.com/r/vim/comments/22ala7/vim_custom_tabline/
