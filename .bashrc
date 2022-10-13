@@ -168,6 +168,9 @@ alias vib='command vim ~/.bashrc'
 # Edit .vimrc
 alias viv='command vim ~/.vimrc'
 
+# Kubectl bash completion
+. ~/.kube/kubectl_completion
+
 ################################################################################
 # fzf                                                                          #
 ################################################################################
