@@ -162,6 +162,18 @@ if [ $( hostname ) = "hieu-thinkpad-p14s-gen-2" ]; then
 fi
 # End of Hostname hieu-thinkpad-p14s-gen-2 specific ############################
 
+# Hostname WPF1Y2XET specific ###################################
+if [ $( hostname ) = "WPF1Y2XET" ]; then
+    # Aliases to cd to common directories
+    alias cdb='cd ~/bin'
+    alias cdr='cd ~/repos; cd1'
+    alias cdd='cd ~/dev; cd1'
+
+    # Edit *_commands files with vim
+    alias vic='command vim -p ~/binb/*_commands -c "tabdo set noexpandtab autoindent formatoptions-=q" -c "3tabnext"'
+fi
+# End of Hostname WPF1Y2XET specific ############################
+
 # Edit .bashrc
 alias vib='command vim ~/.bashrc'
 
