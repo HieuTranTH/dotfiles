@@ -85,6 +85,9 @@ set showcmd
 " Allow :find to search down into sub-directories, simple fuzzy-finder
 set path+=**
 
+" Allow searching upward in directories for tags file, stop at root
+set tags+=tags;/
+
 " Searching
 nnoremap / /\v
 vnoremap / /\v
