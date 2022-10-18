@@ -146,6 +146,7 @@ map <leader>p :checkpath<CR>
 "  \ 'ctrl-x': 'split',
 "  \ 'ctrl-v': 'vsplit' }
 nmap <leader>fo :Files<CR>
+nmap <leader>fe :GFiles<CR>
 nmap <leader>fb :Buffers<CR>
 nmap <leader>fs :GFiles?<CR>
 nmap <leader>fg :if executable('rg') \| execute "Rg" \| else \| execute "RGgrep" \| endif<CR>
