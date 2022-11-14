@@ -6,7 +6,7 @@
 #echo
 #@ usage: `fzfgrep` or `fzfgrep <folder>`. `-g` option to use `git grep`
 #@ author: Hieu Tran
-#@ email : hieu@tuxera.com
+#@ email : hieutran.th.358@gmail.com
 
 PROGNAME=${0##*/}
 

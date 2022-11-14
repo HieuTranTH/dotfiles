@@ -5,9 +5,9 @@
 #echo "=========================================="
 #echo
 
-#@ usage: 
+#@ usage: gits [args]
 #@ author: Hieu Tran
-#@ email : hieu@tuxera.com
+#@ email : hieutran.th.358@gmail.com
 
 PROGNAME=${0##*/}
 

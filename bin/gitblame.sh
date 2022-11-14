@@ -7,7 +7,7 @@
 
 #@ usage: gitblame.sh -C <repo> blame -L<line>,+<range> <file>
 #@ author: Hieu Tran
-#@ email : hieu@tuxera.com
+#@ email : hieutran.th.358@gmail.com
 
 PROGNAME=${0##*/}
 
