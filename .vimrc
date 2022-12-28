@@ -108,6 +108,10 @@ vnoremap <F1> :set invfullscreen<CR>
 " Cannot unmap default Vim key so map it to Noop
 map q: <Nop>
 
+" Remap infrequently use Q key
+" Use current line as shell command then paste back its output
+noremap Q !!$SHELL<CR>
+
 " Formatting in paragraph
 map <leader>q gqip
 
