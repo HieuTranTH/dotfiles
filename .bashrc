@@ -314,6 +314,11 @@ function vim() {
     esac
 }
 
+# Activate a default Python Virtual Environment
+function act_venv() {
+    source "/home/hieu/dev/prefect-2.6.4/bin/activate"
+}
+
 # Give colors for man pages
 # https://www.tecmint.com/view-colored-man-pages-in-linux/
 export LESS_TERMCAP_mb=$'\e[1;32m'
