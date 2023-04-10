@@ -245,7 +245,7 @@ export FZF_ALT_C_OPTS='--preview="tree -L 1 {}"'
 ################################################################################
 
 # Function wrapper for dotfiles git version control
-function dotfiles() {
+function dot() {
     /usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME $@
 }
 # Enable git bash completion for dotfiles
@@ -253,20 +253,20 @@ if [ -f /usr/share/bash-completion/completions/git ]; then
     # Source the private functions
     . /usr/share/bash-completion/completions/git
     # Add git completion to aliases/functions
-    __git_complete dotfiles __git_main
+    __git_complete dot __git_main
 fi
 # Function to push dotfiles, then update the repo on other hosts
-function dotfilespush() {
-    dotfiles push
+function dotpush() {
+    dot push
     #dotfiles_sync.sh   # Don't sync to Tuxera hosts anymore
 }
 # Function to pull dotfiles, automatically stash save > pull > stash pop, which
 # will keep custom changes in some hosts
-function dotfilespull() {
+function dotpull() {
     cd ~
-    dotfiles stash save
-    dotfiles pull
-    dotfiles stash pop
+    dot stash save
+    dot pull
+    dot stash pop
     cd -
 }
 
