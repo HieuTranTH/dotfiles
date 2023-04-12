@@ -335,6 +335,8 @@ export EDITOR=vim
 # Show job count in bash prompt
 PS1="[\j]$PS1"
 
+# Terraform completion
+complete -C /usr/bin/terraform terraform
 ###############################################################################
 # End of Hieu's custom Configurations
 ###############################################################################
