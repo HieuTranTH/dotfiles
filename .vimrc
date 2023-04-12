@@ -98,6 +98,11 @@ set smartcase
 set showmatch
 map <leader><space> :let @/=''<cr> " clear search
 
+" Enable mouse
+set mouse=a
+" Make mouse works in WSL
+set ttymouse=sgr
+
 " Remap annoying F1 help key.
 " Put Vim in fullscreen (only work in Mac)
 inoremap <F1> <ESC>:set invfullscreen<CR>a
@@ -183,7 +188,7 @@ nnoremap <leader><Right> :tabm +1<CR>
 map <C-W>N :vnew<CR>:Buffers<CR>
 map <C-W>n :new<CR>:Buffers<CR>
 " Zoom in the current window by creating a new tab and open that window's
-" buffer
+" buffer, similar to CTRL-W_T but do not close the original window
 map <leader>o :let current_buffer = bufnr("%")<CR>:let current_line = line('.')<CR>:tabe<CR>:execute "buffer " current_buffer<CR>:execute current_line<CR>
 
 " Bubling text, moving selected text up and down
