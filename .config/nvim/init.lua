@@ -93,11 +93,27 @@ require('lazy').setup({
 
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+      'L3MON4D3/LuaSnip',
+      'saadparwaiz1/cmp_luasnip',
+      'hrsh7th/cmp-buffer'
+    },
   },
 
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  { 'folke/which-key.nvim',
+    opts = {
+      triggers_blacklist = {
+        -- list of mode / prefixes that should never be hooked by WhichKey
+        -- this is mostly relevant for keymaps that start with a native binding
+        n = { '"' }, -- showing registers can be slow, :WhichKey " when needed
+        i = { "j", "k", "<c-r>" },
+        v = { "j", "k" },
+      },
+    },
+  },
+
   { -- Adds git releated signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -115,9 +131,6 @@ require('lazy').setup({
   { -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
-    config = function()
-      vim.cmd.colorscheme 'onedark'
-    end,
   },
 
   { -- Set lualine as statusline
@@ -172,6 +185,8 @@ require('lazy').setup({
     end,
   },
 
+  { 'folke/zen-mode.nvim' },
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
@@ -197,6 +212,22 @@ require('set')
 -- See `:help vim.keymap.set()`
 require('remap')
 
+
+-- [[ Link WSL clipboard ]]
+-- See ` help clipboard-wsl`
+vim.cmd [[ let g:clipboard = {
+  \   'name': 'WslClipboard',
+  \   'copy': {
+  \      '+': 'clip.exe',
+  \      '*': 'clip.exe',
+  \    },
+  \   'paste': {
+  \      '+': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  \      '*': 'powershell.exe -c [Console]::Out.Write($(Get-Clipboard -Raw).tostring().replace("`r", ""))',
+  \   },
+  \   'cache_enabled': 0,
+  \ }
+]]
 
 
 -- The line beneath this is called `modeline`. See `:help modeline`

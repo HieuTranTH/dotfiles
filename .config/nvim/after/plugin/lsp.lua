@@ -27,7 +27,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<A-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -49,18 +49,19 @@ end
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
 local servers = {
-  -- clangd = {},
-  -- gopls = {},
-  -- pyright = {},
-  -- rust_analyzer = {},
-  -- tsserver = {},
-
+  bashls = {},
+  clangd = {},
+  dockerls = {},
   lua_ls = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
     },
   },
+  pyright = {},
+  sqlls = {},
+  terraformls = {},
+  yamlls = {},
 }
 
 -- Setup neovim lua configuration
@@ -76,6 +77,7 @@ mason_lspconfig.setup {
   ensure_installed = vim.tbl_keys(servers),
 }
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
 mason_lspconfig.setup_handlers {
   function(server_name)
     require('lspconfig')[server_name].setup {
