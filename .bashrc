@@ -316,7 +316,8 @@ function vim() {
 
 # Activate a default Python Virtual Environment
 function act_venv() {
-    source "/home/hieu/dev/prefect-2.6.4/bin/activate"
+    VENV=$( ls -d /home/hieu/dev/python_venv/*/ | fzf --height 20% )
+    [ -e "${VENV}/bin/activate" ] && source "${VENV}/bin/activate"
 }
 
 # Give colors for man pages
