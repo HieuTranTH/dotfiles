@@ -2,7 +2,7 @@
 	name = Hieu Tran
 	email = hieu.tran@upm.com
 [core]
-	editor = vi
+	editor = nvim
 	pager = less -+F
 [alias]
 	flog = log --graph --full-history --all --decorate --oneline

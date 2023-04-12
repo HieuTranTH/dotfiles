@@ -200,13 +200,13 @@ function fzfbin() {
     find $( echo $PATH | sed 's/:/ /g' ) /usr/share \
         -executable -type f -exec grep -Iq . {} \; -print | \
         fzf -m --preview="head -20 {}" --height 40% \
-            --bind "ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c 'vim {}' &)" | xargs -ro -d "\n" vim
+            --bind "ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c 'nvim {}' &)" | xargs -ro -d "\n" nvim
 }
 # Edit any user configuration files
 function fzfconf() {
     cd ~; find .bash* .config .gdbinit .gitconfig .*rc* .profile .screen* .ssh .vim* | \
         fzf -m --preview="head -20 {}" --height 40% \
-            --bind "ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c 'vim {}' &)" | xargs -ro -d "\n" vim
+            --bind "ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c 'nvim {}' &)" | xargs -ro -d "\n" nvim
 }
 # Kill processes
 function fzfkill() {
@@ -291,7 +291,7 @@ function r() {
 
 # Parse argument of file:line:column or file:line format to vim
 # Only work with as first parameter
-function vim() {
+function nvim() {
     local first="$1"
     case $first in
         *:*:*)
@@ -300,16 +300,16 @@ function vim() {
             column=${first##*:}
             line=${first#$file:}
             line=${line%:$column}
-            command vim ${file} +0${line} -c "normal ${column}|" $@
+            command nvim ${file} +0${line} -c "normal ${column}|" $@
             ;;
         *:*)
             shift
             file=${first%%:*}
             line=${first##*:}
-            command vim ${file} +0${line} $@
+            command nvim ${file} +0${line} $@
             ;;
         *)
-            command vim $@
+            command nvim $@
             ;;
     esac
 }
@@ -330,8 +330,8 @@ export LESS_TERMCAP_so=$'\e[01;48;5;56m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-# Make Vim to be the default editor for C-xC-e and fc commands
-export EDITOR=vim
+# Make NeoVim to be the default editor for C-xC-e and fc commands
+export EDITOR=nvim
 
 # Show job count in bash prompt
 PS1="[\j]$PS1"
