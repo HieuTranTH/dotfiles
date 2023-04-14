@@ -1,6 +1,9 @@
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
+-- Always block cursor
+vim.o.guicursor = "a:block"
+
 -- Show hybrid line numbers
 vim.wo.number = true
 vim.wo.relativenumber = true
@@ -13,11 +16,11 @@ vim.o.mouse = 'a'
 --  See `:help 'clipboard'`
 vim.o.clipboard = 'unnamedplus'
 
--- Might need these settings (back port from .vimrc)
---[[ vim.o.tabstop = 4
+-- Default indentation
+vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.softtabstop = 4
-vim.o.expandtab = true ]]
+vim.o.expandtab = true
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -74,6 +77,9 @@ vim.o.list = true
 vim.o.splitbelow = true
 vim.o.splitright = true
 
+-- Keep text on the same screen line for horizontal split
+vim.o.splitkeep = 'screen'
+
 -- display right margin (72 for git commit message, 80 for normal source code)
 vim.o.colorcolumn = '72,80'
 
@@ -90,10 +96,17 @@ vim.api.nvim_create_autocmd(
   {"VimEnter", "WinEnter"},
   {
     pattern = "*",
-    -- Using double bracketed string to avoid escaping backslashes in lua regex
-    command = [[match ExtraWhitespace /\s\+$/]],
+    callback = function()
+      -- Only enable the highlight for non-floating windows
+      if vim.api.nvim_win_get_config(0).relative == '' then
+        -- Using double bracketed string to avoid escaping backslashes in lua regex
+        vim.cmd [[match ExtraWhitespace /\s\+$/]]
+      end
+    end
   }
 )
+-- Highlight QuickFixLine
+vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = 'Red' })
 
 -- Function to check if there is a view file of the current file
 -- Deriving from https://stackoverflow.com/a/28460676
@@ -101,7 +114,7 @@ local MyViewCheck = function()
   local path = vim.api.nvim_buf_get_name(0)
   -- vim's odd =~ escaping for /
   path = string.gsub(path, '=', '==')
-  if (vim.env.HOME ~= nil or vim.env.HOME ~= '') then
+  if (vim.env.HOME ~= nil and vim.env.HOME ~= '') then
     path = string.gsub(path, '^' .. vim.env.HOME, '~')
   end
   path = string.gsub(path, '/', '=+') .. '='

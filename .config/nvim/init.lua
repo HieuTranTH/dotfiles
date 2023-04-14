@@ -71,7 +71,7 @@ require('lazy').setup({
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
-  'tpope/vim-sleuth',
+  -- 'tpope/vim-sleuth', -- don't really want this for now
 
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
@@ -185,7 +185,12 @@ require('lazy').setup({
     end,
   },
 
+  -- Keep context at the top line when scrolling
+  { 'nvim-treesitter/nvim-treesitter-context' },
+
   { 'folke/zen-mode.nvim' },
+
+  { 'mbbill/undotree' },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
