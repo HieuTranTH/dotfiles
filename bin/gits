@@ -30,7 +30,7 @@ function die() {
 
 ## List of options the program will accept;
 ## those options that take arguments are followed by a colon
-OPTSTRING='ph?'
+OPTSTRING='h?'
 
 ## The loop calls getopts until there are no more options on the command line
 ## Each option is stored in $OPT, any option arguments are stored in OPTARG
@@ -64,7 +64,7 @@ selected=$(
 
 selected=$( awk '{ print $2 }' <<<"$selected" )
 
-if [ -z $GIT_ARGS ]; then
+if [ -z "$GIT_ARGS" ]; then
     read -p "Arguments to git: " GIT_ARGS
 fi
 [[ -n $selected ]] && echo git $GIT_ARGS $selected && git $GIT_ARGS $selected
