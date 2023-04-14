@@ -197,7 +197,7 @@ bind -m vi-command '"\e1": "cd1\n"'
 bind -m vi-insert '"\e1": "cd1\n"'
 # Edit any text executable files
 function fzfbin() {
-    find $( echo $PATH | sed 's/:/ /g' ) /usr/share \
+    find $( echo $PATH | sed 's|/mnt/c/.*:||g;s|:| |g' ) /usr/share \
         -executable -type f -exec grep -Iq . {} \; -print | \
         fzf -m --preview="head -20 {}" --height 40% \
             --bind "ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c 'nvim {}' &)" | xargs -ro -d "\n" nvim
