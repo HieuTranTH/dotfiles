@@ -41,6 +41,8 @@ vim.keymap.set('', '<C-w>N', ':vnew<CR>:Telescope buffers<CR>', { desc = "New ve
 -- Move to next/prev entry in quickfix list
 vim.keymap.set('n', '<leader>n', ':cn<CR>', { desc = "Next in quickfix list", silent = true })
 vim.keymap.set('n', '<leader>N', ':cN<CR>', { desc = "Prev in quickfix list", silent = true })
+-- Reload all buffers
+vim.keymap.set('n', '<leader>l', ':checktime<CR>', { desc = "Re[L]oad all buffers"})
 
 -- Formatting in paragraph
 vim.keymap.set('', '<leader>f', 'gqip', { desc = "[F]ormat a paragraph" })
@@ -58,7 +60,7 @@ vim.keymap.set('n', '<leader>ts', ':windo set cursorline! cursorcolumn! scb! crb
 vim.keymap.set('n', '<leader>tl', ':set list!<CR>', { desc = "[T]oggle [L]istchars" })
 
 -- Zenmode
-vim.keymap.set('n', '<leader>o', ':ZenMode<CR>:<Esc>', { desc = "Toggle Zenmode", silent = true })
+vim.keymap.set('n', '<leader>o', ':ZenMode<CR>:<Esc>', { desc = "Zenmode", silent = true })
 -- Clear search highlight
 vim.keymap.set('n', '<leader><space>', ':noh<CR>', { desc = "Clear search highlight", silent = true })
 
