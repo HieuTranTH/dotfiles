@@ -46,22 +46,11 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-  callback = function()
-    vim.highlight.on_yank { timeout = 300 }
-  end,
-  group = highlight_group,
-  pattern = '*',
-})
-
 -- Minimal number of screen lines to keep above and below the cursor
 vim.o.scrolloff = 3
 
 -- Use % to jump between pairs
-vim.o.matchpairs = vim.o.matchpairs .. ',<:>'
+vim.opt.matchpairs:append { '<:>' }
 
 -- Briefly jump to matching bracket when inserting
 vim.o.showmatch = true
@@ -70,7 +59,7 @@ vim.o.showmatch = true
 vim.o.hidden = true
 
 -- Visualize tabs and newlines
-vim.o.listchars = vim.o.listchars .. ',eol:\\u00ac' -- show '¬' at eol
+vim.opt.listchars:append { eol = '\\u00ac' } -- show '¬' at eol
 vim.o.list = true
 
 -- New splits spawn below and right
@@ -81,12 +70,15 @@ vim.o.splitright = true
 vim.o.splitkeep = 'screen'
 
 -- display right margin (72 for git commit message, 80 for normal source code)
-vim.o.colorcolumn = '72,80'
+vim.o.colorcolumn = '80'
 
 -- open completion menu on statusline
 vim.o.wildmenu = true
 -- Bash-like completion
 vim.o.wildmode = 'longest,list,full'
+
+-- Spell check languages
+vim.opt.spelllang = { 'en_us' }
 
 -- Highlight trailing whitespaces in red, neovim no longer distinguish between cterm and gui
 vim.api.nvim_set_hl(0, 'ExtraWhitespace', { bg = 'Red' })
@@ -107,6 +99,17 @@ vim.api.nvim_create_autocmd(
 )
 -- Highlight QuickFixLine
 vim.api.nvim_set_hl(0, 'QuickFixLine', { bg = 'Red' })
+
+-- [[ Highlight on yank ]]
+-- See `:help vim.highlight.on_yank()`
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+  callback = function()
+    vim.highlight.on_yank { timeout = 300 }
+  end,
+  group = highlight_group,
+  pattern = '*',
+})
 
 -- Function to check if there is a view file of the current file
 -- Deriving from https://stackoverflow.com/a/28460676
@@ -150,5 +153,27 @@ vim.api.nvim_create_autocmd(
   }
 )
 
+-- Jump to the last place in the file before exiting
+vim.api.nvim_create_autocmd('BufReadPost', {
+  callback = function(data)
+    local last_pos = vim.api.nvim_buf_get_mark(data.buf, '"')
+    if last_pos[1] > 0 and last_pos[1] <= vim.api.nvim_buf_line_count(data.buf) then
+      vim.api.nvim_win_set_cursor(0, last_pos)
+      vim.cmd.normal('zz')
+    end
+  end,
+})
+
+-- Remove useless stuff from the terminal window and enter INSERT mode
+vim.api.nvim_create_autocmd('TermOpen', {
+  callback = function(data)
+    if not string.find(vim.bo[data.buf].filetype, '^[fF][tT]erm') then
+      vim.api.nvim_set_option_value('number', false, { scope = 'local' })
+      vim.api.nvim_set_option_value('relativenumber', false, { scope = 'local' })
+      vim.api.nvim_set_option_value('signcolumn', 'no', { scope = 'local' })
+      vim.api.nvim_command('startinsert')
+    end
+  end,
+})
 --[[ vim.cmd.colorscheme 'molokai'
 vim.api.nvim_set_hl(0, 'Normal', { bg = 'None' }) ]]

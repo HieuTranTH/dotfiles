@@ -19,6 +19,8 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz')
 -- Search jumps also stay in middle
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
+-- Fix * (Keep the cursor position, don't move to next match)
+vim.keymap.set('n', '*', '*N')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
@@ -52,21 +54,25 @@ vim.keymap.set('', '<leader>f', 'gqip', { desc = "[F]ormat a paragraph" })
 vim.keymap.set('n', '<leader>tt', ':set expandtab! autoindent!<CR>', { desc = "[T]oggle expand[T]ab autoindent" })
 -- Toggle hybrid line number on/off
 vim.keymap.set('n', '<leader>tn', ':set number! relativenumber!<CR>', { desc = "[T]oggle hybrid line [N]umber" })
--- Toggling cursorline and cursorcolumn
+-- Toggle cursorline and cursorcolumn
 vim.keymap.set('n', '<leader>tc', ':set cursorline! cursorcolumn!<CR>', { desc = "[T]oggle [C]ursorline cursorcolumn" })
 -- Bind scrolling and cursor in all windows
 vim.keymap.set('n', '<leader>ts', ':windo set cursorline! cursorcolumn! scb! crb!<CR>', { desc = "[T]Bind [S]crolling in all windows" })
 -- Or use your leader key + l to toggle on/off
 vim.keymap.set('n', '<leader>tl', ':set list!<CR>', { desc = "[T]oggle [L]istchars" })
+-- Toggle spell check
+vim.keymap.set('', '<F6>', ':setlocal spell!<CR>', { desc = "Toggle Spelling check" })
+-- Toggle search highlight
+vim.keymap.set('n', '<leader>th', ':set hlsearch!<CR>', { desc = "[T]oggle search [H]ighlight", silent = true })
 
 -- Zenmode
 vim.keymap.set('n', '<leader>o', ':ZenMode<CR>:<Esc>', { desc = "Zenmode", silent = true })
--- Clear search highlight
-vim.keymap.set('n', '<leader><space>', ':noh<CR>', { desc = "Clear search highlight", silent = true })
 
 -- Bubble multiple lines
-vim.keymap.set('v', '<leader><Up>',  ":m '<-2<CR>gv=gv", { desc = "Bubbling lines move down" })
-vim.keymap.set('v', '<leader><Down>', ":m '>+1<CR>gv=gv", { desc = "Bubbling lines move up" })
+vim.keymap.set('n', '<leader><Up>', ':m .-2<CR>', { desc = "Move line move up", silent = true })
+vim.keymap.set('n', '<leader><Down>', ':m .+1<CR>', { desc = "Move line move down", silent = true })
+vim.keymap.set('v', '<leader><Up>',  ":m '<-2<CR>gv=gv", { desc = "Bubbling lines move up", silent = true })
+vim.keymap.set('v', '<leader><Down>', ":m '>+1<CR>gv=gv", { desc = "Bubbling lines move down", silent = true })
 
 -- Join lines
 vim.keymap.set({'n', 'v'}, 'J', 'J_', { desc = "Join lines but keep the cursor at front" })
@@ -74,7 +80,7 @@ vim.keymap.set({'n', 'v'}, 'J', 'J_', { desc = "Join lines but keep the cursor a
 -- Paste over a visual still keep the last copy text in default register
 vim.keymap.set('x', '<leader>p', [["_dP]], { desc = "[P]aste in visual keep unnamed register" })
 
--- Mappings for GNU like (bash, emacs,...) readline navigations in command mode
+-- Mappings for GNU like (bash, emacs,...) readline navigations in Command Mode
 vim.keymap.set('c', '<C-a>', '<Home>')
 vim.keymap.set('c', '<C-e>', '<End>')
 vim.keymap.set('c', '<C-p>', '<Up>')
@@ -83,6 +89,9 @@ vim.keymap.set('c', '<C-b>', '<Left>')
 vim.keymap.set('c', '<C-f>', '<Right>')
 vim.keymap.set('c', '<M-b>', '<S-Left>')
 vim.keymap.set('c', '<M-f>', '<S-Right>')
+-- In Insert Mode
+vim.keymap.set('i', '<C-a>', '<Esc>_i')
+vim.keymap.set('i', '<C-e>', '<Esc>$i')
 
 -- Escape to Normal mode from Terminal mode
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = "Escape Terminal mode" })
