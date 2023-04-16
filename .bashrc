@@ -179,6 +179,8 @@ alias vib='command vim ~/.bashrc'
 
 # Edit .vimrc
 alias viv='command vim ~/.vimrc'
+# Edit .config/nvim
+alias nviv='command nvim -p ~/.config/nvim/{init.lua,lua/remap.lua,lua/set.lua} -c "cd ~/.config/nvim"'
 
 ################################################################################
 # fzf                                                                          #
