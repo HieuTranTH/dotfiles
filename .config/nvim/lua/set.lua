@@ -70,7 +70,7 @@ vim.o.splitright = true
 vim.o.splitkeep = 'screen'
 
 -- display right margin (72 for git commit message, 80 for normal source code)
-vim.o.colorcolumn = '80'
+vim.o.colorcolumn = '72,80'
 
 -- open completion menu on statusline
 vim.o.wildmenu = true
@@ -167,6 +167,7 @@ vim.api.nvim_create_autocmd('BufReadPost', {
 -- Remove useless stuff from the terminal window and enter INSERT mode
 vim.api.nvim_create_autocmd('TermOpen', {
   callback = function(data)
+    -- if not using FTerm.nvim plugin
     if not string.find(vim.bo[data.buf].filetype, '^[fF][tT]erm') then
       vim.api.nvim_set_option_value('number', false, { scope = 'local' })
       vim.api.nvim_set_option_value('relativenumber', false, { scope = 'local' })
