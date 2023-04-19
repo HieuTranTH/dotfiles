@@ -47,7 +47,7 @@ vim.o.completeopt = 'menuone,noselect'
 vim.o.termguicolors = true
 
 -- Minimal number of screen lines to keep above and below the cursor
-vim.o.scrolloff = 3
+vim.o.scrolloff = 8
 
 -- Use % to jump between pairs
 vim.opt.matchpairs:append { '<:>' }
