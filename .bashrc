@@ -166,7 +166,7 @@ fi
 if [ $( hostname ) = "WPF1Y2XET" ]; then
     # Aliases to cd to common directories
     alias cdb='cd ~/bin'
-    alias cdr='TEMP_PWD=$PWD; cd ~/repos; cd1; OLDPWD=$TEMP_PWD'
+    alias cdr='TEMP_PWD=$PWD; cd ~/repos; cd1; cd1; OLDPWD=$TEMP_PWD'
     alias cdd='TEMP_PWD=$PWD; cd ~/dev; cd1; OLDPWD=$TEMP_PWD'
 
     # Edit *_commands files with vim
