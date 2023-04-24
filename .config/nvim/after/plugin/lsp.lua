@@ -48,7 +48,22 @@ end
 --
 --  Add any additional override configuration in the following tables. They will be passed to
 --  the `settings` field of the server config. You must look up that documentation yourself.
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
+-- or :h lspconfig-all
 local servers = {
+  azure_pipelines_ls = {
+    yaml = {
+      schemas = {
+        ["https://raw.githubusercontent.com/microsoft/azure-pipelines-vscode/master/service-schema.json"] = {
+          -- "/azure-pipeline*.y*l",
+          -- "/*.azure*",
+          -- "Azure-Pipelines/**/*.y*l",
+          -- "Pipelines/*.y*l",
+          "/*.y*ml",
+        },
+      },
+    },
+  },
   bashls = {},
   clangd = {},
   dockerls = {},
@@ -61,7 +76,6 @@ local servers = {
   pyright = {},
   sqlls = {},
   terraformls = {},
-  yamlls = {},
 }
 
 -- Setup neovim lua configuration
