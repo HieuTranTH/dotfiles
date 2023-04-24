@@ -91,7 +91,7 @@ selected=$(
         --bind "ctrl-alt-a:deselect-all" \
         --bind "ctrl-d:preview-half-page-down" \
         --bind "ctrl-u:preview-half-page-up" \
-        --bind 'ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c "vim +/{q} {}" &)' \
+        --bind 'ctrl-o:execute-silent:(/usr/bin/gnome-terminal --geometry=95x50 --class=floating_window -- bash -c "nvim +/{q} {}" &)' \
         --bind "change:reload:$GREP_DEFAULT_COMMAND {q} || true" \
         --preview "$PREVIEW"
 )
@@ -100,4 +100,4 @@ QUERY_STRING=$( sed "1 q" <<<"$selected" )
 # Escaped forward slash
 QUERY_STRING=$( echo "$QUERY_STRING" | sed "s/\([/]\)/\\\\\1/g" )
 selected=$( sed "1 d" <<<"$selected" )
-[[ -n $selected ]] && vim +/"\v${CASE_INSENSITIVE:+\c}${QUERY_STRING}" "+normal zz" -p $selected # open multiple files in editor
+[[ -n $selected ]] && nvim +/"\v${CASE_INSENSITIVE:+\c}${QUERY_STRING}" "+normal zz" -p $selected # open multiple files in editor
