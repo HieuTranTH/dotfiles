@@ -96,7 +96,7 @@ set incsearch
 set ignorecase
 set smartcase
 set showmatch
-map <leader>th :set hlsearch!<cr> " Toggle search highlight
+map <leader>th :noh<cr> " Toggle search highlight
 
 " Enable mouse
 set mouse=a

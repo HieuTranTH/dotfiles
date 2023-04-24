@@ -63,7 +63,7 @@ vim.keymap.set('n', '<leader>tl', ':set list!<CR>', { desc = "[T]oggle [L]istcha
 -- Toggle spell check
 vim.keymap.set('', '<F6>', ':setlocal spell!<CR>', { desc = "Toggle Spelling check" })
 -- Toggle search highlight
-vim.keymap.set('n', '<leader>th', ':set hlsearch!<CR>', { desc = "[T]oggle search [H]ighlight", silent = true })
+vim.keymap.set('n', '<leader>th', ':noh<CR>', { desc = "[T]oggle search [H]ighlight", silent = true })
 
 -- Zenmode
 vim.keymap.set('n', '<leader>o', ':ZenMode<CR>:<Esc>', { desc = "Zenmode", silent = true })
