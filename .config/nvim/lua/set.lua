@@ -154,15 +154,15 @@ vim.api.nvim_create_autocmd(
 )
 
 -- Jump to the last place in the file before exiting
-vim.api.nvim_create_autocmd('BufReadPost', {
-  callback = function(data)
-    local last_pos = vim.api.nvim_buf_get_mark(data.buf, '"')
-    if last_pos[1] > 0 and last_pos[1] <= vim.api.nvim_buf_line_count(data.buf) then
-      vim.api.nvim_win_set_cursor(0, last_pos)
-      vim.cmd.normal('zz')
-    end
-  end,
-})
+-- vim.api.nvim_create_autocmd('BufReadPost', {
+--   callback = function(data)
+--     local last_pos = vim.api.nvim_buf_get_mark(data.buf, '"')
+--     if last_pos[1] > 0 and last_pos[1] <= vim.api.nvim_buf_line_count(data.buf) then
+--       vim.api.nvim_win_set_cursor(0, last_pos)
+--       vim.cmd.normal('zz')
+--     end
+--   end,
+-- })
 
 -- Remove useless stuff from the terminal window and enter INSERT mode
 vim.api.nvim_create_autocmd('TermOpen', {
