@@ -215,6 +215,7 @@ require('set')
 -- See `:help vim.keymap.set()`
 require('remap')
 
+require('func')
 
 -- [[ Link WSL clipboard ]]
 -- See ` help clipboard-wsl`
