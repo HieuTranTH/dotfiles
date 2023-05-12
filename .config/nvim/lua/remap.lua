@@ -20,7 +20,7 @@ vim.keymap.set('n', '<C-d>', '<C-d>zz')
 vim.keymap.set('n', 'n', 'nzz')
 vim.keymap.set('n', 'N', 'Nzz')
 -- Fix * (Keep the cursor position, don't move to next match)
-vim.keymap.set('n', '*', '*N')
+vim.keymap.set('n', '*', '*Nzz')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
