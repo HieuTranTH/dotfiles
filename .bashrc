@@ -274,12 +274,8 @@ function dotpull() {
 
 # Go to the top directory of a git repo, work with repo that have submodules
 function cdg() {
-    TEMP_PWD=$PWD
-    while [ ! -d .git ]; do
-        cd ..
-        [ $PWD = "/" ] && break
-    done
-    OLDPWD=$TEMP_PWD
+    local TOPLEVEL=$( git rev-parse --show-superproject-working-tree --show-toplevel | head -1 )
+    test -n "${TOPLEVEL}" && cd "${TOPLEVEL}"
 }
 
 # Let shell change directory when ranger exits
