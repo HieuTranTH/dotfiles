@@ -176,5 +176,12 @@ vim.api.nvim_create_autocmd('TermOpen', {
     end
   end,
 })
+
 --[[ vim.cmd.colorscheme 'molokai'
 vim.api.nvim_set_hl(0, 'Normal', { bg = 'None' }) ]]
+
+-- vim.filetype.add({
+--   extension = {
+--     tfvars = 'terraform',
+--   },
+-- })

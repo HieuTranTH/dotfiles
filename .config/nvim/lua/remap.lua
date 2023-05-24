@@ -8,6 +8,8 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set({ 'n', 'v', 'i' }, '<F1>', '<Nop>', { silent = true })
 -- Unmap annoying q: key. Only disable if typing q: quickly
 vim.keymap.set('', 'q:', '<Nop>', { silent = true })
+-- Disable OMNI SQL Completion which interfere with <C-c> key
+vim.g.omni_sql_no_default_maps = 1
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
