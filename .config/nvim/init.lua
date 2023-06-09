@@ -107,7 +107,7 @@ require('lazy').setup({
       triggers_blacklist = {
         -- list of mode / prefixes that should never be hooked by WhichKey
         -- this is mostly relevant for keymaps that start with a native binding
-        n = { '"' }, -- showing registers can be slow, :WhichKey " when needed
+        n = { '"', '@' }, -- showing registers, macros can be slow, :WhichKey " when needed
         i = { "j", "k", "<c-r>" },
         v = { "j", "k" },
       },
