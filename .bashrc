@@ -182,6 +182,11 @@ alias viv='command vim ~/.vimrc'
 # Edit .config/nvim
 alias nviv='command nvim -p ~/.config/nvim/{init.lua,lua/remap.lua,lua/set.lua} -c "cd ~/.config/nvim"'
 
+# Most used options for gcal
+alias gcalw='command gcal -i -K -s 1 -jb'
+# Show finnish public holidays
+alias gcalf='command gcal -q FI -n'
+
 ################################################################################
 # fzf                                                                          #
 ################################################################################
