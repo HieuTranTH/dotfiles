@@ -162,8 +162,8 @@ if [ $( hostname ) = "hieu-thinkpad-p14s-gen-2" ]; then
 fi
 # End of Hostname hieu-thinkpad-p14s-gen-2 specific ############################
 
-# Hostname WPF1Y2XET specific ###################################
-if [ $( hostname ) = "WPF1Y2XET" ]; then
+# Hostname AZPW066EH1 specific ###################################
+if [ $( hostname ) = "AZPW066EH1" ]; then
     # Aliases to cd to common directories
     alias cdb='cd ~/bin'
     alias cdr='TEMP_PWD=$PWD; cd ~/repos; cd1; cd1; OLDPWD=$TEMP_PWD'
