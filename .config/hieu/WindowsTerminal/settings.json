@@ -391,6 +391,7 @@
             "yellow": "#808000"
         }
     ],
+    "startOnUserLogin": true,
     "tabWidthMode": "titleLength",
     "theme": "dark",
     "themes": 
