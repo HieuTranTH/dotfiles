@@ -12,6 +12,7 @@ PROGNAME=${0##*/}
 ## Default values
 EXIT_FAILURE=1
 KEYVAULT="cdp-prod-snowflake-kv"
+# KEYVAULT="cdp-azure-ad-app-secrets"
 TYPE="secret"
 
 function usage() {
