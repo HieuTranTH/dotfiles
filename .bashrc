@@ -337,7 +337,7 @@ export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
 # Make NeoVim to be the default editor for C-xC-e and fc commands
-export EDITOR=nvim
+export EDITOR=/home/hieu/bin/nvim
 
 # Show job count in bash prompt
 PS1="[\j]$PS1"
