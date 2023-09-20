@@ -68,5 +68,19 @@ NAME=$( az keyvault "${TYPE}" list --vault-name "${KEYVAULT}" | jq -r '.[] | .na
         --height 80%
 )
 if [ -n "${NAME}" ]; then
-    az keyvault "${TYPE}" show --vault-name "${KEYVAULT}" --name "${NAME}" | jq
+    OUTPUT=$( az keyvault "${TYPE}" show --vault-name "${KEYVAULT}" --name "${NAME}" | jq )
+
+    if which clip.exe &>/dev/null; then
+        CLIPBOARD="clip.exe"
+    elif which xclip &>/dev/null; then
+        CLIPBOARD="xclip -selection clipboard"
+    fi
+
+    if [ -n "${CLIPBOARD}" ]; then
+        echo "${OUTPUT}" | sed 's/"value".*$/"value": "*****"/g'
+        echo "${OUTPUT}" | jq -r '.value' | ${CLIPBOARD}
+        echo "Value is copied to clipboard."
+    else
+        echo "${OUTPUT}"
+    fi
 fi
