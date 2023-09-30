@@ -286,6 +286,19 @@ function cdg() {
     test -n "${TOPLEVEL}" && cd "${TOPLEVEL}"
 }
 
+# Shortcut for quick development to remote with git
+function gitcp() {
+    git commit --amend --no-edit
+    git push -f origin HEAD
+}
+
+# Shortcut for quick development to remote with git
+function gitacp() {
+    git add -u
+    git commit --amend --no-edit
+    git push -f origin HEAD
+}
+
 # Let shell change directory when ranger exits
 # see /usr/bin/ranger
 function r() {

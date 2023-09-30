@@ -1,16 +1,17 @@
 #!/usr/bin/env bash
 
-#export PS4='+ $LINENO: '
-#set -ex
+# export PS4='+ $LINENO: '
+# set -ex
 
 # NOTE: characters special to the shell must be escaped or quoted on
 # command line. This applies particularly to the multiplication symbol, *.
 
+# From Pro Bash Programming, chapter 11, page 133
 calc() #@ Perform arithmetic, including decimal fractions
 {
     local result=$(awk 'BEGIN { OFMT="%f"; print '"$*"'; exit}')
     case $result in
-        *.*0) result=${result%"¤{result##*[!0]}"} ;;
+        *.*0) result=${result%"${result##*[!0]}"} ;;
     esac
     printf "%s\n" "$result"
 }
