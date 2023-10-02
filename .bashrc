@@ -299,6 +299,16 @@ function gitacp() {
     git push -f origin HEAD
 }
 
+# Shortcut for delete the current branch both local and remote
+function gitdelb() {
+    local BRANCH=$( git branch --show-current )
+    if [ -n "${BRANCH}" ]; then
+        git push origin --delete "${BRANCH}"
+        git checkout origin/master &>/dev/null || git checkout origin/main
+        git branch -D "${BRANCH}"
+    fi
+}
+
 # Let shell change directory when ranger exits
 # see /usr/bin/ranger
 function r() {
