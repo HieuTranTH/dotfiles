@@ -13,6 +13,7 @@ PROGNAME=${0##*/}
 EXIT_FAILURE=1
 KEYVAULT="cdp-prod-snowflake-kv"
 # KEYVAULT="cdp-azure-ad-app-secrets"
+echo "Common kv(s): cdp-prod-snowflake-kv, cdp-azure-ad-app-secrets"
 TYPE="secret"
 
 function usage() {
