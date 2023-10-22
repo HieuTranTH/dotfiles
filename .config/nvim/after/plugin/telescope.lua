@@ -1,10 +1,15 @@
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
 local actions = require "telescope.actions"
+local action_layout = require("telescope.actions.layout")
 require('telescope').setup {
   defaults = {
     mappings = {
+      n = {
+        ["<M-p>"] = action_layout.toggle_preview
+      },
       i = {
+        ["<M-p>"] = action_layout.toggle_preview
       },
     },
   },
