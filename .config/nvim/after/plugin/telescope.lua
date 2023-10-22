@@ -1,12 +1,22 @@
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+local actions = require "telescope.actions"
 require('telescope').setup {
   defaults = {
     mappings = {
       i = {
-     },
+      },
     },
   },
+  pickers = {
+    buffers = {
+      mappings = {
+        i = {
+          ["<c-w>"] = actions.delete_buffer + actions.move_to_top,
+        }
+      }
+    }
+  }
 }
 
 -- Enable telescope fzf native, if installed
