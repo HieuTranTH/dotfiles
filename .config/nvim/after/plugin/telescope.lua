@@ -53,5 +53,26 @@ end, { desc = '[S]earch opened [B]uffers' })
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>st', require('telescope.builtin').git_files, { desc = '[S]earch git [T]racked files' })
+-- Find files from project git root with fallback
+-- We cache the results of "git rev-parse"
+-- Process creation is expensive in Windows, so this reduces latency
+local git_work_tree = {}
+local file_pickers_opts = function()
+  local opts = {}
+  local cwd = vim.fn.getcwd()
+  if git_work_tree[cwd] == nil then
+    -- :sub(0,-2) for removing the last newline character from the shell command output
+    git_work_tree[cwd] = vim.fn.system('git rev-parse --show-superproject-working-tree --show-toplevel | head -1'):sub(0,-2)
+  end
+  if not string.find(git_work_tree[cwd], '^fatal: not a git repository') then
+    opts = {
+      cwd = git_work_tree[cwd]
+    }
+  end
+  return opts
+end
+local find_files_from_project_git_root = function()
+  require("telescope.builtin").find_files(file_pickers_opts())
+end
+vim.keymap.set('n', '<leader>sf', find_files_from_project_git_root, { desc = '[S]earch [F]iles' })
