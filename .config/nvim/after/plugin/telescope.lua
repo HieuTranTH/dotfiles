@@ -1,15 +1,19 @@
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+-- https://github.com/nvim-telescope/telescope.nvim/wiki/Configuration-Recipes#change-directory
 local actions = require "telescope.actions"
 local action_layout = require("telescope.actions.layout")
 require('telescope').setup {
   defaults = {
     mappings = {
       n = {
-        ["<M-p>"] = action_layout.toggle_preview
+        ["<M-p>"] = action_layout.toggle_preview,
       },
       i = {
-        ["<M-p>"] = action_layout.toggle_preview
+        ["<M-p>"] = action_layout.toggle_preview,
+        -- for git_commits and git_bcommits
+        ["<C-s>"] = actions.cycle_previewers_next,
+        ["<C-a>"] = actions.cycle_previewers_prev,
       },
     },
   },
