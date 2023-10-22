@@ -283,7 +283,7 @@ function dotpull() {
 # Go to the top directory of a git repo, work with repo that have submodules
 function cdg() {
     local TOPLEVEL=$( git rev-parse --show-superproject-working-tree --show-toplevel | head -1 )
-    test -n "${TOPLEVEL}" && cd "${TOPLEVEL}"
+    test -d "${TOPLEVEL}" && cd "${TOPLEVEL}"
 }
 
 # Shortcut for quick development to remote with git
