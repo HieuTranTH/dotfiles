@@ -62,9 +62,9 @@ local file_pickers_opts = function()
   local cwd = vim.fn.getcwd()
   if git_work_tree[cwd] == nil then
     -- :sub(0,-2) for removing the last newline character from the shell command output
-    git_work_tree[cwd] = vim.fn.system('git rev-parse --show-superproject-working-tree --show-toplevel | head -1'):sub(0,-2)
+    git_work_tree[cwd] = vim.fn.system('git rev-parse --show-superproject-working-tree --show-toplevel 2> /dev/null | head -1'):sub(0,-2)
   end
-  if not string.find(git_work_tree[cwd], '^fatal: not a git repository') then
+  if git_work_tree[cwd] ~= '' then
     opts = {
       cwd = git_work_tree[cwd]
     }
