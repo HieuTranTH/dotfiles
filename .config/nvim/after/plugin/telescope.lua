@@ -60,7 +60,7 @@ vim.keymap.set('n', '<leader>st', require('telescope.builtin').git_files, { desc
 -- We cache the results of "git rev-parse"
 -- Process creation is expensive in Windows, so this reduces latency
 local git_work_tree = {}
-local file_pickers_opts = function()
+local file_pickers_project_opts = function(prompt)
   local opts = {}
   local cwd = vim.fn.getcwd()
   if git_work_tree[cwd] == nil then
@@ -69,17 +69,18 @@ local file_pickers_opts = function()
   end
   if git_work_tree[cwd] ~= '' then
     opts = {
-      cwd = git_work_tree[cwd]
+      cwd = git_work_tree[cwd],
+      prompt_title = prompt .. ' (Project)'
     }
   end
   return opts
 end
 local find_files_from_project_git_root = function()
-  require("telescope.builtin").find_files(file_pickers_opts())
+  require("telescope.builtin").find_files(file_pickers_project_opts('Find Files'))
 end
 vim.keymap.set('n', '<leader>sfp', find_files_from_project_git_root, { desc = '[S]earch [F]iles in [P]roject' })
 -- Live grep from project git root with fallback
 local live_grep_from_project_git_root = function()
-  require("telescope.builtin").live_grep(file_pickers_opts())
+  require("telescope.builtin").live_grep(file_pickers_project_opts('Live Grep'))
 end
 vim.keymap.set('n', '<leader>sgp', live_grep_from_project_git_root, { desc = '[S]earch by [G]rep in [P]roject' })
