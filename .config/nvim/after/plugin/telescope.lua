@@ -21,10 +21,31 @@ require('telescope').setup {
     buffers = {
       mappings = {
         i = {
+          ["<c-j>"] = function(prompt_bufnr)
+            local selection = require("telescope.actions.state").get_selected_entry()
+            local dir = vim.fn.fnamemodify(selection.filename, ":p:h")
+            -- Depending on what you want put `cd`, `lcd`, `tcd`
+            vim.cmd(string.format("silent cd %s", dir))
+            -- Hack to refresh the results pane
+            require("telescope.actions").close(prompt_bufnr)
+            require('telescope.builtin').buffers()
+          end,
           ["<c-w>"] = actions.delete_buffer + actions.move_to_top,
         }
       }
-    }
+    },
+    find_files = {
+      mappings = {
+        i = {
+          ["<c-j>"] = function(prompt_bufnr)
+            local selection = require("telescope.actions.state").get_selected_entry()
+            local dir = vim.fn.fnamemodify(selection.path, ":p:h")
+            -- Depending on what you want put `cd`, `lcd`, `tcd`
+            vim.cmd(string.format("silent cd %s", dir))
+          end
+        },
+      },
+    },
   }
 }
 
