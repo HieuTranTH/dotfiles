@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+
+source box.sh
+box "Generate Azure Devops workitem link"
+
+#@ usage: 
+#@ author: Hieu Tran
+#@ email : hieu.tran@upm.com
+
+PROGNAME=${0##*/}
+
+## Default values
+EXIT_FAILURE=1
+ORG="upmdevops"
+PROJECT="DDMO"
+PBI=
+CLIPBOARD=1
+
+
+function usage() {
+    echo -e "$PROGNAME - \n"
+    echo -e "usage: $PROGNAME [-c] [-o ORG] [-p PROJECT] [-h] [-?] ITEM_NUMBER\n"
+    echo -e "   -c: do not copy to clipboard."
+    echo -e "   -o: organization."
+    echo -e "   -p: project."
+    echo -e "   -h: Print this help message."
+    echo -e "   -?: Print this help message."
+}
+
+function die() {
+    echo "ERROR: $*" >&2
+    exit $EXIT_FAILURE
+}
+
+
+## List of options the program will accept;
+## those options that take arguments are followed by a colon
+OPTSTRING='co:p:h?'
+
+## The loop calls getopts until there are no more options on the command line
+## Each option is stored in $OPT, any option arguments are stored in OPTARG
+while getopts "$OPTSTRING" OPT
+do
+    case $OPT in
+        c)
+            CLIPBOARD=$(( CLIPBOARD - 1 ))
+            ;;
+        o)
+            ORG=$OPTARG ## $OPTARG contains the argument to the option
+            ;;
+        p)
+            PROJECT=$OPTARG ## $OPTARG contains the argument to the option
+            ;;
+        *)
+            usage >&2
+            exit $EXIT_FAILURE
+            ;;
+    esac
+done
+
+## Remove options from the command line
+## $OPTIND points to the next, unparsed argument
+shift "$(( OPTIND - 1 ))"
+
+if [ $# -eq "0" ]; then
+    die "Missing workitem number"
+else
+    PBI="$1"
+fi
+
+OUTPUT="https://dev.azure.com/${ORG}/${PROJECT}/_workitems/edit/${PBI}"
+echo "${OUTPUT}"
+
+if [ $CLIPBOARD -eq 1 ]; then
+    if which clip.exe &>/dev/null; then
+        CLIPBOARD="clip.exe"
+    elif which xclip &>/dev/null; then
+        CLIPBOARD="xclip -selection clipboard"
+    fi
+    echo "${OUTPUT}" | ${CLIPBOARD}
+    echo "Value is copied to clipboard."
+fi
