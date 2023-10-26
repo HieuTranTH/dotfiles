@@ -26,6 +26,7 @@ require('telescope').setup {
             local dir = vim.fn.fnamemodify(selection.filename, ":p:h")
             -- Depending on what you want put `cd`, `lcd`, `tcd`
             vim.cmd(string.format("silent cd %s", dir))
+            require("notify")(dir, nil, { title = "Change directory" })
             -- Hack to refresh the results pane
             require("telescope.actions").close(prompt_bufnr)
             require('telescope.builtin').buffers()
@@ -42,6 +43,7 @@ require('telescope').setup {
             local dir = vim.fn.fnamemodify(selection.path, ":p:h")
             -- Depending on what you want put `cd`, `lcd`, `tcd`
             vim.cmd(string.format("silent cd %s", dir))
+            require("notify")(dir, nil, { title = "Change directory" })
           end
         },
       },

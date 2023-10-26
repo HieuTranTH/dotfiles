@@ -197,6 +197,14 @@ require('lazy').setup({
 
   { 'mbbill/undotree' },
 
+  {
+    'rcarriga/nvim-notify',
+    opts = {
+      background_colour = "#000000",  -- default value from onedark colorscheme is missing
+      stages = "static",  -- the default "fade_in_slide_out" animation seems quite slow
+    }
+  },
+
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
   --       These are some example plugins that I've included in the kickstart repository.
   --       Uncomment any of the lines below to enable them.
