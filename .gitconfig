@@ -41,3 +41,7 @@
 	keepBackup = false
 [rebase]
 	autoStash = true
+
+# Custom gitconfig for directories
+[includeIf "gitdir:~/repos_public/"]
+	path = .gitconfig-github
