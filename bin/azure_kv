@@ -11,14 +11,14 @@ PROGNAME=${0##*/}
 
 ## Default values
 EXIT_FAILURE=1
-KEYVAULT="cdp-prod-snowflake-kv"
-# KEYVAULT="cdp-azure-ad-app-secrets"
-echo "Common kv(s): cdp-prod-snowflake-kv, cdp-azure-ad-app-secrets"
+COMMON_KEYVAULTS="$( dirname $0 )/azure_kv_common.csv"
+KEYVAULT="$( sed '2q;d' ${COMMON_KEYVAULTS} | cut -d',' -f1 )"
 TYPE="secret"
 
 function usage() {
     echo -e "$PROGNAME - Fuzzy find a secret in a Azure keyvault \n"
-    echo -e "usage: $PROGNAME [-h] [-?] [-n keyvault] [-t type]\n"
+    echo -e "usage: $PROGNAME [-h] [-?] [-c] [-n keyvault] [-t type]\n"
+    echo -e "   -c: Choose keyvault from the list of common ones."
     echo -e "   -n: Name of the keyvault."
     echo -e "   -t: Object type: [key,secret,certificate]."
     echo -e "   -h: Print this help message."
@@ -33,13 +33,24 @@ function die() {
 
 ## List of options the program will accept;
 ## those options that take arguments are followed by a colon
-OPTSTRING='n:t:h?'
+OPTSTRING='cn:t:h?'
 
 ## The loop calls getopts until there are no more options on the command line
 ## Each option is stored in $OPT, any option arguments are stored in OPTARG
 while getopts "$OPTSTRING" OPT
 do
     case $OPT in
+        c)
+            KEYVAULT=$( sed '1 d' ${COMMON_KEYVAULTS} | cut -d',' -f1 | \
+                fzf \
+                    --ansi \
+                    --reverse \
+                    --no-mouse \
+                    --height 80% \
+                    --preview-window=wrap \
+                    --preview "grep {} ${COMMON_KEYVAULTS} | cut -d',' -f2" )
+            [ -z "${KEYVAULT}" ] && die "Invalid keyvault"
+            ;;
         n)
             KEYVAULT=$OPTARG ## $OPTARG contains the argument to the option
             ;;
