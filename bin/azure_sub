@@ -46,7 +46,7 @@ done
 shift "$(( OPTIND - 1 ))"
 
 echo -n "Current subscription is: "
-az account show | jq '.name'
+az account show | jq '{name,user}'
 
 SUBSCRIPTION_LIST=$( az account list )
 SUBSCRIPTION_NAME=$( echo ${SUBSCRIPTION_LIST} | jq '.[].name' | \
