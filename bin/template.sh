@@ -7,7 +7,7 @@ box "abcdefgh"
 #@ author: Hieu Tran
 #@ email : hieu.tran@upm.com
 
-PROGNAME=${0##*/}
+readonly PROGNAME=${0##*/}
 
 ## Default values
 EXIT_FAILURE=1
