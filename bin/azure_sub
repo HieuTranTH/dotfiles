@@ -47,8 +47,9 @@ shift "$(( OPTIND - 1 ))"
 
 echo -n "Current subscription is: "
 az account show | jq '{name,user}'
+USERNAME="$( az account show | jq '.user.name' )"
 
-SUBSCRIPTION_LIST=$( az account list )
+SUBSCRIPTION_LIST=$( az account list | jq "[.[] | select(.user.name | contains(${USERNAME}))]")
 SUBSCRIPTION_NAME=$( echo ${SUBSCRIPTION_LIST} | jq '.[].name' | \
     fzf \
         --ansi \
