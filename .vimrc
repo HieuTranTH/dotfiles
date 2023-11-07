@@ -133,10 +133,8 @@ map <leader>n :set number! relativenumber!<CR>
 " colorcolumn)
 map <leader>s :set number! relativenumber! list!<CR>:let &cc = &cc == '' ? '72,80' : ''<CR>
 
-" Git blame current line
-nmap <leader>b :exe '!gitblame.sh -C' expand('%:p:h') 'blame -L' . line(".") . ',+1' '' expand('%:t')<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
-" Git blame visual selection
-vmap <leader>b <ESC>:let RANGE = line("'>") - line("'<") + 1<CR>:exe '!gitblame.sh -C' expand('%:p:h') 'blame -L' . line("'<") . ',+' . RANGE '' expand('%:t')<Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left><Left>
+" Open Git in vertical split
+map <leader>g :vertical rightbelow Git 
 
 " Toggling cursorline and cursorcolumn
 map <leader>c :set cursorline! cursorcolumn!<CR>
