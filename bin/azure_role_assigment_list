@@ -1,0 +1,105 @@
+#!/usr/bin/env bash
+
+source box.sh
+box "WIP"
+
+#@ usage: 
+#@ author: Hieu Tran
+#@ email : hieu.tran@upm.com
+
+readonly PROGNAME=${0##*/}
+
+## Default values
+EXIT_FAILURE=1
+VERBOSE=${VERBOSE:-0}
+ID= # email, Service Principal AppID or ObjectID
+SUBSCRIPTION=''
+
+function usage() {
+    echo -e "$PROGNAME - \n"
+    echo -e "usage: $PROGNAME [-s SUBSCRIPTION] [-h] [-?] ID\n"
+    echo -e "   -s: Subscription to list. Can be either dev|qa|prod alias or custom string."
+    echo -e "   -v: Verbose mode."
+    echo -e "   -h: Print this help message."
+    echo -e "   -?: Print this help message."
+}
+
+function die() {
+    echo "ERROR: $*" >&2
+    exit $EXIT_FAILURE
+}
+
+function log {
+    [ ${VERBOSE} -eq 0 ] && return 0
+    local readonly level="$1"
+    local readonly message="$2"
+    local readonly timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+    >&2 echo -e "${timestamp} [${level}] [$PROGNAME] ${message}"
+}
+
+function log_info {
+    local readonly message="$1"
+    log "INFO" "$message"
+}
+
+function log_warn {
+    local readonly message="$1"
+    log "WARN" "$message"
+}
+
+function log_error {
+    local readonly message="$1"
+    log "ERROR" "$message"
+}
+
+
+## List of options the program will accept;
+## those options that take arguments are followed by a colon
+OPTSTRING='s:vh?'
+
+## The loop calls getopts until there are no more options on the command line
+## Each option is stored in $OPT, any option arguments are stored in OPTARG
+while getopts "$OPTSTRING" OPT
+do
+    case $OPT in
+        s)
+            SUBSCRIPTION=$OPTARG ## $OPTARG contains the argument to the option
+            case "$SUBSCRIPTION" in
+                dev)
+                    SUBSCRIPTION="UPM CDP DEV"
+                    ;;
+                qa)
+                    SUBSCRIPTION="UPM CDP QA"
+                    ;;
+                prod)
+                    SUBSCRIPTION="UPM CDP PROD"
+                    ;;
+            esac
+            ;;
+        v)
+            VERBOSE=$(( VERBOSE + 1 ))
+            ;;
+        *)
+            usage >&2
+            exit $EXIT_FAILURE
+            ;;
+    esac
+done
+
+## Remove options from the command line
+## $OPTIND points to the next, unparsed argument
+shift "$(( OPTIND - 1 ))"
+
+ID="$1"
+
+COMMAND="az role assignment list --assignee $ID --all"
+if [ -n "$SUBSCRIPTION" ]; then
+    COMMAND="$COMMAND --subscription '$SUBSCRIPTION'"
+fi
+
+eval $COMMAND | jq '[.[] | {resourceGroup,roleDefinitionName,scope}]'
+
+# TODO: list apps that has role on this resource, scope:"This resource"
+
+# TODO: sort by types and count each type
+# TODO: sort by created date and count for each deployment (based on time)
