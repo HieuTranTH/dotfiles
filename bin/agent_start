@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+echo "========================================================================="
+echo "Start new ssh-agent or run old one, if still existing, in a new sub shell"
+echo "========================================================================="
+echo
+
+AGENT_FILE="$HOME/.ssh/current_agent.sh"
+if [ -f "$AGENT_FILE" ]; then
+    old_agent_pid=$( sed -n '3s/^echo Agent pid //;3s/;$//;3p' "$AGENT_FILE" )
+fi
+
+if [ -n "$old_agent_pid" ] && ps -p "$old_agent_pid" | grep -q "ssh-agent"; then
+    echo "Old agent is still running. Connecting back now."
+    . "$AGENT_FILE"
+else
+    echo "Old agent is missing. Creating new agent..."
+    ssh-agent > "$AGENT_FILE"
+    . "$AGENT_FILE"
+fi
+
+ssh-add -l | grep $HOME/.ssh/id_rsa || ssh-add $HOME/.ssh/hieu.tran_upm_azure-devops/id_rsa
+
+# Continue working in a subshell that has SSH_AGENT_* environment variables
+# set, otherwise the script exits and everything above will be meaningless.
+exec bash
