@@ -131,7 +131,7 @@ map <leader>n :set number! relativenumber!<CR>
 
 " Toggling text selecting mode with mouse (toggle line number, listchar, and
 " colorcolumn)
-map <leader>s :set number! relativenumber! list!<CR>:let &cc = &cc == '' ? '72,80' : ''<CR>
+map <leader>z :set number! relativenumber! list!<CR>:let &cc = &cc == '' ? '72,80' : ''<CR>
 
 " Open Git in vertical split
 map <leader>g :vertical rightbelow Git 
@@ -155,19 +155,20 @@ map <leader>p :checkpath<CR>
 "  \ 'ctrl-t': 'tab split',
 "  \ 'ctrl-x': 'split',
 "  \ 'ctrl-v': 'vsplit' }
-nmap <leader>fo :Files<CR>
-nmap <leader>fe :GFiles<CR>
-nmap <leader>fb :Buffers<CR>
-nmap <leader>fs :GFiles?<CR>
-nmap <leader>fg :if executable('rg') \| execute "Rg" \| else \| execute "RGgrep" \| endif<CR>
-nmap <leader>ff :Lines<CR>
-nmap <leader>f/ :BLines<CR>
-nmap <leader>ft :Tags<CR>
-nmap <leader>fc :Commands<CR>
-nmap <leader>fm :Marks<CR>
-nmap <leader>fw :Windows<CR>
-nmap <leader>fl :Locate 
-nmap <leader>fh :History<CR>
+nmap <leader>? :History<CR>
+nmap <leader>b :Buffers<CR>
+nmap <leader>sh :Helptags<CR>
+nmap <leader>/ :BLines<CR>
+nmap <leader>sb :Lines<CR>
+nmap <leader>sf :Files<CR>
+nmap <leader>sfp :GFiles<CR>
+nmap <leader>sfs :GFiles?<CR>
+nmap <leader>sg :if executable('rg') \| execute "Rg" \| else \| execute "RGgrep" \| endif<CR>
+nmap <leader>st :Tags<CR>
+nmap <leader>sc :Commands<CR>
+nmap <leader>sm :Marks<CR>
+nmap <leader>sw :Windows<CR>
+nmap <leader>sl :Locate 
 let g:fzf_buffers_jump = 1
 
 " Visualize tabs and newlines
