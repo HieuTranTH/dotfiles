@@ -187,6 +187,22 @@ require('lazy').setup({
     end,
   },
 
+  {
+    'junegunn/fzf.vim',
+    dependencies = {
+      'junegunn/fzf',
+      build = ":call fzf#install()",
+    },
+    init = function ()
+      vim.g.fzf_vim = {
+        command_prefix = 'FZF',
+        preview_window = { 'right,50%,<70(up,70%)', 'alt-p' },
+        buffers_jump = 1
+      }
+      vim.env.FZF_DEFAULT_OPTS = vim.env.FZF_DEFAULT_OPTS.." --bind=ctrl-d:preview-half-page-down --bind=ctrl-u:preview-half-page-up"
+    end,
+  },
+
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {

@@ -7,7 +7,9 @@ require('telescope').setup {
   defaults = {
     layout_strategy = 'flex',
     layout_config = {
-      flip_columns = 200,
+      flex = {
+        flip_columns = 200,
+      }
     },
     mappings = {
       n = {
@@ -59,19 +61,12 @@ require('telescope').setup {
 pcall(require('telescope').load_extension, 'fzf')
 
 -- See `:help telescope.builtin`
+vim.keymap.set('n', '<leader>sp', require('telescope.builtin').builtin, { desc = '[S]earch all Telescope [P]ickers' })
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers, { desc = 'Find existing [B]uffers' })
-
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
-vim.keymap.set('n', '<leader>/', function()
-  -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
-    winblend = 10,
-    previewer = false,
-  })
-end, { desc = '[/] Fuzzily search in current buffer' })
+vim.keymap.set('n', '<leader>/', require('telescope.builtin').current_buffer_fuzzy_find, { desc = '[/] Fuzzily search in current buffer' })
 vim.keymap.set('n', '<leader>sb', function()
     require('telescope.builtin').live_grep {
       grep_open_files=true
@@ -111,3 +106,8 @@ local live_grep_from_project_git_root = function()
   require("telescope.builtin").live_grep(file_pickers_project_opts('Live Grep'))
 end
 vim.keymap.set('n', '<leader>sgp', live_grep_from_project_git_root, { desc = '[S]earch by [G]rep in [P]roject' })
+
+
+-- Prefer these commands in fzf.vim over Telescope
+vim.keymap.set('n', '<leader>b', ':FZFBuffers<CR>', { desc = 'Find [B]uffer' })
+vim.keymap.set('n', '<leader>w', ':FZFWindows<CR>', { desc = 'Find [W]indow' })
