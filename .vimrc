@@ -11,7 +11,7 @@ filetype off
 " - Avoid using standard Vim directory names like 'plugin'
 call plug#begin('~/.vim/plugged')
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim', { 'commit': 'dc71692' }
+Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'hashivim/vim-terraform'
 " Initialize plugin system
@@ -151,25 +151,33 @@ map <leader>p :checkpath<CR>
 " FuzzyFinder binds
 " https://github.com/junegunn/fzf.vim#commands
 " most stuff are defined in ~/.vim/plugged/fzf.vim/autoload/fzf/vim.vim
-" let s:default_action = {
-"  \ 'ctrl-t': 'tab split',
-"  \ 'ctrl-x': 'split',
-"  \ 'ctrl-v': 'vsplit' }
-nmap <leader>? :History<CR>
-nmap <leader>b :Buffers<CR>
-nmap <leader>sh :Helptags<CR>
-nmap <leader>/ :BLines<CR>
-nmap <leader>sb :Lines<CR>
-nmap <leader>sf :Files<CR>
-nmap <leader>sfp :GFiles<CR>
-nmap <leader>sfs :GFiles?<CR>
-nmap <leader>sg :if executable('rg') \| execute "Rg" \| else \| execute "RGgrep" \| endif<CR>
-nmap <leader>st :Tags<CR>
-nmap <leader>sc :Commands<CR>
-nmap <leader>sm :Marks<CR>
-nmap <leader>sw :Windows<CR>
-nmap <leader>sl :Locate 
-let g:fzf_buffers_jump = 1
+" This is the default extra key bindings
+" let g:fzf_action = {
+"   \ 'ctrl-t': 'tab split',
+"   \ 'ctrl-x': 'split',
+"   \ 'ctrl-v': 'vsplit' }
+" Initialize configuration dictionary
+let g:fzf_vim = {}
+let g:fzf_vim.command_prefix = 'FZF'
+let g:fzf_vim.buffers_jump = 1
+let g:fzf_vim.preview_window = ['right,50%,<70(up,70%)', 'alt-p']
+" Append to the environment variable
+let $FZF_DEFAULT_OPTS .= " --bind=ctrl-d:preview-half-page-down --bind=ctrl-u:preview-half-page-up"
+" List all fzf commands
+nmap <leader>sp :FZFCommands<CR>fzf 
+nmap <leader>? :FZFHistory<CR>
+nmap <leader>b :FZFBuffers<CR>
+nmap <leader>w :FZFWindows<CR>
+nmap <leader>sh :FZFHelptags<CR>
+" A bit shame that [B]Lines does not support preview
+" https://github.com/junegunn/fzf.vim/issues/374
+nmap <leader>/ :FZFBLines<CR>
+nmap <leader>sb :FZFLines<CR>
+command! -bang -nargs=* FZFGrep call fzf#vim#grep("grep --line-number -R --color=always --ignore-case -- ".shellescape(<q-args>), 1, fzf#vim#with_preview(), <bang>0)',
+nmap <leader>sg :if executable('rg') \| execute "FZFRg" \| else \| execute "FZFGrep" \| endif<CR>
+nmap <leader>sf :FZFFiles<CR>
+nmap <leader>st :FZFGFiles<CR>
+nmap <leader>sl :FZFLocate 
 
 " Visualize tabs and newlines
 set listchars=tab:▸\ ,eol:¬
