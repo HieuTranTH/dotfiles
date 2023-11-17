@@ -97,3 +97,7 @@ vim.keymap.set('i', '<C-e>', '<Esc>$i')
 
 -- Escape to Normal mode from Terminal mode
 vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = "Escape Terminal mode" })
+
+-- [[ Snippets ]]
+-- Bash parameter expansion
+vim.keymap.set('i', '<F10>', '"${}"<Left><Left>', { silent = true })
