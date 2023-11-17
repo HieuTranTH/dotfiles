@@ -97,6 +97,15 @@ set ignorecase
 set smartcase
 set showmatch
 map <leader>th :noh<cr> " Toggle search highlight
+" Half page scrolls stay in middle, preventing disorienting
+nnoremap <C-u> <C-u>zz
+nnoremap <C-d> <C-d>zz
+" Seach jumps also stay in middle
+nnoremap n nzz
+nnoremap N Nzz
+" Fix * (Keep the cursor position, don't move to next match)
+nnoremap * *Nzz
+
 
 " Enable mouse
 set mouse=a
