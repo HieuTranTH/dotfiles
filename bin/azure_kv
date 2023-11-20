@@ -72,6 +72,8 @@ done
 ## $OPTIND points to the next, unparsed argument
 shift "$(( OPTIND - 1 ))"
 
+echo "KEYVAULT: $KEYVAULT"
+
 NAME=$( az keyvault "${TYPE}" list --vault-name "${KEYVAULT}" | jq -r '.[] | .name' | \
     fzf \
         --ansi \
