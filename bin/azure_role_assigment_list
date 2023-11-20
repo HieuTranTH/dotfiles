@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 source box.sh
-box "WIP"
+box "List role assignments associated with an account"
 
 #@ usage: 
 #@ author: Hieu Tran
