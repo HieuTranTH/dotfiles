@@ -304,7 +304,11 @@ function gitdelb() {
     local BRANCH=$( git branch --show-current )
     if [ -n "${BRANCH}" ]; then
         git push origin --delete "${BRANCH}"
-        git checkout origin/master &>/dev/null || git checkout origin/main
+        if [ $# -gt 0 ]; then
+            git checkout $1
+        else
+            git checkout origin/master &>/dev/null || git checkout origin/main
+        fi
         git branch -D "${BRANCH}"
     fi
 }
