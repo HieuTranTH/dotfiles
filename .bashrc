@@ -195,7 +195,7 @@ export FZF_DEFAULT_OPTS="--color='bg+:240'"
 
 # cd to a sub-directory right under CWD
 function cd1() {
-    LIST_LS=$( ls -laL | grep "^d" )
+    LIST_LS=$( ls -lAL | grep "^d" )
     LIST_DIRS=$( dirs -l | sed 's/ /\n/g' | uniq | sed 's/^/dirs , , , , , , , /g' )
     LIST="${LIST_LS}\n${LIST_DIRS}"
     DEST=$( echo -e "${LIST}"  | fzf --height 20% |  awk '{ print $9 }' )
