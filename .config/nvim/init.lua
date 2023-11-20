@@ -199,6 +199,12 @@ require('lazy').setup({
         preview_window = { 'right,50%,<70(up,70%)', 'alt-p' },
         buffers_jump = 1
       }
+      vim.g.fzf_action = {
+        ['ctrl-o'] = 'edit',
+        ['ctrl-t'] = 'tab split',
+        ['ctrl-x'] = 'split',
+        ['ctrl-v'] = 'vsplit',
+      }
       vim.env.FZF_DEFAULT_OPTS = vim.env.FZF_DEFAULT_OPTS.." --bind=ctrl-d:preview-half-page-down --bind=ctrl-u:preview-half-page-up"
     end,
   },
