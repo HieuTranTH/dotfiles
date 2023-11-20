@@ -160,11 +160,11 @@ map <leader>p :checkpath<CR>
 " FuzzyFinder binds
 " https://github.com/junegunn/fzf.vim#commands
 " most stuff are defined in ~/.vim/plugged/fzf.vim/autoload/fzf/vim.vim
-" This is the default extra key bindings
-" let g:fzf_action = {
-"   \ 'ctrl-t': 'tab split',
-"   \ 'ctrl-x': 'split',
-"   \ 'ctrl-v': 'vsplit' }
+let g:fzf_action = {
+  \ 'ctrl-o': 'edit',
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-x': 'split',
+  \ 'ctrl-v': 'vsplit' }
 " Initialize configuration dictionary
 let g:fzf_vim = {}
 let g:fzf_vim.command_prefix = 'FZF'
