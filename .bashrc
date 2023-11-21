@@ -303,7 +303,8 @@ function gitacp() {
 function gitdelb() {
     local BRANCH=$( git branch --show-current )
     if [ -n "${BRANCH}" ]; then
-        git push origin --delete "${BRANCH}"
+        git ls-remote --exit-code --heads origin refs/heads/${BRANCH} && \
+            git push origin --delete "${BRANCH}"
         if [ $# -gt 0 ]; then
             git checkout $1
         else
