@@ -101,3 +101,6 @@ mason_lspconfig.setup_handlers {
     }
   end,
 }
+
+-- Disable LSP logging in ~/.local/state/nvim/lsp.log
+vim.lsp.set_log_level("off")
