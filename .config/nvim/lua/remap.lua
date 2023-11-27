@@ -70,6 +70,9 @@ vim.keymap.set('n', '<leader>th', ':noh<CR>', { desc = "[T]oggle search [H]ighli
 -- Zenmode
 vim.keymap.set('n', '<leader>o', ':ZenMode<CR>:<Esc>', { desc = "Zenmode", silent = true })
 
+-- Set working directory to the current file
+vim.keymap.set('n', '<leader>cd', ':cd %:p:h<CR>', { desc = "[C]hange [D]irectory", silent = true })
+
 -- Bubble multiple lines
 vim.keymap.set('n', '<leader><Up>', ':m .-2<CR>', { desc = "Move line move up", silent = true })
 vim.keymap.set('n', '<leader><Down>', ':m .+1<CR>', { desc = "Move line move down", silent = true })
