@@ -299,7 +299,7 @@ function gitacp() {
     git push -f origin HEAD
 }
 
-# Shortcut for delete the current branch both local and remote
+# Shortcut for deleting the current branch both local and remote
 function gitdelb() {
     local BRANCH=$( git branch --show-current )
     if [ -n "${BRANCH}" ]; then
@@ -312,6 +312,12 @@ function gitdelb() {
         fi
         git branch -D "${BRANCH}"
     fi
+}
+
+# Shortcut for creating empty files and add them to git staging
+function gittouch() {
+    touch $*
+    git add $*
 }
 
 # Let shell change directory when ranger exits
