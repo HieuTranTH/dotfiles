@@ -16,7 +16,7 @@ FILENAME=
 
 function usage() {
     echo -e "$PROGNAME - \n"
-    echo -e "usage: $PROGNAME [-h] [-?]\n"
+    echo -e "usage: $PROGNAME [-v] [-h] [-?]\n"
     echo -e "   -v: Verbose mode."
     echo -e "   -h: Print this help message."
     echo -e "   -?: Print this help message."
