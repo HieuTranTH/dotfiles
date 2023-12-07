@@ -360,6 +360,14 @@ function act_venv() {
     [ -e "${VENV}/bin/activate" ] && source "${VENV}/bin/activate"
 }
 
+# Temporary fix for
+# https://github.com/microsoft/WSL/issues/8022
+# https://github.com/golang/go/issues/51127#issuecomment-1035018244
+# sometimes terraform plan stuck reading the state of resoures on Azure
+function terraform_dnsfix() {
+    sudo bash -c "sed -i '/management.azure.com/d' /etc/hosts" ; sudo bash -c 'echo "$(dig management.azure.com | grep -E -o "([0-9]{1,3}[\.]){3}[0-9]{1,3}$") management.azure.com" >> /etc/hosts'
+}
+
 # Give colors for man pages
 # https://www.tecmint.com/view-colored-man-pages-in-linux/
 export LESS_TERMCAP_mb=$'\e[1;32m'
