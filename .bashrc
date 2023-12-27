@@ -356,8 +356,19 @@ function nvim() {
 
 # Activate a default Python Virtual Environment
 function act_venv() {
-    VENV=$( ls -d /home/hieu/dev/python_venv/*/ | fzf --height 20% )
-    [ -e "${VENV}/bin/activate" ] && source "${VENV}/bin/activate"
+    # Create new venv
+    if [ "$1" == "-n" ]; then
+        [ "$#" -lt 2 ] && return 1
+        cd ~/dev/python_venv
+        VENV="$2"
+        python3 -m venv "$VENV"
+        [ -e "${VENV}/bin/activate" ] && source "${VENV}/bin/activate"
+        pip install --upgrade pip wheel
+        cd "$VENV"
+    else
+        VENV=$( ls -d /home/hieu/dev/python_venv/*/ | fzf --height 20% )
+        [ -e "${VENV}/bin/activate" ] && source "${VENV}/bin/activate"
+    fi
 }
 
 # Temporary fix for
