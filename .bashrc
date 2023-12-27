@@ -119,6 +119,7 @@ fi
 ###############################################################################
 # Start of Hieu's custom Configurations
 ###############################################################################
+PATH=~/.local/bin:$PATH
 
 # Customization for GNU Screen to use dynamic title and different screenrc files
 if [ -f ~/.bashrc_extra/bashrc_screen.sh ]; then
@@ -195,11 +196,9 @@ export FZF_DEFAULT_OPTS="--color='bg+:240'"
 
 # cd to a sub-directory right under CWD
 function cd1() {
-    LIST_LS=$( ls -lAL | grep "^d" )
-    LIST_DIRS=$( dirs -l | sed 's/ /\n/g' | uniq | sed 's/^/dirs , , , , , , , /g' )
-    LIST="${LIST_LS}\n${LIST_DIRS}"
+    LIST=$( ls -lAL | grep "^d" )
     DEST=$( echo -e "${LIST}"  | fzf --height 20% |  awk '{ print $9 }' )
-    [ -n "$DEST" ] && cd $DEST && echo "$PWD:" && ls -A
+    [ -n "$DEST" ] && z $DEST && echo "$PWD:" && ls -A
 }
 # Bind Alt-1 to execute cd1()
 bind -m emacs-standard '"\e1": "cd1\n"'
@@ -397,6 +396,11 @@ PS1="[\j]$PS1"
 
 # Terraform completion
 complete -C ~/bin/terraform terraform
+
+# https://github.com/ajeetdsouza/zoxide
+# tab completion
+# when paths are similar, use <Space>+<Tab> to resolve
+eval "$(zoxide init bash)"
 ###############################################################################
 # End of Hieu's custom Configurations
 ###############################################################################
