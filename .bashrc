@@ -171,7 +171,7 @@ if [ $( hostname ) = "AZPW066EH1" ]; then
     alias cdd='TEMP_PWD=$PWD; cd ~/dev; cd1; OLDPWD=$TEMP_PWD'
 
     # Edit *_commands files with vim
-    alias vic='command vim -p ~/binb/*_commands -c "tabdo set noexpandtab autoindent formatoptions-=q" -c "3tabnext"'
+    alias vic='command nvim -p ~/binb/*_commands -c "tabdo set noexpandtab autoindent formatoptions-=q" -c "3tabnext"'
 fi
 # End of Hostname WPF1Y2XET specific ############################
 
