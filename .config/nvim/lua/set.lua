@@ -1,6 +1,9 @@
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
+-- Set the title of the terminal emulator (e.g. Windows Terminal)
+vim.opt.title = true
+
 -- Always block cursor
 vim.o.guicursor = "a:block"
 
