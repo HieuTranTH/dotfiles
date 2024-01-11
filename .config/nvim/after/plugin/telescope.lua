@@ -20,6 +20,8 @@ require('telescope').setup {
         -- for git_commits and git_bcommits
         ["<C-s>"] = actions.cycle_previewers_next,
         ["<C-a>"] = actions.cycle_previewers_prev,
+        -- "zz" after selecting
+        ["<CR>"] = actions.select_default + actions.center,
       },
     },
   },
