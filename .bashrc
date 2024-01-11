@@ -310,6 +310,8 @@ function gitdelb() {
             git checkout origin/master &>/dev/null || git checkout origin/main
         fi
         git branch -D "${BRANCH}"
+    else
+        git checkout origin/master &>/dev/null || git checkout origin/main
     fi
 }
 
