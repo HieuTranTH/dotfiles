@@ -67,10 +67,7 @@ require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
   -- Git related plugins
-  {
-    'tpope/vim-fugitive',
-    cmd = 'Git'
-  },
+  'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
   -- Detect tabstop and shiftwidth automatically
@@ -92,7 +89,6 @@ require('lazy').setup({
       -- Additional lua configuration, makes nvim stuff amazing!
       'folke/neodev.nvim',
     },
-    event = { 'BufReadPre', 'BufNewFile' },
   },
 
   { -- Autocompletion
@@ -103,7 +99,6 @@ require('lazy').setup({
       'saadparwaiz1/cmp_luasnip',
       'hrsh7th/cmp-buffer'
     },
-    event = 'InsertEnter',
   },
 
   -- Useful plugin to show you pending keybinds.
@@ -117,7 +112,6 @@ require('lazy').setup({
         v = { "j", "k" },
       },
     },
-    event = 'VeryLazy',
   },
 
   { -- Adds git releated signs to the gutter, as well as utilities for managing changes
@@ -132,8 +126,6 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
     },
-    cmd = 'Gitsigns',
-    event = { 'BufReadPre', 'BufNewFile' },
   },
 
   { -- Theme inspired by Atom
@@ -146,7 +138,6 @@ require('lazy').setup({
       }
       require('onedark').load()
     end,
-    lazy = false,
   },
 
   { -- Set lualine as statusline
@@ -160,7 +151,6 @@ require('lazy').setup({
         section_separators = '',
       },
     },
-    event = { 'BufReadPre', 'BufNewFile' },
   },
 
   { -- Add indentation guides even on blank lines
@@ -176,38 +166,25 @@ require('lazy').setup({
         }
       }
     },
-    event = { 'BufReadPre', 'BufNewFile' },
   },
 
   -- "gc" to comment visual regions/lines
-  {
-    'numToStr/Comment.nvim', opts = {},
-    keys = {
-      { 'gcc', mode = { 'n', }, function() require('Comment').toggle() end, desc = "Comment" },
-      { 'gc',  mode = { 'v' },  function() require('Comment').toggle() end, desc = "Comment" },
-    },
-  },
+  { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
+  { 'nvim-telescope/telescope.nvim', version = '*', dependencies = { 'nvim-lua/plenary.nvim' } },
+
+  -- Fuzzy Finder Algorithm which requires local dependencies to be built.
+  -- Only load if `make` is available. Make sure you have the system
+  -- requirements installed.
   {
-    'nvim-telescope/telescope.nvim',
-    version = '*',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-      {
-        -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-        -- Only load if `make` is available. Make sure you have the system
-        -- requirements installed.
-        'nvim-telescope/telescope-fzf-native.nvim',
-        -- NOTE: If you are having trouble with this installation,
-        --       refer to the README for telescope-fzf-native for more instructions.
-        build = 'make',
-        cond = function()
-          return vim.fn.executable 'make' == 1
-        end,
-      },
-    },
-    cmd = 'Telescope',
+    'nvim-telescope/telescope-fzf-native.nvim',
+    -- NOTE: If you are having trouble with this installation,
+    --       refer to the README for telescope-fzf-native for more instructions.
+    build = 'make',
+    cond = function()
+      return vim.fn.executable 'make' == 1
+    end,
   },
 
   {
@@ -238,33 +215,24 @@ require('lazy').setup({
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     build = ":TSUpdate",
-    event = { 'BufReadPre', 'BufNewFile' },
   },
 
   -- Keep context at the top line when scrolling
-  {
-    'nvim-treesitter/nvim-treesitter-context',
-    event = { 'BufReadPre', 'BufNewFile' },
-  },
+  { 'nvim-treesitter/nvim-treesitter-context' },
 
   {
     'folke/zen-mode.nvim',
     cmd = { 'ZenMode' },
   },
 
-  {
-    'mbbill/undotree',
-    cmd = { 'UndoTreeToggle' },
-  },
+  { 'mbbill/undotree' },
 
   {
     'rcarriga/nvim-notify',
     opts = {
       background_colour = "#000000",  -- default value from onedark colorscheme is missing
       stages = "static",  -- the default "fade_in_slide_out" animation seems quite slow
-    },
-    event = 'VeryLazy',
-    cmd = 'Notifications',
+    }
   },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
