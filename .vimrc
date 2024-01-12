@@ -274,6 +274,9 @@ set wildmenu
 set wildmenu wildmode=longest,list,full
 " set wildmenu wildmode=longest:full,full
 
+" Enable interactive shell to access functions in .bashrc
+set shellcmdflag=-ic
+
 " Customized statusline
 function! GitBranch()
   return system("git rev-parse --abbrev-ref HEAD 2>/dev/null | tr -d '\n'")

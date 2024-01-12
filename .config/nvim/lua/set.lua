@@ -83,6 +83,9 @@ vim.o.wildmode = 'longest,list,full'
 -- Spell check languages
 vim.opt.spelllang = { 'en_us' }
 
+-- Enable interactive shell to access functions in .bashrc
+vim.o.shellcmdflag='-ic'
+
 -- Highlight trailing whitespaces in red, neovim no longer distinguish between cterm and gui
 vim.api.nvim_set_hl(0, 'ExtraWhitespace', { bg = 'Red' })
 -- :match command only applies to the current window. So any :split or :tabe
