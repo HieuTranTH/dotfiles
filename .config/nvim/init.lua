@@ -94,15 +94,19 @@ require('lazy').setup({
   { -- Autocompletion
     'hrsh7th/nvim-cmp',
     dependencies = {
-      'L3MON4D3/LuaSnip',
-      'saadparwaiz1/cmp_luasnip',
-      'hrsh7th/cmp-buffer',
-      'hrsh7th/cmp-path',
-      'hrsh7th/cmp-cmdline',
-      'hrsh7th/cmp-nvim-lsp',
-      'hrsh7th/cmp-nvim-lsp-signature-help',
-      'hrsh7th/cmp-nvim-lua',
+      -- https://github.com/hrsh7th/nvim-cmp/wiki/List-of-sources
+      -- Modify after/plugin/nvim-cmp.lua:23 if changing this list
+      'L3MON4D3/LuaSnip',                         -- luasnip
+      'saadparwaiz1/cmp_luasnip',                 -- luasnip
+      'hrsh7th/cmp-buffer',                       -- buffer
+      'hrsh7th/cmp-nvim-lsp',                     -- nvim_lsp
+      'hrsh7th/cmp-nvim-lsp-signature-help',      -- nvim_lsp_signature_help
+      'hrsh7th/cmp-path',                         -- path
+      'hrsh7th/cmp-cmdline',                      -- cmdline
+      'hrsh7th/cmp-nvim-lua',                     -- nvim_lua
     },
+    -- FIXME: after/plugin is not compatible
+    -- event = { "InsertEnter", "CmdlineEnter" },
   },
 
   -- Useful plugin to show you pending keybinds.
