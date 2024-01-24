@@ -234,10 +234,7 @@ require('lazy').setup({
 
   {
     'folke/zen-mode.nvim',
-    dependencies = {
-      'folke/twilight.nvim',
-    },
-    cmd = { 'ZenMode', 'Twilight' },
+    cmd = { 'ZenMode', },
   },
 
   { 'mbbill/undotree' },
