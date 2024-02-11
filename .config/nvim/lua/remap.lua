@@ -26,6 +26,7 @@ vim.keymap.set('n', '*', '*Nzz')
 -- Keep cursor at the middle
 vim.keymap.set('n', 'g,', 'g,zz')
 vim.keymap.set('n', 'g;', 'g;zz')
+vim.keymap.set('n', "''", "''zz")
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
