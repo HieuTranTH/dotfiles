@@ -62,6 +62,7 @@ OPTSTRING='s:vh?'
 while getopts "$OPTSTRING" OPT
 do
     case $OPT in
+        # TODO: if -s is not used, then check against all subscriptions
         s)
             SUBSCRIPTION=$OPTARG ## $OPTARG contains the argument to the option
             case "$SUBSCRIPTION" in
@@ -73,6 +74,9 @@ do
                     ;;
                 prod)
                     SUBSCRIPTION="UPM CDP PROD"
+                    ;;
+                common)
+                    SUBSCRIPTION="UPM CDP COMMON"
                     ;;
             esac
             ;;
@@ -90,6 +94,7 @@ done
 ## $OPTIND points to the next, unparsed argument
 shift "$(( OPTIND - 1 ))"
 
+# TODO: use current logged in user if not specified ID
 ID="$1"
 
 COMMAND="az role assignment list --assignee $ID --all"
