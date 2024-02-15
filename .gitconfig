@@ -10,6 +10,7 @@
 	changelog = log --pretty=format:\"%h%x09%an%x09%ad%x09%s\"
 	cchangelog = log --pretty=format:\"%C(yellow)%h%C(blue)%x09%an%C(red)%x09%ad%Creset%x09%s\"
 	lograw = log --pretty=format:'- %s%n%b'
+	rmu = "!git remote update --prune && git fetch --prune-tags -f"
 
 # Added color
 # https://nathanhoad.net/how-to-colours-in-git/
