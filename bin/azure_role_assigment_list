@@ -14,11 +14,14 @@ EXIT_FAILURE=1
 VERBOSE=${VERBOSE:-0}
 ID= # email, Service Principal AppID or ObjectID
 SUBSCRIPTION=''
+SUBSCRIPTIONS_LIST='dev test qa prod common'
+ALL_SUBSCRIPTIONS=0
 
 function usage() {
     echo -e "$PROGNAME - \n"
     echo -e "usage: $PROGNAME [-s SUBSCRIPTION] [-h] [-?] ID\n"
-    echo -e "   -s: Subscription to list. Can be either dev|qa|prod alias or custom string."
+    echo -e "   -s: Subscription to list. Can be either dev|test|qa|prod|common alias or custom string."
+    echo -e "   -a: List in all subscriptions"
     echo -e "   -v: Verbose mode."
     echo -e "   -h: Print this help message."
     echo -e "   -?: Print this help message."
@@ -55,7 +58,7 @@ function log_error {
 
 ## List of options the program will accept;
 ## those options that take arguments are followed by a colon
-OPTSTRING='s:vh?'
+OPTSTRING='as:vh?'
 
 ## The loop calls getopts until there are no more options on the command line
 ## Each option is stored in $OPT, any option arguments are stored in OPTARG
@@ -63,11 +66,17 @@ while getopts "$OPTSTRING" OPT
 do
     case $OPT in
         # TODO: if -s is not used, then check against all subscriptions
+        a)
+            ALL_SUBSCRIPTIONS=$(( ALL_SUBSCRIPTIONS + 1 ))
+            ;;
         s)
             SUBSCRIPTION=$OPTARG ## $OPTARG contains the argument to the option
             case "$SUBSCRIPTION" in
                 dev)
                     SUBSCRIPTION="UPM CDP DEV"
+                    ;;
+                test)
+                    SUBSCRIPTION="UPM CDP TEST"
                     ;;
                 qa)
                     SUBSCRIPTION="UPM CDP QA"
@@ -98,7 +107,18 @@ shift "$(( OPTIND - 1 ))"
 ID="$1"
 
 COMMAND="az role assignment list --assignee $ID --all"
+
+if [ $ALL_SUBSCRIPTIONS -gt 0 ]; then
+    "$0" -s dev "$ID"
+    "$0" -s test "$ID"
+    "$0" -s qa "$ID"
+    "$0" -s prod "$ID"
+    "$0" -s common "$ID"
+    exit 0
+fi
+
 if [ -n "$SUBSCRIPTION" ]; then
+    box "$SUBSCRIPTION"
     COMMAND="$COMMAND --subscription '$SUBSCRIPTION'"
 fi
 
