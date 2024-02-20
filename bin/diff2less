@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
 #set -x
 
-echo "======================================================"
-echo "Pass diff output to less for easy reading through pipe"
-echo "======================================================"
-echo
+# echo "======================================================"
+# echo "Pass diff output to less for easy reading through pipe"
+# echo "======================================================"
+# echo
 #@ usage: diff2less [args...] <file1> <file2>
 
 diff -u --color=always $@ 2>&1 | less -r
