@@ -28,6 +28,17 @@ vim.keymap.set('n', 'g,', 'g,zz')
 vim.keymap.set('n', 'g;', 'g;zz')
 vim.keymap.set('n', "''", "''zz")
 
+-- Use 0 register for these commands instead of default " register
+-- Avoiding unexpected behavior when you paste afterward
+vim.keymap.set('n',        'cc','"0cc')
+vim.keymap.set({'n', 'v'}, 'c', '"0c')
+vim.keymap.set({'n', 'v'}, 'C', '"0C')
+vim.keymap.set({'n', 'v'}, 's', '"0s')
+vim.keymap.set({'n', 'v'}, 'S', '"0S')
+
+-- Paste over a visual still keep the last copy text in default register
+vim.keymap.set('x', '<leader>p', [["_dP]], { desc = "[P]aste in visual keep unnamed register" })
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
@@ -85,9 +96,6 @@ vim.keymap.set('v', '<leader><Down>', ":m '>+1<CR>gv=gv", { desc = "Bubbling lin
 
 -- Join lines
 vim.keymap.set({'n', 'v'}, 'J', 'J_', { desc = "Join lines but keep the cursor at front" })
-
--- Paste over a visual still keep the last copy text in default register
-vim.keymap.set('x', '<leader>p', [["_dP]], { desc = "[P]aste in visual keep unnamed register" })
 
 -- Mappings for GNU like (bash, emacs,...) readline navigations in Command Mode
 vim.keymap.set('c', '<C-a>', '<Home>')
