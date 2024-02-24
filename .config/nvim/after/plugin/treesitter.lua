@@ -7,6 +7,8 @@ require('nvim-treesitter.configs').setup {
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
 
+  autotag = { enable = true },  -- windwp/nvim-ts-autotag
+  endwise = { enable = true },  -- RRethy/nvim-treesitter-endwise
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
   incremental_selection = {
