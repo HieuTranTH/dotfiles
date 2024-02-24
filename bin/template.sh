@@ -1,8 +1,5 @@
 #!/usr/bin/env bash
 
-source box.sh
-box "abcdefgh"
-
 #@ usage: 
 #@ author: Hieu Tran
 #@ email : hieu.tran@upm.com
@@ -13,6 +10,15 @@ readonly PROGNAME=${0##*/}
 EXIT_FAILURE=1
 VERBOSE=${VERBOSE:-0}
 FILENAME=
+
+# Decoration for output
+function box() {
+    title="| $1 |"
+    edge=$( echo "$title" | sed 's/./*/g' )
+    echo "$edge"
+    echo -e "$title"
+    echo "$edge"
+}
 
 function usage() {
     echo -e "$PROGNAME - \n"
