@@ -298,20 +298,26 @@ function gitacp() {
     git push -f origin HEAD
 }
 
-# Shortcut for deleting the current branch both local and remote
+# Shortcut for deleting the current branch both local and remote, then checkout
+# origin/HEAD
 function gitdelb() {
+    [ $# -gt 0 ] && { git checkout $1 || return; }
+
     local BRANCH=$( git branch --show-current )
-    if [ -n "${BRANCH}" ]; then
+    git checkout origin/HEAD &>/dev/null || \
+        git checkout origin/master &>/dev/null || \
+        git checkout origin/main &>/dev/null || \
+        { echo "Could not find default branch to checkout"; return; }
+    echo "Detached checkout"
+    if [ -n "${BRANCH}" ] && [ "${BRANCH}" != "master" ] && [ "${BRANCH}" != "main" ]; then
+        echo "Will delete 'origin/${BRANCH}' and '${BRANCH}' branch"
+        if read -p 'Continue? (Y/n) ' && [ "$REPLY" == "n" ]; then
+            echo "Cancelled."
+            return
+        fi
         git ls-remote --exit-code --heads origin refs/heads/${BRANCH} && \
             git push origin --delete "${BRANCH}"
-        if [ $# -gt 0 ]; then
-            git checkout $1
-        else
-            git checkout origin/master &>/dev/null || git checkout origin/main
-        fi
         git branch -D "${BRANCH}"
-    else
-        git checkout origin/master &>/dev/null || git checkout origin/main
     fi
 }
 
