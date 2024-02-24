@@ -108,3 +108,4 @@ vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = "Escape Terminal mode" })
 -- [[ Snippets ]]
 -- Bash parameter expansion
 vim.keymap.set('i', '<F10>', '"${}"<Left><Left>', { silent = true })
+vim.keymap.set('n', '<leader>is', ':-1read $HOME/bin/template.sh<CR>', { desc = "Snippet: shell script template", silent = true })
