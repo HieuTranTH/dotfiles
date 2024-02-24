@@ -19,7 +19,7 @@ require('nvim-treesitter.configs').setup {
   },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-  auto_install = false,
+  auto_install = true,
 
   autotag = { enable = true },  -- windwp/nvim-ts-autotag
   endwise = { enable = true },  -- RRethy/nvim-treesitter-endwise
@@ -125,4 +125,22 @@ require('nvim-treesitter.configs').setup {
       },
     },
   },
+  refactor = {  -- 'nvim-treesitter/nvim-treesitter-refactor'
+    highlight_current_scope = { enable = true },
+    highlight_definitions = {
+      enable = true,
+      -- Set to false if you have an `updatetime` of ~100.
+      clear_on_cursor_move = true,
+    },
+  },
 }
+
+-- vim way: ; goes to the direction you were moving.
+vim.keymap.set({ "n", "x", "o" }, ";", require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move)
+vim.keymap.set({ "n", "x", "o" }, ",", require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move_opposite)
+
+-- Optionally, make builtin f, F, t, T also repeatable with ; and ,
+vim.keymap.set({ "n", "x", "o" }, "f", require("nvim-treesitter.textobjects.repeatable_move").builtin_f)
+vim.keymap.set({ "n", "x", "o" }, "F", require("nvim-treesitter.textobjects.repeatable_move").builtin_F)
+vim.keymap.set({ "n", "x", "o" }, "t", require("nvim-treesitter.textobjects.repeatable_move").builtin_t)
+vim.keymap.set({ "n", "x", "o" }, "T", require("nvim-treesitter.textobjects.repeatable_move").builtin_T)
