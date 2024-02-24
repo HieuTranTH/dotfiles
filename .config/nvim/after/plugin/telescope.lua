@@ -56,6 +56,19 @@ require('telescope').setup {
         },
       },
     },
+    oldfiles = {
+      mappings = {
+        i = {
+          ["<c-j>"] = function(prompt_bufnr)
+            local selection = require("telescope.actions.state").get_selected_entry()
+            local dir = vim.fn.fnamemodify(selection.path, ":p:h")
+            -- Depending on what you want put `cd`, `lcd`, `tcd`
+            vim.cmd(string.format("silent cd %s", dir))
+            require("notify")(dir, nil, { title = "Change directory" })
+          end
+        },
+      },
+    },
   }
 }
 
