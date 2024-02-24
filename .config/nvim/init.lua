@@ -217,6 +217,12 @@ require('lazy').setup({
     end,
   },
 
+  -- Reverse join lines
+  -- Keymaps:
+  -- gS - to split a one-liner into multiple lines
+  -- gJ - (with the cursor on the first line of a block) to join a block into a single-line statement.
+  { 'AndrewRadev/splitjoin.vim', },
+
   { -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
     dependencies = {
@@ -224,6 +230,7 @@ require('lazy').setup({
       'nvim-treesitter/nvim-treesitter-textobjects',
       'RRethy/nvim-treesitter-endwise',
       'windwp/nvim-ts-autotag',
+      -- 'AckslD/nvim-trevJ.lua',  -- TODO: use this instead of 'splitjoin.vim' when it has more languages supported
     },
     build = ":TSUpdate",
   },
