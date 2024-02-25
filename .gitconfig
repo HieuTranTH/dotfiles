@@ -12,6 +12,7 @@
 	lograw = log --pretty=format:'- %s%n%b'
 	ca = commit --amend
 	can = commit --amend --no-edit
+	pushf = push --force-with-lease origin HEAD
 	rmu = "!git remote update --prune && git fetch --prune-tags -f"
 
 # Added color
