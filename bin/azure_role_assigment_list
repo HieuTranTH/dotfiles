@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 source box.sh
-# box "List role assignments associated with an account"
+box "List role assignments associated with an account"
 
 #@ usage: 
 #@ author: Hieu Tran
@@ -131,7 +131,7 @@ if [ $ALL_SUBSCRIPTIONS -gt 0 ]; then
 fi
 
 if [ -n "$SUBSCRIPTION" ]; then
-    # box "$SUBSCRIPTION"
+    box "$SUBSCRIPTION"
     COMMAND="$COMMAND --subscription '$SUBSCRIPTION'"
 fi
 
@@ -139,10 +139,9 @@ fi
 OUTPUT=$( eval "$COMMAND" )
 
 COUNT=$( echo "${OUTPUT}" | jq '. | length' )
-if [ "${COUNT}" -gt 5 ]; then
 echo "Role assginments count: ${COUNT}"
 
-readarray -t ARRAY_OUTPUT < <( echo "$OUTPUT" | jq '[.[] | {createdBy,createdOn,description,resourceGroup,roleDefinitionName,scope}]' )
+readarray -t ARRAY_OUTPUT < <( echo "$OUTPUT" | jq -C '[.[] | {createdBy,createdOn,description,resourceGroup,roleDefinitionName,scope}]' )
 for line in "${ARRAY_OUTPUT[@]}"; do
     if echo "${line}" | grep -q "createdBy"; then
         createdBy_id=$( echo "${line}" | cut -d '"' -f 4 )
@@ -152,8 +151,7 @@ for line in "${ARRAY_OUTPUT[@]}"; do
     else
         echo "${line}"
     fi
-done | clip.exe
-fi
+done
 
 # TODO: list apps that has role on this resource, scope:"This resource"
 
