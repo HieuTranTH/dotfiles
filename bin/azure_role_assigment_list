@@ -13,6 +13,7 @@ readonly PROGNAME=${0##*/}
 EXIT_FAILURE=1
 VERBOSE=${VERBOSE:-0}
 ID= # email, Service Principal AppID or ObjectID
+NAME= # Service Principal name
 SUBSCRIPTION=''
 SUBSCRIPTIONS_LIST='dev test qa prod common'
 ALL_SUBSCRIPTIONS=0
@@ -65,7 +66,6 @@ OPTSTRING='as:vh?'
 while getopts "$OPTSTRING" OPT
 do
     case $OPT in
-        # TODO: if -s is not used, then check against all subscriptions
         a)
             ALL_SUBSCRIPTIONS=$(( ALL_SUBSCRIPTIONS + 1 ))
             ;;
@@ -103,8 +103,21 @@ done
 ## $OPTIND points to the next, unparsed argument
 shift "$(( OPTIND - 1 ))"
 
-# TODO: use current logged in user if not specified ID
-ID="$1"
+if [ "$#" -eq 0 ]; then
+    # TODO: use current logged in user if not specified ID rather than dying
+    die "Missing ID"
+# Heuristically detect if ID or SP name was passed
+elif echo "$1" | grep -Eq "@"; then
+    ID="$1"
+elif echo "$1" | grep -Eq "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"; then
+    ID="$1"
+else
+    NAME="$1"
+    SP_LIST=$( az ad sp list --display-name "${NAME}" --query '[].{id:id}' )
+    SP_COUNT=$( echo "${SP_LIST}" | jq  '. | length' )
+    [ "${SP_COUNT}" -gt 1 ] && die "More than 1 SP found (${SP_COUNT}) with this name."
+    ID=$( echo "${SP_LIST}" | jq -r '.[].id' )
+fi
 
 COMMAND="az role assignment list --assignee $ID --all"
 
@@ -132,7 +145,8 @@ readarray -t ARRAY_OUTPUT < <( echo "$OUTPUT" | jq -C '[.[] | {createdBy,created
 for line in "${ARRAY_OUTPUT[@]}"; do
     if echo "${line}" | grep -q "createdBy"; then
         createdBy_id=$( echo "${line}" | cut -d '"' -f 4 )
-        createdBy_displayName=$( az ad sp show --id "${createdBy_id}" | jq -r '.displayName' )
+        createdBy_displayName=$( az ad sp show --id "${createdBy_id}" 2>/dev/null | jq -r '.displayName' )
+        [ -z "${createdBy_displayName}" ] && createdBy_displayName=$( az ad user show --id "${createdBy_id}" | jq -r '.userPrincipalName + " (" + .displayName + ")"' )
         echo "${line}   # ${createdBy_displayName}"
     else
         echo "${line}"
