@@ -122,7 +122,22 @@ if [ -n "$SUBSCRIPTION" ]; then
     COMMAND="$COMMAND --subscription '$SUBSCRIPTION'"
 fi
 
-eval $COMMAND | jq '[.[] | {resourceGroup,roleDefinitionName,scope}]'
+# set -x
+OUTPUT=$( eval "$COMMAND" )
+
+COUNT=$( echo "${OUTPUT}" | jq '. | length' )
+echo "Role assginments count: ${COUNT}"
+
+readarray -t ARRAY_OUTPUT < <( echo "$OUTPUT" | jq -C '[.[] | {createdBy,createdOn,description,resourceGroup,roleDefinitionName,scope}]' )
+for line in "${ARRAY_OUTPUT[@]}"; do
+    if echo "${line}" | grep -q "createdBy"; then
+        createdBy_id=$( echo "${line}" | cut -d '"' -f 4 )
+        createdBy_displayName=$( az ad sp show --id "${createdBy_id}" | jq -r '.displayName' )
+        echo "${line}   # ${createdBy_displayName}"
+    else
+        echo "${line}"
+    fi
+done
 
 # TODO: list apps that has role on this resource, scope:"This resource"
 
