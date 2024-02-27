@@ -142,6 +142,7 @@ COUNT=$( echo "${OUTPUT}" | jq '. | length' )
 echo "Role assginments count: ${COUNT}"
 
 readarray -t ARRAY_OUTPUT < <( echo "$OUTPUT" | jq -C '[.[] | {createdBy,createdOn,description,resourceGroup,roleDefinitionName,scope}]' )
+# readarray -t ARRAY_OUTPUT < <( echo "$OUTPUT" | jq -C '[.[] | {createdBy,createdOn,description,resourceGroup,roleDefinitionName,scope}] | sort_by(.createdOn)' )  # if need sorting by createdOn
 for line in "${ARRAY_OUTPUT[@]}"; do
     if echo "${line}" | grep -q "createdBy"; then
         createdBy_id=$( echo "${line}" | cut -d '"' -f 4 )
