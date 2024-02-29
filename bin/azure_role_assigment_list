@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+# set -x
 source box.sh
 box "List role assignments associated with an account"
 
@@ -17,12 +18,17 @@ NAME= # Service Principal name
 SUBSCRIPTION=''
 SUBSCRIPTIONS_LIST='dev test qa prod common'
 ALL_SUBSCRIPTIONS=0
+SEARCH_SCOPE=${SEARCH_SCOPE:-}
+INCLUDE_GROUPS=${INCLUDE_GROUPS:-0}
+INCLUDE_GROUPS_CMD=" --include-groups | jq -c '[.[]] | sort_by(.principalType)'"
 
 function usage() {
     echo -e "$PROGNAME - \n"
-    echo -e "usage: $PROGNAME [-s SUBSCRIPTION] [-h] [-?] ID\n"
-    echo -e "   -s: Subscription to list. Can be either dev|test|qa|prod|common alias or custom string."
-    echo -e "   -a: List in all subscriptions"
+    echo -e "usage: $PROGNAME [-e ENV] [-a] [-s NAME] [-g] [-h] [-?] ID\n"
+    echo -e "   -e: Environment (subscription) to list. Can be either dev|test|qa|prod|common alias."
+    echo -e "   -a: List in all subscriptions."
+    echo -e "   -s: Search for name in scope."
+    echo -e "   -g: List roles granted via Groups."
     echo -e "   -v: Verbose mode."
     echo -e "   -h: Print this help message."
     echo -e "   -?: Print this help message."
@@ -59,7 +65,7 @@ function log_error {
 
 ## List of options the program will accept;
 ## those options that take arguments are followed by a colon
-OPTSTRING='as:vh?'
+OPTSTRING='ae:s:gvh?'
 
 ## The loop calls getopts until there are no more options on the command line
 ## Each option is stored in $OPT, any option arguments are stored in OPTARG
@@ -69,7 +75,7 @@ do
         a)
             ALL_SUBSCRIPTIONS=$(( ALL_SUBSCRIPTIONS + 1 ))
             ;;
-        s)
+        e)
             SUBSCRIPTION=$OPTARG ## $OPTARG contains the argument to the option
             case "$SUBSCRIPTION" in
                 dev)
@@ -85,9 +91,16 @@ do
                     SUBSCRIPTION="UPM CDP PROD"
                     ;;
                 common)
-                    SUBSCRIPTION="UPM CDP COMMON"
+                    SUBSCRIPTION="UPM CDP Common"
                     ;;
             esac
+            az account list | grep -q "$SUBSCRIPTION" || die "Current account does not have access to '$SUBSCRIPTION' subscription."
+            ;;
+        s)
+            SEARCH_SCOPE=$OPTARG
+            ;;
+        g)
+            INCLUDE_GROUPS=$(( INCLUDE_GROUPS + 1 ))
             ;;
         v)
             VERBOSE=$(( VERBOSE + 1 ))
@@ -102,6 +115,23 @@ done
 ## Remove options from the command line
 ## $OPTIND points to the next, unparsed argument
 shift "$(( OPTIND - 1 ))"
+
+function format_list() {
+    readarray -t ARRAY_OUTPUT < <( echo "$1" | jq -C '[.[] | {createdBy,createdOn,description,principalName,principalType,resourceGroup,roleDefinitionName,scope}]' )
+    for line in "${ARRAY_OUTPUT[@]}"; do
+        # if echo "${line}" | grep -q "createdBy"; then
+        if [[ "${line}" = *'createdBy'* ]]; then
+            createdBy_id=$( echo "${line}" | cut -d '"' -f 4 )
+            createdBy_displayName=$( az ad sp show --id "${createdBy_id}" 2>/dev/null | jq -r '.displayName' )
+            [ -z "${createdBy_displayName}" ] && createdBy_displayName=$( az ad user show --id "${createdBy_id}" | jq -r '.userPrincipalName + " (" + .displayName + ")"' )
+            echo "${line}   # ${createdBy_displayName}"
+        elif [[ "${line}" = *'principalType'*'Group'* ]]; then
+            echo "${line}                              # via Group"
+        else
+            echo "${line}"
+        fi
+    done
+}
 
 if [ "$#" -eq 0 ]; then
     # TODO: use current logged in user if not specified ID rather than dying
@@ -119,40 +149,41 @@ else
     ID=$( echo "${SP_LIST}" | jq -r '.[].id' )
 fi
 
-COMMAND="az role assignment list --assignee $ID --all"
-
 if [ $ALL_SUBSCRIPTIONS -gt 0 ]; then
-    "$0" -s dev "$ID"
-    "$0" -s test "$ID"
-    "$0" -s qa "$ID"
-    "$0" -s prod "$ID"
-    "$0" -s common "$ID"
+    INCLUDE_GROUPS=$INCLUDE_GROUPS SEARCH_SCOPE="$SEARCH_SCOPE" "$0" -e dev "$ID"
+    INCLUDE_GROUPS=$INCLUDE_GROUPS SEARCH_SCOPE="$SEARCH_SCOPE" "$0" -e test "$ID"
+    INCLUDE_GROUPS=$INCLUDE_GROUPS SEARCH_SCOPE="$SEARCH_SCOPE" "$0" -e qa "$ID"
+    INCLUDE_GROUPS=$INCLUDE_GROUPS SEARCH_SCOPE="$SEARCH_SCOPE" "$0" -e prod "$ID"
+    INCLUDE_GROUPS=$INCLUDE_GROUPS SEARCH_SCOPE="$SEARCH_SCOPE" "$0" -e common "$ID"
     exit 0
 fi
 
-if [ -n "$SUBSCRIPTION" ]; then
-    box "$SUBSCRIPTION"
-    COMMAND="$COMMAND --subscription '$SUBSCRIPTION'"
+if [ -z "$SUBSCRIPTION" ]; then
+    SUBSCRIPTION=$( az account show --query 'name' --output tsv )
 fi
 
-# set -x
-OUTPUT=$( eval "$COMMAND" )
+BASE_COMMAND="az role assignment list --assignee $ID --subscription '$SUBSCRIPTION'"
 
+box "$SUBSCRIPTION - Subscription level:"
+COMMAND="$BASE_COMMAND"
+[ $INCLUDE_GROUPS -gt 0 ] && COMMAND="$COMMAND $INCLUDE_GROUPS_CMD"
+OUTPUT=$( eval "$COMMAND" )
 COUNT=$( echo "${OUTPUT}" | jq '. | length' )
 echo "Role assginments count: ${COUNT}"
+format_list "${OUTPUT}"
 
-readarray -t ARRAY_OUTPUT < <( echo "$OUTPUT" | jq -C '[.[] | {createdBy,createdOn,description,resourceGroup,roleDefinitionName,scope}]' )
-# readarray -t ARRAY_OUTPUT < <( echo "$OUTPUT" | jq -C '[.[] | {createdBy,createdOn,description,resourceGroup,roleDefinitionName,scope}] | sort_by(.createdOn)' )  # if need sorting by createdOn
-for line in "${ARRAY_OUTPUT[@]}"; do
-    if echo "${line}" | grep -q "createdBy"; then
-        createdBy_id=$( echo "${line}" | cut -d '"' -f 4 )
-        createdBy_displayName=$( az ad sp show --id "${createdBy_id}" 2>/dev/null | jq -r '.displayName' )
-        [ -z "${createdBy_displayName}" ] && createdBy_displayName=$( az ad user show --id "${createdBy_id}" | jq -r '.userPrincipalName + " (" + .displayName + ")"' )
-        echo "${line}   # ${createdBy_displayName}"
-    else
-        echo "${line}"
-    fi
-done
+
+box "All resources (including Subscription level):"
+COMMAND="$BASE_COMMAND --all"
+[ $INCLUDE_GROUPS -gt 0 ] && COMMAND="$COMMAND $INCLUDE_GROUPS_CMD"
+OUTPUT=$( eval "$COMMAND" )
+if [ -n "${SEARCH_SCOPE}" ]; then
+    OUTPUT=$( echo "${OUTPUT}" | jq -c --arg NAME "${SEARCH_SCOPE}" '[.[] | select(.scope | match($NAME;"i"))]' )
+fi
+COUNT=$( echo "${OUTPUT}" | jq '. | length' )
+echo "Role assginments count: ${COUNT}"
+format_list "${OUTPUT}"
+
 
 # TODO: list apps that has role on this resource, scope:"This resource"
 
