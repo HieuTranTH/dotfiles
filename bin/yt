@@ -1,0 +1,30 @@
+#!/bin/bash
+#set -x
+
+case $( uname ) in
+    MINGW64_NT*)
+        BIN=yt-dlp.exe
+        ;;
+    LINUX*)
+        BIN=yt-dlp
+        ;;
+    *)
+        BIN=yt-dlp
+        ;;
+esac
+
+read -p "NAME: " NAME
+read -p "URL: " URL
+
+if [ -z "${NAME}" ]; then
+    "${BIN}" "${URL}"
+    exit 0
+fi
+
+if [ "$(echo $NAME* )" != "$NAME*" ]; then
+    echo "WARNING: Existing file name: "
+    printf "%s\n" $NAME*
+    exit 1
+fi
+
+"${BIN}" -o "${NAME}.%(ext)s" "${URL}"
