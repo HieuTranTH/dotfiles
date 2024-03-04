@@ -365,7 +365,7 @@ function nvim() {
 function act_venv() {
     # Create new venv
     if [ "$1" == "-n" ]; then
-        [ "$#" -lt 2 ] && return 1
+        [ "$#" -lt 2 ] && { echo "Please specify name for Virtual Env"; return 1; }
         cd ~/dev/python_venv
         VENV="$2"
         python3 -m venv "$VENV"
