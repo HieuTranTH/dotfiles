@@ -288,14 +288,14 @@ function cdg() {
 # Shortcut for quick development to remote with git
 function gitcp() {
     git commit --amend --no-edit
-    git push -f origin HEAD
+    git push --force-with-lease origin HEAD
 }
 
 # Shortcut for quick development to remote with git
 function gitacp() {
     git add -u
     git commit --amend --no-edit
-    git push -f origin HEAD
+    git push --force-with-lease origin HEAD
 }
 
 # Shortcut for deleting the current branch both local and remote, then checkout
