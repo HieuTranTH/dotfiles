@@ -1,5 +1,5 @@
 #!/bin/bash
-#set -x
+# set -x
 
 case $( uname ) in
     MINGW64_NT*)
@@ -13,11 +13,13 @@ case $( uname ) in
         ;;
 esac
 
-read -p "NAME: " NAME
-read -p "URL: " URL
+[ "$1" = "-a" ] && AUDIO_FLAG="-f ba -x --audio-format mp3"
+
+read -ep "NAME: " NAME
+read -ep "URL: " URL
 
 if [ -z "${NAME}" ]; then
-    "${BIN}" "${URL}"
+    "${BIN}" ${AUDIO_FLAG} "${URL}"
     exit 0
 fi
 
@@ -27,4 +29,4 @@ if [ "$(echo $NAME* )" != "$NAME*" ]; then
     exit 1
 fi
 
-"${BIN}" -o "${NAME}.%(ext)s" "${URL}"
+"${BIN}" ${AUDIO_FLAG} -o "${NAME}.%(ext)s" "${URL}"
