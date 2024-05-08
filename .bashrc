@@ -269,13 +269,13 @@ function dotpush() {
     dot push
     #dotfiles_sync.sh   # Don't sync to Tuxera hosts anymore
 }
-# Function to pull dotfiles, automatically stash save > pull > stash pop, which
+# Function to pull dotfiles, automatically stash push > stash pull > stash pop, which
 # will keep custom changes in some hosts
 function dotpull() {
     cd ~
-    dot stash save
+    local PUSH_OUTPUT=$( dot stash push )
     dot pull
-    dot stash pop
+    [ "${PUSH_OUTPUT}" != "No local changes to save" ] && dot stash pop
     cd -
 }
 
