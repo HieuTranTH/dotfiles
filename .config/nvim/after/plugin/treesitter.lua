@@ -30,7 +30,7 @@ require('nvim-treesitter.configs').setup {
     keymaps = {
       init_selection = '<c-space>',
       node_incremental = '<c-space>',
-      scope_incremental = '<c-s>',  -- to return after moving around
+      scope_incremental = '<c-s>',  -- can be used to return after moving around inside the node
       node_decremental = '<M-space>',
     },
   },
