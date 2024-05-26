@@ -140,7 +140,7 @@ map <leader>n :set number! relativenumber!<CR>
 
 " Toggling text selecting mode with mouse (toggle line number, listchar, and
 " colorcolumn)
-map <leader>z :set number! relativenumber! list!<CR>:let &cc = &cc == '' ? '72,80' : ''<CR>
+map <leader>v :set number! relativenumber! list!<CR>:let &cc = &cc == '' ? '72,80' : ''<CR>
 
 " Open Git in vertical split
 map <leader>g :vertical rightbelow Git 
