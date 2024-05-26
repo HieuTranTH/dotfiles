@@ -16,6 +16,7 @@ VERBOSE=${VERBOSE:-0}
 ID= # email, Service Principal AppID or ObjectID
 NAME= # Service Principal name
 SUBSCRIPTION=''
+# TODO: Add "Digi non-prod" and "Digi prod" subscription
 SUBSCRIPTIONS_LIST='dev test qa prod common'
 ALL_SUBSCRIPTIONS=0
 SEARCH_SCOPE=${SEARCH_SCOPE:-}
@@ -149,6 +150,7 @@ else
     ID=$( echo "${SP_LIST}" | jq -r '.[].id' )
 fi
 
+# TODO: Add "Digi non-prod" and "Digi prod" subscription
 if [ $ALL_SUBSCRIPTIONS -gt 0 ]; then
     INCLUDE_GROUPS=$INCLUDE_GROUPS SEARCH_SCOPE="$SEARCH_SCOPE" "$0" -e dev "$ID"
     INCLUDE_GROUPS=$INCLUDE_GROUPS SEARCH_SCOPE="$SEARCH_SCOPE" "$0" -e test "$ID"

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-mkdir /tmp/sh
+mkdir -p /tmp/sh
 cd $_
 FILE=$( mktemp /tmp/sh/test_XXXXXX.sh )
 chmod +x "$FILE"
