@@ -169,6 +169,7 @@ BASE_COMMAND="az role assignment list --assignee $ID --subscription '$SUBSCRIPTI
 box "$SUBSCRIPTION - Subscription level:"
 COMMAND="$BASE_COMMAND"
 [ $INCLUDE_GROUPS -gt 0 ] && COMMAND="$COMMAND $INCLUDE_GROUPS_CMD"
+log_info "COMMAND: $COMMAND"
 OUTPUT=$( eval "$COMMAND" )
 COUNT=$( echo "${OUTPUT}" | jq '. | length' )
 echo "Role assginments count: ${COUNT}"
@@ -178,6 +179,7 @@ format_list "${OUTPUT}"
 box "All resources (including Subscription level):"
 COMMAND="$BASE_COMMAND --all"
 [ $INCLUDE_GROUPS -gt 0 ] && COMMAND="$COMMAND $INCLUDE_GROUPS_CMD"
+log_info "COMMAND: $COMMAND"
 OUTPUT=$( eval "$COMMAND" )
 if [ -n "${SEARCH_SCOPE}" ]; then
     OUTPUT=$( echo "${OUTPUT}" | jq -c --arg NAME "${SEARCH_SCOPE}" '[.[] | select(.scope | match($NAME;"i"))]' )
