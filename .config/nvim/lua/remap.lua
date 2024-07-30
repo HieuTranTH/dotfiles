@@ -12,8 +12,8 @@ vim.keymap.set('', 'q:', '<Nop>', { silent = true })
 vim.g.omni_sql_no_default_maps = 1
 
 -- Remap for dealing with word wrap
-vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set({ 'n', 'v' }, 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set({ 'n', 'v' }, 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Half page scrolls stay in middle, preventing disorienting
 vim.keymap.set('n', '<C-u>', '<C-u>zz')
