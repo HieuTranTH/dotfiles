@@ -6,4 +6,5 @@ FILE=$( mktemp /tmp/sh/test_XXXXXX.sh )
 chmod +x "$FILE"
 echo "#!/usr/bin/env bash" > "$FILE"
 echo >> "$FILE"
-nvim "$FILE"
+echo >> "$FILE"
+nvim "+normal G" "$FILE"
