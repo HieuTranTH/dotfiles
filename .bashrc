@@ -399,6 +399,9 @@ export LESS_TERMCAP_us=$'\e[1;4;31m'
 # Make NeoVim to be the default editor for C-xC-e and fc commands
 export EDITOR=/home/hieu/bin/nvim
 
+# For interactive 'az login' in WSL to spawn new page in host browser
+export BROWSER='/mnt/c/Program Files/Mozilla Firefox/firefox.exe'
+
 # Show job count in bash prompt
 PS1="[\j]$PS1"
 
