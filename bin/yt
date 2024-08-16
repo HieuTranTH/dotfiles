@@ -1,6 +1,9 @@
 #!/bin/bash
 # set -x
 
+NAME=
+URL=
+
 case $( uname ) in
     MINGW64_NT*)
         BIN=yt-dlp.exe
@@ -13,10 +16,38 @@ case $( uname ) in
         ;;
 esac
 
-[ "$1" = "-a" ] && AUDIO_FLAG="-f ba -x --audio-format mp3"
 
-read -ep "NAME: " NAME
-read -ep "URL: " URL
+## List of options the program will accept;
+## those options that take arguments are followed by a colon
+OPTSTRING='n:u:avh?'
+
+## The loop calls getopts until there are no more options on the command line
+## Each option is stored in $OPT, any option arguments are stored in OPTARG
+while getopts "$OPTSTRING" OPT
+do
+    case $OPT in
+        n)
+            NAME=$OPTARG ## $OPTARG contains the argument to the option
+            ;;
+        u)
+            URL=$OPTARG ## $OPTARG contains the argument to the option
+            ;;
+        a)
+            AUDIO_FLAG="-f ba -x --audio-format mp3"
+            ;;
+        v)
+            export VERBOSE=$(( VERBOSE + 1 ))
+            echo "export VERBOSE=$(( VERBOSE + 1 ))"
+            ;;
+        *)
+            usage >&2
+            exit $EXIT_FAILURE
+            ;;
+    esac
+done
+
+[ -z "${NAME}" ] && read -ep "NAME: " NAME
+[ -z "${URL}" ] && read -ep "URL: " URL
 
 if [ -z "${NAME}" ]; then
     "${BIN}" ${AUDIO_FLAG} "${URL}"
