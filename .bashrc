@@ -255,7 +255,7 @@ export FZF_ALT_C_OPTS='--preview="tree -L 1 {}"'
 
 # Function wrapper for dotfiles git version control
 function dot() {
-    /usr/bin/git --git-dir=$HOME/.myconf/ --work-tree=$HOME $@
+    git --git-dir=$HOME/.myconf/ --work-tree=$HOME $@
 }
 # Enable git bash completion for dotfiles
 if [ -f /usr/share/bash-completion/completions/git ]; then
@@ -396,8 +396,9 @@ export LESS_TERMCAP_so=$'\e[01;48;5;56m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
-# Make NeoVim to be the default editor for C-xC-e and fc commands
-export EDITOR=/home/hieu/bin/nvim
+# Make (Neo)Vim to be the default editor for C-xC-e and fc commands
+which vim > /dev/null && export EDITOR=vim
+which nvim > /dev/null && export EDITOR=nvim
 
 # For interactive 'az login' in WSL to spawn new page in host browser
 export BROWSER='/mnt/c/Program Files/Mozilla Firefox/firefox.exe'
@@ -411,7 +412,7 @@ complete -C ~/bin/terraform terraform
 # https://github.com/ajeetdsouza/zoxide
 # tab completion
 # when paths are similar, use <Space>+<Tab> to resolve
-eval "$(zoxide init bash)"
+which zoxide > /dev/null && eval "$(zoxide init bash)"
 ###############################################################################
 # End of Hieu's custom Configurations
 ###############################################################################
