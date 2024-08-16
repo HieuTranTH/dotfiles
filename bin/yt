@@ -3,12 +3,13 @@
 
 NAME=
 URL=
+INTERACTIVE=1
 
 case $( uname ) in
     MINGW64_NT*)
         BIN=yt-dlp.exe
         ;;
-    LINUX*)
+    Linux*)
         BIN=yt-dlp
         ;;
     *)
@@ -28,9 +29,11 @@ do
     case $OPT in
         n)
             NAME=$OPTARG ## $OPTARG contains the argument to the option
+            INTERACTIVE=0
             ;;
         u)
             URL=$OPTARG ## $OPTARG contains the argument to the option
+            INTERACTIVE=0
             ;;
         a)
             AUDIO_FLAG="-f ba -x --audio-format mp3"
@@ -46,8 +49,10 @@ do
     esac
 done
 
-[ -z "${NAME}" ] && read -ep "NAME: " NAME
-[ -z "${URL}" ] && read -ep "URL: " URL
+if [ "${INTERACTIVE}" = 1 ]; then
+    read -ep "NAME: " NAME
+    read -ep "URL: " URL
+fi
 
 if [ -z "${NAME}" ]; then
     "${BIN}" ${AUDIO_FLAG} "${URL}"
