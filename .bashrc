@@ -119,7 +119,15 @@ fi
 ###############################################################################
 # Start of Hieu's custom Configurations
 ###############################################################################
-PATH=~/.local/bin:$PATH
+# set PATH so it includes user's private bin if it exists
+# duplicate in ~/.profile but need this already here
+if [ -d "$HOME/bin" ] ; then
+    PATH="$HOME/bin:$PATH"
+fi
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
+fi
+
 
 # Customization for GNU Screen to use dynamic title and different screenrc files
 if [ -f ~/.bashrc_extra/bashrc_screen.sh ]; then
@@ -401,7 +409,9 @@ which vim &> /dev/null && export EDITOR=vim
 which nvim &> /dev/null && export EDITOR=nvim
 
 # For interactive 'az login' in WSL to spawn new page in host browser
-export BROWSER='/mnt/c/Program Files/Mozilla Firefox/firefox.exe'
+if [ -f '/mnt/c/Program Files/Mozilla Firefox/firefox.exe' ]; then
+    export BROWSER='/mnt/c/Program Files/Mozilla Firefox/firefox.exe'
+fi
 
 # Show job count in bash prompt
 PS1="[\j]$PS1"
