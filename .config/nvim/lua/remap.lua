@@ -86,7 +86,13 @@ vim.keymap.set('n', '<leader>th', ':noh<CR>', { desc = "[T]oggle search [H]ighli
 vim.keymap.set('n', '<leader>o', ':ZenMode<CR>:<Esc>', { desc = "Zenmode", silent = true })
 
 -- Set working directory to the current file
-vim.keymap.set('n', '<leader>cd', ':cd %:p:h<CR>', { desc = "[C]hange [D]irectory", silent = true })
+vim.keymap.set('n', '<leader>cd', function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local bufname = vim.api.nvim_buf_get_name(bufnr)
+  local bufdir = vim.fn.fnamemodify(bufname, ':p:h')
+  vim.api.nvim_command('cd ' .. bufdir)
+  require("notify")(bufdir, nil, { title = "Change directory" })
+end, { desc = "[C]hange [D]irectory", silent = true })
 
 -- Bubble multiple lines
 vim.keymap.set('n', '<leader><Up>', ':m .-2<CR>', { desc = "Move line move up", silent = true })
