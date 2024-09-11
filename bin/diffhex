@@ -1,0 +1,109 @@
+#!/usr/bin/env bash
+
+set -e
+
+#@ usage: 
+#@ author: Hieu Tran
+#@ email : hieu.tran@upm.com
+
+readonly PROGNAME=${0##*/}
+
+## Default values
+EXIT_FAILURE=1
+VERBOSE=${VERBOSE:-0}
+FILENAME_SRC=
+FILENAME_DST=
+HEAD_BYTES=0
+
+# Decoration for output
+function box() {
+    title="| $1 |"
+    # edge=$( echo "$title" | sed 's/./*/g' )
+    edge="${title//?/*}"
+    echo "$edge"
+    echo -e "$title"
+    echo "$edge"
+}
+
+function usage() {
+    echo -e "$PROGNAME - Diff the hexdump outputs\n"
+    echo -e "usage: $PROGNAME [-h BYTES] [-v] [-h] [-?] FILE1 FILE2\n"
+    echo -e "   -h: head - How many first bytes to compare?"
+    echo -e "   -v: Verbose mode."
+    echo -e "   -h: Print this help message."
+    echo -e "   -?: Print this help message."
+}
+
+function die() {
+    echo "ERROR: $*" >&2
+    exit $EXIT_FAILURE
+}
+
+function log {
+    [ ${VERBOSE} -eq 0 ] && return 0
+    local readonly level="$1"
+    local readonly message="$2"
+    local readonly timestamp=$(date +"%Y-%m-%d %H:%M:%S")
+    >&2 echo -e "${timestamp} [${level}] [$PROGNAME] ${message}"
+}
+
+function log_info {
+    local readonly message="$1"
+    log "INFO" "$message"
+}
+
+function log_warn {
+    local readonly message="$1"
+    log "WARN" "$message"
+}
+
+function log_error {
+    local readonly message="$1"
+    log "ERROR" "$message"
+}
+
+
+## List of options the program will accept;
+## those options that take arguments are followed by a colon
+OPTSTRING='h:vh?'
+
+## The loop calls getopts until there are no more options on the command line
+## Each option is stored in $OPT, any option arguments are stored in OPTARG
+while getopts "$OPTSTRING" OPT
+do
+    case $OPT in
+        h)
+            # TODO
+            HEAD_BYTES=$OPTARG ## $OPTARG contains the argument to the option
+            ;;
+        v)
+            VERBOSE=$(( VERBOSE + 1 ))
+            ;;
+        *)
+            usage >&2
+            exit $EXIT_FAILURE
+            ;;
+    esac
+done
+
+## Remove options from the command line
+## $OPTIND points to the next, unparsed argument
+shift "$(( OPTIND - 1 ))"
+
+[ "$#" -ne 2 ] && die "Invalid number of arguments"
+pwd
+
+[ ! -e "$1" ] && die "FILE1 not exist"
+FILENAME_SRC="$1"
+[ ! -e "$2" ] && die "FILE2 not exist"
+FILENAME_DST="$2"
+
+if which hexdump; then
+    HEXDUMP_CMD="hexdump -C"
+elif which xxd; then
+    HEXDUMP_CMD="xxd"
+else
+    die "Missing hexdump binary"
+fi
+
+diff2less <(${HEXDUMP_CMD} "${FILENAME_SRC}") <(${HEXDUMP_CMD} "${FILENAME_DST}")
