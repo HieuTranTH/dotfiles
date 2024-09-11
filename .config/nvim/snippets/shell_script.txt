@@ -14,7 +14,7 @@ FILENAME=
 # Decoration for output
 function box() {
     title="| $1 |"
-    edge=$( echo "$title" | sed 's/./*/g' )
+    edge="${title//?/*}"
     echo "$edge"
     echo -e "$title"
     echo "$edge"
