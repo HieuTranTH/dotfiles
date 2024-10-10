@@ -48,3 +48,5 @@
 # Custom gitconfig for directories
 [includeIf "gitdir:~/repos_public/"]
 	path = .gitconfig-github
+[init]
+	defaultBranch = main
