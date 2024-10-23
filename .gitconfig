@@ -13,6 +13,7 @@
 	can = commit --amend --no-edit
 	pushf = push --force-with-lease origin HEAD
 	rmu = "!git remote update --prune && git fetch --prune-tags -f"
+	rmur = "!git remote update --prune && git fetch --prune-tags -f && git rebase -i origin/HEAD"
 
 # Added color
 # https://nathanhoad.net/how-to-colours-in-git/
