@@ -129,6 +129,9 @@ let g:omni_sql_no_default_maps = 1
 " Use current line as shell command then paste back its output
 noremap Q !!$SHELL<CR>
 
+" Remap Y to yank from cursor to end of line (mimics neovim)
+nnoremap Y y$
+
 " Formatting in paragraph
 map <leader>q gqip
 
