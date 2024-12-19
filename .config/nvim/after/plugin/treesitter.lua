@@ -137,11 +137,11 @@ require('nvim-treesitter.configs').setup {
 }
 
 -- vim way: ; goes to the direction you were moving.
-vim.keymap.set({ "n", "x", "o" }, ";", require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move)
-vim.keymap.set({ "n", "x", "o" }, ",", require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move_opposite)
+vim.keymap.set({ "n", "x", "o" }, ";", require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move_next)
+vim.keymap.set({ "n", "x", "o" }, ",", require("nvim-treesitter.textobjects.repeatable_move").repeat_last_move_previous)
 
 -- Optionally, make builtin f, F, t, T also repeatable with ; and ,
-vim.keymap.set({ "n", "x", "o" }, "f", require("nvim-treesitter.textobjects.repeatable_move").builtin_f)
-vim.keymap.set({ "n", "x", "o" }, "F", require("nvim-treesitter.textobjects.repeatable_move").builtin_F)
-vim.keymap.set({ "n", "x", "o" }, "t", require("nvim-treesitter.textobjects.repeatable_move").builtin_t)
-vim.keymap.set({ "n", "x", "o" }, "T", require("nvim-treesitter.textobjects.repeatable_move").builtin_T)
+vim.keymap.set({ "n", "x", "o" }, "f", require("nvim-treesitter.textobjects.repeatable_move").builtin_f_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "F", require("nvim-treesitter.textobjects.repeatable_move").builtin_F_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "t", require("nvim-treesitter.textobjects.repeatable_move").builtin_t_expr, { expr = true })
+vim.keymap.set({ "n", "x", "o" }, "T", require("nvim-treesitter.textobjects.repeatable_move").builtin_T_expr, { expr = true })
