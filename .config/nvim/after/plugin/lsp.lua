@@ -81,7 +81,7 @@ local servers = {
 }
 
 -- Setup neovim lua configuration
-require('neodev').setup()
+require('lazydev').setup()
 
 -- Setup mason so it can manage external tooling
 require('mason').setup()
