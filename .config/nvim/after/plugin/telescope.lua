@@ -80,6 +80,7 @@ vim.keymap.set('n', '<leader>sp', require('telescope.builtin').builtin, { desc =
 vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
 vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<leader>sc', require('telescope.builtin').commands, { desc = '[S]earch all Vim [C]ommands' })
 
 vim.keymap.set('n', '<leader>/', require('telescope.builtin').current_buffer_fuzzy_find, { desc = '[/] Fuzzily search in current buffer' })
 vim.keymap.set('n', '<leader>sb', function()
