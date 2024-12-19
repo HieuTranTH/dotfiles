@@ -111,15 +111,7 @@ require('lazy').setup({
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim',
-    opts = {
-      triggers_blacklist = {
-        -- list of mode / prefixes that should never be hooked by WhichKey
-        -- this is mostly relevant for keymaps that start with a native binding
-        n = { '"', '@' }, -- showing registers, macros can be slow, :WhichKey " when needed
-        i = { "j", "k", "<c-r>" },
-        v = { "j", "k" },
-      },
-    },
+    opts = {},
   },
 
   { -- Adds git releated signs to the gutter, as well as utilities for managing changes
