@@ -88,6 +88,9 @@ vim.keymap.set('n', '<leader>o', ':ZenMode<CR>:<Esc>', { desc = "Zenmode", silen
 -- nvim-tree
 vim.keymap.set('n', '<leader>r', vim.cmd.NvimTreeFindFileToggle, { desc = "[R] Nvim Tree Toggle" })
 
+-- undotree
+vim.keymap.set('n', '<leader>u', vim.cmd.UndotreeToggle, { desc = "[U]ndotree" })
+
 -- Set working directory to the current file
 vim.keymap.set('n', '<leader>cd', function()
   local bufnr = vim.api.nvim_get_current_buf()
