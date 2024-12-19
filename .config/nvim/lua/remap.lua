@@ -84,6 +84,9 @@ vim.keymap.set('n', '<leader>th', ':noh<CR>', { desc = "[T]oggle search [H]ighli
 
 -- Zenmode
 vim.keymap.set('n', '<leader>o', ':ZenMode<CR>:<Esc>', { desc = "Zenmode", silent = true })
+--
+-- nvim-tree
+vim.keymap.set('n', '<leader>r', vim.cmd.NvimTreeFindFileToggle, { desc = "[R] Nvim Tree Toggle" })
 
 -- Set working directory to the current file
 vim.keymap.set('n', '<leader>cd', function()
