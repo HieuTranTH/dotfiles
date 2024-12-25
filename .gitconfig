@@ -3,6 +3,8 @@
 	email = hieu.tran@upm.com
 [core]
 	pager = less -+F
+	autocrlf = false
+	eol = lf
 [alias]
 	flog = log --graph --full-history --all --decorate --oneline
 	cdate = log --date=short --pretty=format:'%C(yellow)%h%Creset %C(blue)%cd%Creset %C(red)%d%Creset %s'
