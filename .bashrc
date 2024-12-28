@@ -351,13 +351,15 @@ function gittouch() {
     git add $*
 }
 
-# Let shell change directory when ranger exits
-# see /usr/bin/ranger
 function r() {
     [ $# -eq 1 ] && cd $1
     # shift positional parameter because 'ranger' script will check $1
     shift
-    source ranger
+    # Let shell change directory when ranger exits
+    # see /usr/bin/ranger
+    #source ranger
+
+    nvim -c "NvimTreeFindFileToggle"
 }
 
 # Parse argument of file:line:column or file:line format to vim
