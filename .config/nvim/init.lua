@@ -71,6 +71,12 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
+  -- Smart substitution with case and plural form awareness
+  -- :%S/lower/upper/g  (Lower -> Upper, LOWER -> UPPER)
+  -- :%S/lower/upper/g  (Lower -> Upper, LOWER -> UPPER)
+  -- :%Subvert/facilit{y,ies}/building{,s}/g
+  'tpope/vim-abolish',
+
   -- Git related plugins
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
