@@ -181,7 +181,23 @@ if [ $( hostname ) = "AZPW066EH1" ]; then
     # Edit *_commands files with vim
     alias vic='command nvim -p ~/binb/*_commands -c "tabdo set noexpandtab autoindent formatoptions-=q" -c "3tabnext"'
 fi
-# End of Hostname WPF1Y2XET specific ############################
+# End of Hostname AZPW066EH1 specific ############################
+
+# Hostname DESKTOP-I805DU9 specific ###################################
+if  [ $( hostname ) = "DESKTOP-I805DU9" ]; then
+    # Aliases to cd to common directories
+    alias cdb='cd ~/bin'
+    alias cdr='TEMP_PWD=$PWD; cd ~/repos_public; cd1; cd1; OLDPWD=$TEMP_PWD'
+    alias cdd='TEMP_PWD=$PWD; cd ~/dev; cd1; OLDPWD=$TEMP_PWD'
+
+    # Edit *_commands files with vim
+    alias vic='command nvim -p ~/binb/*_commands -c "tabdo set noexpandtab autoindent formatoptions-=q" -c "3tabnext" -c "set readonly"'
+
+    if ! [ -h ~/.config/hieu/WindowsTerminal/settings.json_ ]; then
+        ln -snf /mnt/c/Users/HieuT/AppData/Local/Packages/Microsoft.WindowsTerminal_8wekyb3d8bbwe/LocalState/settings.json ~/.config/hieu/WindowsTerminal/settings.json_
+    fi
+fi
+# End of Hostname DESKTOP-I805DU9 specific ############################
 
 # Edit .bashrc
 alias vib='command vim ~/.bashrc'
