@@ -422,6 +422,11 @@ export LESS_TERMCAP_so=$'\e[01;48;5;56m'
 export LESS_TERMCAP_ue=$'\e[0m'
 export LESS_TERMCAP_us=$'\e[1;4;31m'
 
+export LESS='-r -i' # keep color when pipe and set case insensitive search
+# need this to have colors in recent groff version
+# https://github.com/jedsoft/most/issues/18
+export GROFF_NO_SGR=1
+
 # Make (Neo)Vim to be the default editor for C-xC-e and fc commands
 which vim &> /dev/null && export EDITOR=vim
 which nvim &> /dev/null && export EDITOR=nvim
@@ -438,7 +443,7 @@ PS1="[\j]$PS1"
 complete -C ~/bin/terraform terraform
 
 # https://github.com/ajeetdsouza/zoxide
-# tab completion
+# better cd commands: 'z' and 'zi'
 # when paths are similar, use <Space>+<Tab> to resolve
 which zoxide &> /dev/null && eval "$(zoxide init bash)"
 ###############################################################################
