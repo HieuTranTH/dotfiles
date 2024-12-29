@@ -136,3 +136,7 @@ vim.keymap.set('n', '<leader>sgf', ':GrepMatchingFiles ', { desc = '[S]earch by 
 -- Prefer these commands in fzf.vim over Telescope
 vim.keymap.set('n', '<leader>b', ':FZFBuffers<CR>', { desc = 'Find [B]uffer' })
 vim.keymap.set('n', '<leader>w', ':FZFWindows<CR>', { desc = 'Find [W]indow' })
+-- Insert mode completion
+vim.keymap.set('i', '<C-x><C-k>', '<plug>(fzf-complete-word)')
+vim.keymap.set('i', '<C-x><C-f>', '<plug>(fzf-complete-path)')
+vim.keymap.set('i', '<C-x><C-l>', '<plug>(fzf-complete-line)')
