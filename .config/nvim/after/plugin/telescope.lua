@@ -24,6 +24,16 @@ require('telescope').setup {
         ["<CR>"] = actions.select_default + actions.center,
       },
     },
+    vimgrep_arguments = {
+      "rg",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
+      "--trim" -- remove indentation
+    },
   },
   pickers = {
     buffers = {
