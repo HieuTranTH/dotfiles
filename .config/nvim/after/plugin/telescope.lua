@@ -104,6 +104,16 @@ vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc
 vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
 vim.keymap.set('n', '<leader>st', require('telescope.builtin').git_files, { desc = '[S]earch git [T]racked files' })
 
+-- Find sibling files of current file: only for the directory containing the file you're currently editing
+vim.keymap.set('n', '<leader>sfs', function()
+  require('telescope.builtin').find_files(
+    {
+      cwd = vim.fn.expand('%:p:h'),
+      prompt_title = 'Find (Sibling) Files'
+    }
+  )
+end, { desc = '[S]earch [F]iles [S]ibling' })
+
 -- Find files from project git root with fallback
 -- We cache the results of "git rev-parse"
 -- Process creation is expensive in Windows, so this reduces latency
