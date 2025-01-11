@@ -428,8 +428,8 @@ export LESS='-r -i' # keep color when pipe and set case insensitive search
 export GROFF_NO_SGR=1
 
 # Make (Neo)Vim to be the default editor for C-xC-e and fc commands
-which vim &> /dev/null && export EDITOR=vim
-which nvim &> /dev/null && export EDITOR=nvim
+which vim &> /dev/null && export EDITOR=$(which vim)
+which nvim &> /dev/null && export EDITOR=$(which nvim)
 
 # For interactive 'az login' in WSL to spawn new page in host browser
 if [ -f '/mnt/c/Program Files/Mozilla Firefox/firefox.exe' ]; then
