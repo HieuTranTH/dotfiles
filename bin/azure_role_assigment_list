@@ -10,11 +10,15 @@ box "List role assignments associated with an account"
 
 readonly PROGNAME=${0##*/}
 
+export AZURE_CONFIG_DIR=${AZURE_CONFIG_DIR:-/home/hieu/AZURE_CONFIG_DIR/hieu_tran_upm_com}
+echo export AZURE_CONFIG_DIR=${AZURE_CONFIG_DIR:-/home/hieu/AZURE_CONFIG_DIR/hieu_tran_upm_com}
+
 ## Default values
 EXIT_FAILURE=1
 VERBOSE=${VERBOSE:-0}
 ID= # email, Service Principal AppID or ObjectID
 NAME= # Service Principal name
+SCOPE=
 SUBSCRIPTION=''
 # TODO: Add "Digi non-prod" and "Digi prod" subscription
 SUBSCRIPTIONS_LIST='dev test qa prod common'
@@ -25,10 +29,10 @@ INCLUDE_GROUPS_CMD=" --include-groups | jq -c '[.[]] | sort_by(.principalType)'"
 
 function usage() {
     echo -e "$PROGNAME - \n"
-    echo -e "usage: $PROGNAME [-e ENV] [-a] [-s NAME] [-g] [-h] [-?] ID\n"
-    echo -e "   -e: Environment (subscription) to list. Can be either dev|test|qa|prod|common alias."
+    echo -e "usage: $PROGNAME [-e ENV] [-a] [-s NAME] [-g] [-h] [-?] ID|scope\n"
+    echo -e "   -e: Environment (subscription) to list. Can be either dev|test|qa|prod|common|digi-non-prod|digi-prod alias."
     echo -e "   -a: List in all subscriptions."
-    echo -e "   -s: Search for name in scope."
+    echo -e "   -s: Search for name in scope field."
     echo -e "   -g: List roles granted via Groups."
     echo -e "   -v: Verbose mode."
     echo -e "   -h: Print this help message."
@@ -94,6 +98,12 @@ do
                 common)
                     SUBSCRIPTION="UPM CDP Common"
                     ;;
+                digi-non-prod)
+                    SUBSCRIPTION="Digi Non-Prod"
+                    ;;
+                digi-prod)
+                    SUBSCRIPTION="Digi Prod"
+                    ;;
             esac
             az account list | grep -q "$SUBSCRIPTION" || die "Current account does not have access to '$SUBSCRIPTION' subscription."
             ;;
@@ -118,30 +128,41 @@ done
 shift "$(( OPTIND - 1 ))"
 
 function format_list() {
-    readarray -t ARRAY_OUTPUT < <( echo "$1" | jq -C '[.[] | {createdBy,createdOn,description,principalName,principalType,resourceGroup,roleDefinitionName,scope}]' )
+    readarray -t ARRAY_OUTPUT < <( echo "$1" | jq -C '[.[] | {condition,createdBy,createdOn,description,principalId,principalName,principalType,resourceGroup,roleDefinitionName,scope}]' )
     for line in "${ARRAY_OUTPUT[@]}"; do
         # if echo "${line}" | grep -q "createdBy"; then
         if [[ "${line}" = *'createdBy'* ]]; then
             createdBy_id=$( echo "${line}" | cut -d '"' -f 4 )
             createdBy_displayName=$( az ad sp show --id "${createdBy_id}" 2>/dev/null | jq -r '.displayName' )
             [ -z "${createdBy_displayName}" ] && createdBy_displayName=$( az ad user show --id "${createdBy_id}" | jq -r '.userPrincipalName + " (" + .displayName + ")"' )
-            echo "${line}   # ${createdBy_displayName}"
+            echo "${line}       # ${createdBy_displayName}"
+        elif [[ "${line}" =~ .*principalName.*[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}.* ]]; then
+            sp_id=$( echo "${line}" | cut -d '"' -f 4 )
+            sp_displayName=$( az ad sp show --id "${sp_id}" 2>/dev/null | jq -r '.displayName' )
+            [ -z "${sp_displayName}" ] && sp_displayName=$( az ad user show --id "${sp_id}" | jq -r '.userPrincipalName + " (" + .displayName + ")"' )
+            echo "${line}   # ${sp_displayName}"
         elif [[ "${line}" = *'principalType'*'Group'* ]]; then
-            echo "${line}                              # via Group"
+            echo "${line}                                  # via Group"
         else
             echo "${line}"
         fi
     done
 }
 
+[ ! -d "${AZURE_CONFIG_DIR}" ] && die "Missing the AZURE_CONFIG_DIR."
+
 if [ "$#" -eq 0 ]; then
     # TODO: use current logged in user if not specified ID rather than dying
-    die "Missing ID"
-# Heuristically detect if ID or SP name was passed
+    die "Missing ID or Scope"
+# Heuristically detect if ID or SP name or Scope was passed
 elif echo "$1" | grep -Eq "@"; then
     ID="$1"
 elif echo "$1" | grep -Eq "^[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$"; then
     ID="$1"
+elif echo "$1" | grep -Eq "^subscriptions/"; then
+    die "Scope has to start with /subscriptions/"
+elif echo "$1" | grep -Eq "^/subscriptions/"; then
+    SCOPE="$1"
 else
     NAME="$1"
     SP_LIST=$( az ad sp list --display-name "${NAME}" --query '[].{id:id}' )
@@ -151,20 +172,45 @@ else
 fi
 
 # TODO: Add "Digi non-prod" and "Digi prod" subscription
-if [ $ALL_SUBSCRIPTIONS -gt 0 ]; then
+if [ $ALL_SUBSCRIPTIONS -gt 0 ] && [ -n "$ID" ]; then
     INCLUDE_GROUPS=$INCLUDE_GROUPS SEARCH_SCOPE="$SEARCH_SCOPE" "$0" -e dev "$ID"
     INCLUDE_GROUPS=$INCLUDE_GROUPS SEARCH_SCOPE="$SEARCH_SCOPE" "$0" -e test "$ID"
     INCLUDE_GROUPS=$INCLUDE_GROUPS SEARCH_SCOPE="$SEARCH_SCOPE" "$0" -e qa "$ID"
     INCLUDE_GROUPS=$INCLUDE_GROUPS SEARCH_SCOPE="$SEARCH_SCOPE" "$0" -e prod "$ID"
     INCLUDE_GROUPS=$INCLUDE_GROUPS SEARCH_SCOPE="$SEARCH_SCOPE" "$0" -e common "$ID"
     exit 0
+elif [ $ALL_SUBSCRIPTIONS -gt 0 ] && [ -z "$ID" ]; then
+    die "Missing ID when listing in all subscriptions."
 fi
+
+if [ -n "$SCOPE" ]; then
+    box "Scope level:"
+    COMMAND="az role assignment list --scope '$SCOPE'"
+    log_info "COMMAND: $COMMAND"
+    OUTPUT=$( eval "$COMMAND" )
+    COUNT=$( echo "${OUTPUT}" | jq '. | length' )
+    echo "Role assginments count: ${COUNT}"
+    format_list "${OUTPUT}"
+
+    if echo "$SCOPE" | grep -q '/subscriptions/.*/resourceGroups/.*/.*'; then
+        box "Resource Group level:"
+        COMMAND="az role assignment list --scope $(echo "$SCOPE" | sed -E 's|(/subscriptions/[^/]+/resourceGroups/[^/]+)/.*|\1|')"
+        log_info "COMMAND: $COMMAND"
+        OUTPUT=$( eval "$COMMAND" )
+        COUNT=$( echo "${OUTPUT}" | jq '. | length' )
+        echo "Role assginments count: ${COUNT}"
+        format_list "${OUTPUT}"
+    fi
+
+    exit 0
+fi
+
 
 if [ -z "$SUBSCRIPTION" ]; then
     SUBSCRIPTION=$( az account show --query 'name' --output tsv )
 fi
 
-BASE_COMMAND="az role assignment list --assignee $ID --subscription '$SUBSCRIPTION'"
+BASE_COMMAND="az role assignment list --assignee '$ID' --subscription '$SUBSCRIPTION'"
 
 box "$SUBSCRIPTION - Subscription level:"
 COMMAND="$BASE_COMMAND"
@@ -188,8 +234,6 @@ COUNT=$( echo "${OUTPUT}" | jq '. | length' )
 echo "Role assginments count: ${COUNT}"
 format_list "${OUTPUT}"
 
-
-# TODO: list apps that has role on this resource, scope:"This resource"
 
 # TODO: sort by types and count each type
 # TODO: sort by created date and count for each deployment (based on time)
