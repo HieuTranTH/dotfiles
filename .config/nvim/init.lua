@@ -158,6 +158,11 @@ require('lazy').setup({
         component_separators = '|',
         section_separators = '',
       },
+      sections = {
+        -- Remove 'branch' and 'diff'
+        -- lualine_b = {'branch', 'diff', 'diagnostics'},
+        lualine_b = {'diagnostics'},
+      },
     },
   },
 
