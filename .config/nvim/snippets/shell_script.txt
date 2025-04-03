@@ -33,6 +33,19 @@ function die() {
     exit $EXIT_FAILURE
 }
 
+function error_handler() {
+  {
+    local exit_code=$?
+    echo "Error occurred in function ${FUNCNAME[1]}() of script: ${BASH_SOURCE[1]}:$1"
+    echo "Failed command exit code: $exit_code"
+    # Add any cleanup commands here
+    exit $EXIT_FAILURE
+  } >&2 # Redirect all output to stderr
+}
+# Set up the trap to call the error_handler function on ERR
+# NB! Should be set again for every functions to achieve expected behavior
+trap 'error_handler $LINENO' ERR
+
 function log {
     [ ${VERBOSE} -eq 0 ] && return 0
     local readonly level="$1"
