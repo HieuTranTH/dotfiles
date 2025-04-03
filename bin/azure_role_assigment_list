@@ -19,6 +19,7 @@ VERBOSE=${VERBOSE:-0}
 ID= # email, Service Principal AppID or ObjectID
 NAME= # Service Principal name
 SCOPE=
+FILE=
 SUBSCRIPTION=''
 # TODO: Add "Digi non-prod" and "Digi prod" subscription
 SUBSCRIPTIONS_LIST='dev test qa prod common'
@@ -29,11 +30,12 @@ INCLUDE_GROUPS_CMD=" --include-groups | jq -c '[.[]] | sort_by(.principalType)'"
 
 function usage() {
     echo -e "$PROGNAME - \n"
-    echo -e "usage: $PROGNAME [-e ENV] [-a] [-s NAME] [-g] [-h] [-?] ID|scope\n"
+    echo -e "usage: $PROGNAME [-e ENV] [-a] [-s NAME] [-g] [-f JSON_FILE] [-h] [-?] ID|scope\n"
     echo -e "   -e: Environment (subscription) to list. Can be either dev|test|qa|prod|common|digi-non-prod|digi-prod alias."
     echo -e "   -a: List in all subscriptions."
     echo -e "   -s: Search for name in scope field."
     echo -e "   -g: List roles granted via Groups."
+    echo -e "   -f: Just read the JSON file and format it."
     echo -e "   -v: Verbose mode."
     echo -e "   -h: Print this help message."
     echo -e "   -?: Print this help message."
@@ -70,7 +72,7 @@ function log_error {
 
 ## List of options the program will accept;
 ## those options that take arguments are followed by a colon
-OPTSTRING='ae:s:gvh?'
+OPTSTRING='ae:s:gf:vh?'
 
 ## The loop calls getopts until there are no more options on the command line
 ## Each option is stored in $OPT, any option arguments are stored in OPTARG
@@ -113,6 +115,9 @@ do
         g)
             INCLUDE_GROUPS=$(( INCLUDE_GROUPS + 1 ))
             ;;
+        f)
+            FILE=$OPTARG
+            ;;
         v)
             VERBOSE=$(( VERBOSE + 1 ))
             ;;
@@ -148,6 +153,11 @@ function format_list() {
         fi
     done
 }
+
+if [ -n "$FILE" ]; then
+    format_list "$( cat ${FILE} )"
+    exit 0
+fi
 
 [ ! -d "${AZURE_CONFIG_DIR}" ] && die "Missing the AZURE_CONFIG_DIR."
 
