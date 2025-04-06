@@ -3,6 +3,7 @@
 	email = hieu.tran@upm.com
 [core]
 	pager = less -+F
+	excludesfile = ~/.gitignore
 [alias]
 	flog = log --graph --full-history --all --decorate --oneline
 	cdate = log --date=short --pretty=format:\"%C(yellow)%h%Creset %C(blue)%cd%Creset %C(red)%d%Creset %s\"
@@ -45,6 +46,8 @@
 	keepBackup = false
 [rebase]
 	autoStash = true
+[rerere]
+	enabled = true
 
 # Custom gitconfig for directories
 [includeIf "gitdir:~/repos_public/"]
