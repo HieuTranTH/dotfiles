@@ -1,0 +1,6 @@
+# Vim
+*.swp
+*.swo
+
+# custom terraform helper script
+.tf_init_az.sh
