@@ -7,8 +7,55 @@
 # echo
 #@ usage: diff2less [args...] <file1> <file2>
 
-if [ -d $1 ] && [ -d $2 ]; then
-    diff -Nur --color=always $@ 2>&1 | less -r
+# if [ -d $1 ] && [ -d $2 ]; then
+#     diff -Nur --color=always $@ 2>&1 | less -r
+# else
+#     diff -u --color=always $@ 2>&1 | less -r
+# fi
+
+# Function to display usage
+usage() {
+    echo "Usage: $0 <dir1|file1> <dir2|file2> [-e pattern_to_ignore]"
+    exit 1
+}
+
+# Check if at least two arguments are provided
+if [ "$#" -lt 2 ]; then
+    usage
+fi
+
+# Assign the first two arguments to variables
+DIR1=$1
+DIR2=$2
+PATTERN=""
+
+# Parse the arguments for the exclude flag
+shift 2  # Shift the first two arguments
+while [[ "$#" -gt 0 ]]; do
+    case "$1" in
+        -e|--exclude)
+            shift
+            PATTERN="$1"
+            ;;
+        *)
+            echo "Unknown option: $1"
+            usage
+            ;;
+    esac
+    shift
+done
+
+# Construct the diff command
+if [ -d "$DIR1" ] && [ -d "$DIR2" ]; then
+    if [ -n "$PATTERN" ]; then
+        diff -Nur --color=always --exclude="$PATTERN" "$DIR1" "$DIR2" 2>&1 | less -r
+    else
+        diff -Nur --color=always "$DIR1" "$DIR2" 2>&1 | less -r
+    fi
 else
-    diff -u --color=always $@ 2>&1 | less -r
+    if [ -n "$PATTERN" ]; then
+        diff -u --color=always --exclude="$PATTERN" "$DIR1" "$DIR2" 2>&1 | less -r
+    else
+        diff -u --color=always "$DIR1" "$DIR2" 2>&1 | less -r
+    fi
 fi
