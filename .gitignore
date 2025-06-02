@@ -3,4 +3,4 @@
 *.swo
 
 # custom terraform helper script
-.tf_init_az.sh
+tf_init_az.*sh
