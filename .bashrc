@@ -416,8 +416,11 @@ fi
 # Show job count in bash prompt
 PS1="[\j]$PS1"
 
-# Terraform completion
+# tenv
+. <( tenv completion bash )
+# Terraform completion for symlink under ~/bin
 complete -C ~/bin/terraform terraform
+complete -C ~/bin/tofu tofu
 
 # https://github.com/ajeetdsouza/zoxide
 # tab completion
