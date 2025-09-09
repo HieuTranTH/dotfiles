@@ -8,8 +8,10 @@ readonly PROGNAME=${0##*/}
 
 ## Default values
 EXIT_FAILURE=1
+DIE_PRINT_USAGE=0
 VERBOSE=${VERBOSE:-0}
 FILENAME=
+URL=
 
 # Decoration for output
 function box() {
@@ -22,14 +24,19 @@ function box() {
 
 function usage() {
     echo -e "$PROGNAME - \n"
-    echo -e "usage: $PROGNAME [-v] [-h] [-?]\n"
+    echo -e "usage: $PROGNAME [-v] [-h] [-?] URL\n"
     echo -e "   -v: Verbose mode."
     echo -e "   -h: Print this help message."
     echo -e "   -?: Print this help message."
+    echo -e "  URL: ."
 }
 
 function die() {
     echo "ERROR: $*" >&2
+    if [ $DIE_PRINT_USAGE != 0 ]; then
+        echo
+        usage
+    fi
     exit $EXIT_FAILURE
 }
 
@@ -95,3 +102,10 @@ done
 ## Remove options from the command line
 ## $OPTIND points to the next, unparsed argument
 shift "$(( OPTIND - 1 ))"
+
+if [ -n "$1" ]; then
+    URL="$1"
+    log_info "URL: $URL"
+else
+    DIE_PRINT_USAGE=1 die "Missing URL."
+fi
