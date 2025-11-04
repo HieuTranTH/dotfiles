@@ -123,3 +123,4 @@ vim.keymap.set('t', '<Esc>', [[<C-\><C-n>]], { desc = "Escape Terminal mode" })
 vim.keymap.set('i', '<F10>', '"${}"<Left><Left>', { silent = true })  -- Bash parameter expansion
 vim.keymap.set('n', '<leader>ih', ':-1read $HOME/.config/nvim/snippets/html.txt<CR>', { desc = "Snippet: html template", silent = true })
 vim.keymap.set('n', '<leader>is', ':-1read $HOME/.config/nvim/snippets/shell_script.txt<CR>', { desc = "Snippet: shell script template", silent = true })
+vim.keymap.set('n', '<leader>it', ':-1read $HOME/.config/nvim/snippets/terraform.txt<CR>', { desc = "Snippet: terraform example template", silent = true })

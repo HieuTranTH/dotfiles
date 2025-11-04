@@ -1,0 +1,10 @@
+provider "local" {}
+
+resource "local_file" "example" {
+  content  = "Hello, Terraform!"
+  filename = "${path.module}/example.txt"
+}
+
+output "file_path" {
+  value = local_file.example.filename
+}
