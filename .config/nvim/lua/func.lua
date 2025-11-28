@@ -32,6 +32,7 @@ vim.api.nvim_create_user_command('GenAzDoGitLink', function(t)
       cend = _end[3]
     end
 
+    -- https://dev.azure.com/upmdevops/DDMOAppPlatform/_git/DDMOAppPlatform?path=/terraform/modules/generic_project_pipeline/azdo_pipeline.tf&line=1&lineEnd=1&lineStartColumn=1&lineEndColumn=2147483647&lineStyle=plain&_a=contents
     local link = "https://dev.azure.com/" .. azdo_org .. "/" .. azdo_prj
       .. "/_git/" .. azdo_repo .. "?path=/" .. file_path
       .. "&line=" .. lstart .. "&lineEnd=" .. lend
@@ -42,3 +43,40 @@ vim.api.nvim_create_user_command('GenAzDoGitLink', function(t)
     print("AzDo repo link copied to clipboard")
   end
   , {range = true})
+
+vim.api.nvim_create_user_command('GenAzDoGitBranchComapreLink', function(t)
+    local remote_url = vim.fn.system('git remote -v | head -1 | sed "s|^origin\tgit@ssh.dev.azure.com:v3/||g;s| (fetch)$||g"')
+    if string.find(remote_url, '^fatal: not a git repository') then
+      print(remote_url)
+      return
+    end
+
+    local i, j = string.find(remote_url, '/.*$')
+    local azdo_org = string.sub(remote_url, 0, i-1)
+    remote_url = string.sub(remote_url, i+1)
+    i, j = string.find(remote_url, '/.*$')
+    local azdo_prj = string.sub(remote_url, 0, i-1)
+    local azdo_repo = string.sub(remote_url, i+1, j-1)
+
+    local file_path = vim.fn.system('git ls-files --full-name ' .. vim.api.nvim_buf_get_name(0))
+    file_path = string.gsub(file_path, "\n$", "")
+
+    local target_branch = t.args
+
+    -- https://dev.azure.com/upmdevops/DDMOAppPlatform/_git/DDMOAppPlatform/branchCompare?baseVersion=GBmain&targetVersion=GBfeature/73476/mlflow&_a=files
+    local link = "https://dev.azure.com/" .. azdo_org .. "/" .. azdo_prj
+      .. "/_git/" .. azdo_repo
+      .. "/branchCompare"
+      .. "?baseVersion=GB" .. "main"
+      .. "&targetVersion=GB" .. target_branch
+      .. "&_a=files"
+
+    vim.fn.setreg('+', link)
+    print("AzDo repo branch compare link copied to clipboard")
+  end
+  , {
+      nargs = 1,
+  }
+)
+
+--
