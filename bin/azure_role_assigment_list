@@ -146,6 +146,11 @@ function format_list() {
             sp_displayName=$( az ad sp show --id "${sp_id}" 2>/dev/null | jq -r '.displayName' )
             [ -z "${sp_displayName}" ] && sp_displayName=$( az ad user show --id "${sp_id}" | jq -r '.userPrincipalName + " (" + .displayName + ")"' )
             echo "${line}   # ${sp_displayName}"
+        elif [[ "${line}" =~ .*principalName.*[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}.* ]]; then
+            sp_id=$( echo "${line}" | cut -d '"' -f 4 )
+            sp_displayName=$( az ad user show --id "${sp_id}" 2>/dev/null | jq -r '.displayName' )
+            [ -z "${sp_displayName}" ] && sp_displayName=$( az ad user show --id "${sp_id}" | jq -r '.userPrincipalName + " (" + .displayName + ")"' )
+            echo "${line}   # ${sp_displayName}"
         elif [[ "${line}" = *'principalType'*'Group'* ]]; then
             echo "${line}                                  # via Group"
         else
