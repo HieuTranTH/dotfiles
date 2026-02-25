@@ -103,6 +103,9 @@ done
 ## $OPTIND points to the next, unparsed argument
 shift "$(( OPTIND - 1 ))"
 
+[ ${VERBOSE} -gt 0 ] && set -x
+export VERBOSE
+
 if [ -n "$1" ]; then
     URL="$1"
     log_info "URL: $URL"
