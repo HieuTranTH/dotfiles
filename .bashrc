@@ -376,6 +376,7 @@ function act_venv() {
         [ "$#" -lt 2 ] && { echo "Please specify name for Virtual Env"; return 1; }
         cd ~/dev/python_venv
         VENV="$2"
+        [ -d "$VENV" ] && { echo "Directory exists"; return 1; }
         python3 -m venv "$VENV"
         [ -e "${VENV}/bin/activate" ] && source "${VENV}/bin/activate"
         pip install --upgrade pip wheel
