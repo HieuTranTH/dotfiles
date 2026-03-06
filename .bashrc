@@ -384,6 +384,7 @@ function act_venv() {
     else
         VENV=$( ls -d /home/hieu/dev/python_venv/*/ | fzf --height 20% )
         [ -e "${VENV}/bin/activate" ] && source "${VENV}/bin/activate"
+        cd "${VENV}"
     fi
 }
 
