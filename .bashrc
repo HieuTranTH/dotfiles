@@ -369,6 +369,11 @@ function nvim() {
     esac
 }
 
+# Open vim-fugitive in neovim
+function ngit() {
+    command nvim -c "Git | only"
+}
+
 # Activate a default Python Virtual Environment
 function act_venv() {
     # Create new venv
