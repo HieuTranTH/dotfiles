@@ -30,7 +30,7 @@ INCLUDE_GROUPS_CMD=" --include-groups | jq -c '[.[]] | sort_by(.principalType)'"
 
 function usage() {
     echo -e "$PROGNAME - \n"
-    echo -e "usage: $PROGNAME [-e ENV] [-a] [-s NAME] [-g] [-f JSON_FILE] [-h] [-?] ID|scope\n"
+    echo -e "usage: $PROGNAME [-e ENV] [-a] [-s NAME] [-g] [-f JSON_FILE] [-h] [-?] ID|SPNAME|SCOPE\n"
     echo -e "   -e: Environment (subscription) to list. Can be either dev|test|qa|prod|common|digi-non-prod|digi-prod alias."
     echo -e "   -a: List in all subscriptions."
     echo -e "   -s: Search for name in scope field."
