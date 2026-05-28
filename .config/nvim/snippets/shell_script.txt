@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-#@ usage: 
+#@ usage:
 #@ author: Hieu Tran
 #@ email : hieu.tran@upm.com
 
@@ -10,6 +10,7 @@ readonly PROGNAME=${0##*/}
 EXIT_FAILURE=1
 DIE_PRINT_USAGE=0
 VERBOSE=${VERBOSE:-0}
+TRACE=${TRACE:-0}
 FILENAME=
 URL=
 
@@ -26,6 +27,7 @@ function usage() {
     echo -e "$PROGNAME - \n"
     echo -e "usage: $PROGNAME [-v] [-h] [-?] URL\n"
     echo -e "   -v: Verbose mode."
+    echo -e "   -x: Shell trace mode (set -x)."
     echo -e "   -h: Print this help message."
     echo -e "   -?: Print this help message."
     echo -e "  URL: ."
@@ -79,7 +81,7 @@ function log_error {
 
 ## List of options the program will accept;
 ## those options that take arguments are followed by a colon
-OPTSTRING='f:vh?'
+OPTSTRING='f:vxh?'
 
 ## The loop calls getopts until there are no more options on the command line
 ## Each option is stored in $OPT, any option arguments are stored in OPTARG
@@ -92,6 +94,9 @@ do
         v)
             VERBOSE=$(( VERBOSE + 1 ))
             ;;
+        x)
+            TRACE=$(( TRACE + 1 ))
+            ;;
         *)
             usage >&2
             exit $EXIT_FAILURE
@@ -103,8 +108,9 @@ done
 ## $OPTIND points to the next, unparsed argument
 shift "$(( OPTIND - 1 ))"
 
-[ ${VERBOSE} -gt 0 ] && set -x
+[ ${TRACE} -gt 0 ] && set -x
 export VERBOSE
+export TRACE
 
 if [ -n "$1" ]; then
     URL="$1"
