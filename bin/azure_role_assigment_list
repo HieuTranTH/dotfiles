@@ -4,7 +4,7 @@
 source box.sh
 box "List role assignments associated with an account"
 
-#@ usage: 
+#@ usage:
 #@ author: Hieu Tran
 #@ email : hieu.tran@upm.com
 
@@ -132,27 +132,70 @@ done
 ## $OPTIND points to the next, unparsed argument
 shift "$(( OPTIND - 1 ))"
 
+function az_get_value_or_error() {
+    local jq_filter="$1"
+    shift
+
+    local stderr_file
+    stderr_file=$( mktemp )
+    local cmd_stdout
+    cmd_stdout=$( "$@" 2>"${stderr_file}" )
+    local cmd_stderr
+    cmd_stderr=$( cat "${stderr_file}" )
+    rm -f "${stderr_file}"
+
+    if [ -n "${cmd_stdout}" ] && echo "${cmd_stdout}" | jq -e . >/dev/null 2>&1; then
+        echo "${cmd_stdout}" | jq -r "${jq_filter}"
+    elif [ -n "${cmd_stderr}" ]; then
+        echo "STDERR: ${cmd_stderr}" | head -n 1
+    elif [ -n "${cmd_stdout}" ]; then
+        echo "STDERR: ${cmd_stdout}" | head -n 1
+    else
+        echo ""
+    fi
+}
+
 function format_list() {
+    #set -x
     readarray -t ARRAY_OUTPUT < <( echo "$1" | jq -C '[.[] | {condition,createdBy,createdOn,description,principalId,principalName,principalType,resourceGroup,roleDefinitionName,scope}]' )
     for line in "${ARRAY_OUTPUT[@]}"; do
+        line_has_trailing_comma=0
+        [[ "${line}" =~ ,[[:space:]]*$ ]] && line_has_trailing_comma=1
+        line_without_trailing_comma=$( echo "${line}" | awk '{ sub(/,[[:space:]]*$/, ""); print }' )
+
         # if echo "${line}" | grep -q "createdBy"; then
         if [[ "${line}" = *'createdBy'* ]]; then
             createdBy_id=$( echo "${line}" | cut -d '"' -f 4 )
-            createdBy_displayName=$( az ad sp show --id "${createdBy_id}" 2>/dev/null | jq -r '.displayName' )
-            [ -z "${createdBy_displayName}" ] && createdBy_displayName=$( az ad user show --id "${createdBy_id}" | jq -r '.userPrincipalName + " (" + .displayName + ")"' )
-            echo "${line}       # ${createdBy_displayName}"
+            createdBy_displayName=$( az_get_value_or_error '.displayName // empty' az ad sp show --id "${createdBy_id}" )
+            if [ -z "${createdBy_displayName}" ] || [[ "${createdBy_displayName}" == STDERR:* ]]; then
+                createdBy_displayName=$( az_get_value_or_error 'if (.displayName // "") != "" then .displayName else .userPrincipalName + " (" + .displayName + ")" end' az ad user show --id "${createdBy_id}" )
+            fi
+
+            createdBy_displayName_json=$( printf '%s' "${createdBy_displayName}" | jq -Rs '.' )
+            new_line="${line_without_trailing_comma}, \"createdByDisplayName\": ${createdBy_displayName_json}"
+            [ ${line_has_trailing_comma} -eq 1 ] && new_line="${new_line},"
+            echo "${new_line}"
         elif [[ "${line}" =~ .*principalName.*[0-9a-fA-F]{8}-([0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}.* ]]; then
             sp_id=$( echo "${line}" | cut -d '"' -f 4 )
-            sp_displayName=$( az ad sp show --id "${sp_id}" 2>/dev/null | jq -r '.displayName' )
-            [ -z "${sp_displayName}" ] && sp_displayName=$( az ad user show --id "${sp_id}" | jq -r '.userPrincipalName + " (" + .displayName + ")"' )
-            echo "${line}   # ${sp_displayName}"
+            sp_displayName=$( az_get_value_or_error '.displayName // empty' az ad sp show --id "${sp_id}" )
+            if [ -z "${sp_displayName}" ] || [[ "${sp_displayName}" == STDERR:* ]]; then
+                sp_displayName=$( az_get_value_or_error 'if (.displayName // "") != "" then .displayName else .userPrincipalName + " (" + .displayName + ")" end' az ad user show --id "${sp_id}" )
+            fi
+            sp_displayName_json=$( printf '%s' "${sp_displayName}" | jq -Rs '.' )
+            new_line="${line_without_trailing_comma}, \"principalNameDisplayName\": ${sp_displayName_json}"
+            [ ${line_has_trailing_comma} -eq 1 ] && new_line="${new_line},"
+            echo "${new_line}"
         elif [[ "${line}" =~ .*principalName.*[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}.* ]]; then
             sp_id=$( echo "${line}" | cut -d '"' -f 4 )
-            sp_displayName=$( az ad user show --id "${sp_id}" 2>/dev/null | jq -r '.displayName' )
-            [ -z "${sp_displayName}" ] && sp_displayName=$( az ad user show --id "${sp_id}" | jq -r '.userPrincipalName + " (" + .displayName + ")"' )
-            echo "${line}   # ${sp_displayName}"
+            sp_displayName=$( az_get_value_or_error 'if (.displayName // "") != "" then .displayName else .userPrincipalName + " (" + .displayName + ")" end' az ad user show --id "${sp_id}" )
+            sp_displayName_json=$( printf '%s' "${sp_displayName}" | jq -Rs '.' )
+            new_line="${line_without_trailing_comma}, \"principalNameDisplayName\": ${sp_displayName_json}"
+            [ ${line_has_trailing_comma} -eq 1 ] && new_line="${new_line},"
+            echo "${new_line}"
         elif [[ "${line}" = *'principalType'*'Group'* ]]; then
-            echo "${line}                                  # via Group"
+            new_line="${line_without_trailing_comma}, \"principalTypeInfo\": \"Group\""
+            [ ${line_has_trailing_comma} -eq 1 ] && new_line="${new_line},"
+            echo "${new_line}"
         else
             echo "${line}"
         fi

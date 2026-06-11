@@ -3,7 +3,7 @@
 source box.sh
 box "Generate Azure Devops workitem link"
 
-#@ usage: 
+#@ usage:
 #@ author: Hieu Tran
 #@ email : hieu.tran@upm.com
 
